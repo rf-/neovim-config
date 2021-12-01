@@ -1,0 +1,16 @@
+(module config {autoload {nvim aniseed.nvim u local.utils str std.string}})
+
+(import-macros {:def-keymap map! :def-keymap-fn map-fn! :def-autocmd autocmd!} :zest.macros)
+
+(set nvim.o.colorcolumn :100)
+(set nvim.o.textwidth 99)
+
+(set nvim.g.ale_linters {:javascript [:eslint]
+                         :typescript [:eslint]
+                         :typescriptreact [:eslint]
+                         :ruby [:rubocop :ruby] })
+
+(set nvim.g.ale_fixers {:javascript [:eslint]
+                        :typescript [:eslint]
+                        :typescriptreact [:eslint]
+                        :ruby [:rubocop] })
