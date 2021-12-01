@@ -237,8 +237,8 @@
                          :python {:shiftwidth 4 :softtabstop 4 :textwidth 79}
                          :scala {:colorcolumn 100}
                          :scss {:shiftwidth 2 :softtabstop 2}
-                         :typescript {:shiftwidth 2 :softtabstop 2 :formatexpr ""}
-                         :typescriptreact {:shiftwidth 2 :softtabstop 2 :formatexpr ""}}]
+                         :typescript {:shiftwidth 2 :softtabstop 2}
+                         :typescriptreact {:shiftwidth 2 :softtabstop 2}}]
   (each [filetype settings (pairs filetype-settings)]
     (autocmd-fn! [:FileType] filetype
                  (each [setting value (pairs settings)]

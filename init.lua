@@ -61,7 +61,9 @@ require("packer").startup(function ()
 
   -- Language support
 
-  use 'sheerun/vim-polyglot'
+  vim.g["polyglot_disabled"] = {"typescript"}
+  use "sheerun/vim-polyglot"
+  use "rf-/yats.vim"
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
   use "nvim-treesitter/playground"
 
