@@ -167,7 +167,7 @@
 (map! :<Leader>q [nv] ":q<CR>")
 
 ; Map F10 to show syntax groups under cursor
-(map-fn! :<F10> [nv] (nvim.echo (u.inspect-syntax-group)))
+(map-fn! :<F10> [nv :silent] (nvim.echo (u.inspect-syntax-group)))
 
 ; Map <C-\><C-[> and <C-\><C-]> to switch tabs in all modes
 (map! "<C-\\><C-[>" [tnvi] "<C-\\><C-n>gT")
