@@ -8,5 +8,5 @@
                       :<C-d> (cm (cm.scroll_docs 4) [:i :c])
                       :<C-Space> (cm (cm.complete) [:i :c])
                       ;:<C-e> (cm {:i (cm.abort) :c (cm.close)})
-                      :<CR> (cm.confirm {:select true})}
+                      :<CR> (cm.confirm {:select false})}
             :sources [{:name :nvim_lsp} {:name :vsnip} {:name :buffer}]})
