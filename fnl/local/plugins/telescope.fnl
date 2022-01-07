@@ -77,7 +77,7 @@
                                                            telescope-actions.move_selection_better)
                                                  :<S-Tab> (+ telescope-actions.toggle_selection
                                                              telescope-actions.move_selection_worse)})}
-                  :pickers {:buffers {:mappings file-mappings}
+                  :pickers {:buffers {:mappings file-mappings :sort_lastused true}
                             :find_files {:mappings file-mappings}
                             :lsp_code_actions (merge {:border true} (telescope-themes.get_cursor))
                             :live_grep {:mappings grep-mappings}
