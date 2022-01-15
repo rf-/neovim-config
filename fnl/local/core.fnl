@@ -1,4 +1,5 @@
-(module local.core {autoload {nvim aniseed.nvim str std.string u local.utils}})
+(module local.core
+  {autoload {nvim aniseed.nvim str std.string u local.utils}})
 
 (import-macros {:opt-set set!
                 :opt-get get!

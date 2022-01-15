@@ -1,5 +1,5 @@
 (module local.plugins.ale
-        {require {_ nvim-ale-diagnostic} autoload {nvim aniseed.nvim}})
+  {require {_ nvim-ale-diagnostic} autoload {nvim aniseed.nvim}})
 
 (import-macros {:def-keymap map!} :zest.macros)
 

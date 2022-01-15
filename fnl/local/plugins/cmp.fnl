@@ -1,4 +1,5 @@
-(module local.plugins.cmp {autoload {nvim aniseed.nvim cmp cmp}})
+(module local.plugins.cmp
+  {autoload {nvim aniseed.nvim cmp cmp}})
 
 (local cm cmp.mapping)
 

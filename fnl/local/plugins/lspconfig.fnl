@@ -1,5 +1,5 @@
 (module local.plugins.lspconfig
-        {autoload {nvim aniseed.nvim lsp lspconfig cmp-lsp cmp_nvim_lsp}})
+  {autoload {nvim aniseed.nvim lsp lspconfig cmp-lsp cmp_nvim_lsp}})
 
 ; Set LSP shortcuts when client attaches
 (defn- on-attach [client buf-nr]

@@ -1,6 +1,5 @@
-(module local.plugins {autoload {nvim aniseed.nvim
-                                 a aniseed.core
-                                 packer packer}})
+(module local.plugins
+  {autoload {nvim aniseed.nvim a aniseed.core packer packer}})
 
 (local {: use : use_rocks} packer)
 

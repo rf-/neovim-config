@@ -1,4 +1,5 @@
-(module local.utils {autoload {nvim aniseed.nvim io io}})
+(module local.utils
+  {autoload {nvim aniseed.nvim io io}})
 
 (defn system [cmd]
   "Run the given command and return its output."

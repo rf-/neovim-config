@@ -1,4 +1,5 @@
-(module local.plugins.nerdcommenter {autoload {nvim aniseed.nvim}})
+(module local.plugins.nerdcommenter
+  {autoload {nvim aniseed.nvim}})
 
 (import-macros {:def-keymap map!} :zest.macros)
 

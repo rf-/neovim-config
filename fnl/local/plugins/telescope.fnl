@@ -1,13 +1,13 @@
 (module local.plugins.telescope
-        {autoload {nvim aniseed.nvim
-                   std-fn std.functional
-                   std-table std.table
-                   telescope telescope
-                   telescope-action-state telescope.actions.state
-                   telescope-actions telescope.actions
-                   telescope-builtin telescope.builtin
-                   telescope-from-entry telescope.from_entry
-                   telescope-themes telescope.themes}})
+  {autoload {nvim aniseed.nvim
+             std-fn std.functional
+             std-table std.table
+             telescope telescope
+             telescope-action-state telescope.actions.state
+             telescope-actions telescope.actions
+             telescope-builtin telescope.builtin
+             telescope-from-entry telescope.from_entry
+             telescope-themes telescope.themes}})
 
 (local {: map : bind : foldl} std-fn)
 (local {: merge} std-table)
@@ -77,9 +77,11 @@
                                                            telescope-actions.move_selection_better)
                                                  :<S-Tab> (+ telescope-actions.toggle_selection
                                                              telescope-actions.move_selection_worse)})}
-                  :pickers {:buffers {:mappings file-mappings :sort_lastused true}
+                  :pickers {:buffers {:mappings file-mappings
+                                      :sort_lastused true}
                             :find_files {:mappings file-mappings}
-                            :lsp_code_actions (merge {:border true} (telescope-themes.get_cursor))
+                            :lsp_code_actions (merge {:border true}
+                                                     (telescope-themes.get_cursor))
                             :live_grep {:mappings grep-mappings}
                             :grep_string {:mappings grep-mappings}}
                   :extensions {}})

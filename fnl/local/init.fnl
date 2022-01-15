@@ -1,6 +1,7 @@
 ; Hello, Fennel!
 
-(module local.init {autoload {zest zest}})
+(module local.init
+  {autoload {zest zest}})
 
 (zest.setup)
 
