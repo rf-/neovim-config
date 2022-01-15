@@ -68,9 +68,10 @@ require("packer").startup(function ()
   use "nvim-treesitter/playground"
 
   use "neovim/nvim-lspconfig"
+  use "jose-elias-alvarez/null-ls.nvim"
 
-  use "dense-analysis/ale"
-  use "rf-/nvim-ale-diagnostic"
+  use "folke/trouble.nvim"
+  use "seblj/nvim-echo-diagnostics"
 
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-buffer"

@@ -16,11 +16,12 @@
 (config :mundo)
 (config :treesitter)
 (config :lspconfig)
-(config :ale)
 (config :cmp)
 (config :vsnip)
 (config :telescope)
 (config :nerdtree)
+(config :trouble)
+(config :echo-diagnostics)
 
 (set nvim.g.edge_style :aura)
 (set nvim.g.edge_enable_italic 1)

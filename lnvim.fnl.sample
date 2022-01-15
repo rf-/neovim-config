@@ -1,16 +1,32 @@
-(module config {autoload {nvim aniseed.nvim u local.utils str std.string}})
+(module config
+  {autoload {nvim aniseed.nvim
+             u local.utils
+             str std.string
+             null-ls null-ls
+             lsp lspconfig}})
 
-(import-macros {:def-keymap map! :def-keymap-fn map-fn! :def-autocmd autocmd!} :zest.macros)
+(import-macros {:def-keymap map!
+                :def-keymap-fn map-fn!
+                :def-autocmd autocmd!
+                :def-augroup augroup!} :zest.macros)
 
 (set nvim.o.colorcolumn :100)
 (set nvim.o.textwidth 99)
 
-(set nvim.g.ale_linters {:javascript [:eslint]
-                         :typescript [:eslint]
-                         :typescriptreact [:eslint]
-                         :ruby [:rubocop :ruby] })
+(set nvim.o.path (.. nvim.o.path ",./client/src"))
 
-(set nvim.g.ale_fixers {:javascript [:eslint]
-                        :typescript [:eslint]
-                        :typescriptreact [:eslint]
-                        :ruby [:rubocop] })
+(defn- on-attach [client]
+  (when client.resolved_capabilities.document_formatting
+    (augroup! :lsp-formatting
+              (nvim.command "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()"))))
+
+(null-ls.setup {:on_attach on-attach
+                :sources [null-ls.builtins.diagnostics.eslint_d
+                          null_ls.builtins.diagnostics.rubocop
+                          null-ls.builtins.formatting.eslint_d]})
+
+(map-fn! :<Leader>xh [n :silent]
+         (let [current-file (str.escape_shell (nvim.fn.expand "%"))]
+           (u.system (.. "eslint_d --fix --rule '{\"react-hooks/exhaustive-deps\": [1, { \"enableDangerousAutofixThisMayCauseInfiniteLoops\": true }] }' "
+                         current-file))
+           (nvim.ex.edit!)))

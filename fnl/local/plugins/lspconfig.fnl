@@ -3,6 +3,9 @@
 
 ; Set LSP shortcuts when client attaches
 (defn- on-attach [client buf-nr]
+  ;; Disable LSP formatting; we want to use null-ls instead
+  (tset client.resolved_capabilities :document_formatting false)
+  (tset client.resolved_capabilities :document_range_formatting false)
   ;; We can't use Zest here since these need to be buffer-local
   (each [lhs func-name (pairs {"<C-]>" :definition
                                :<C-p> :hover

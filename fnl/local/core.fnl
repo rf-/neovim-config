@@ -263,3 +263,17 @@
 (autocmd-fn! [:FileType] :dict
              (each [idx score (ipairs [0 10 21 51 61])]
                (map! (tostring idx) [n] (.. "0f;lciw" score "<Esc>:noh<CR>"))))
+
+; Customize display of LSP diagnostics
+(vim.diagnostic.config {:underline true
+                        :virtual_text false
+                        :signs true
+                        :update_in_insert true
+                        :severity_sort true})
+
+; Add shortcuts for jumping between diagnostics
+(map-fn! "[d" [n :silent] (vim.diagnostic.goto_prev {:float false}))
+(map-fn! "]d" [n :silent] (vim.diagnostic.goto_next {:float false}))
+
+; Display signature popup when entering args
+(autocmd-fn! [:CursorHoldI] "*" (vim.lsp.buf.signature_help))
