@@ -15,18 +15,13 @@
 
 (set nvim.o.path (.. nvim.o.path ",./client/src"))
 
-(defn- on-attach [client]
+(defn on-attach [client]
   (when client.resolved_capabilities.document_formatting
     (augroup! :lsp-formatting
-              (nvim.command "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()"))))
+      (nvim.command "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync({}, 5000, {'null-ls'})"))))
 
 (null-ls.setup {:on_attach on-attach
                 :sources [null-ls.builtins.diagnostics.eslint_d
                           null_ls.builtins.diagnostics.rubocop
-                          null-ls.builtins.formatting.eslint_d]})
-
-(map-fn! :<Leader>xh [n :silent]
-         (let [current-file (str.escape_shell (nvim.fn.expand "%"))]
-           (u.system (.. "eslint_d --fix --rule '{\"react-hooks/exhaustive-deps\": [1, { \"enableDangerousAutofixThisMayCauseInfiniteLoops\": true }] }' "
-                         current-file))
-           (nvim.ex.edit!)))
+                          null-ls.builtins.formatting.eslint_d
+                          null-ls.builtins.code_actions.eslint_d]})
