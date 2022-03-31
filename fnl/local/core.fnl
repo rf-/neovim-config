@@ -27,7 +27,6 @@
 (set! :expandtab true)
 (set! :hidden true)
 (set! :mouse :a)
-(set! :wrap false)
 (set! :number true)
 (set! :shiftwidth 2)
 (set! :showmode false)
@@ -36,6 +35,12 @@
 (set! :tabstop 8)
 (set! :termguicolors true)
 (set! :background :light)
+
+; Line wrapping: wrap at word boundaries, indent and mark next line
+(set! :wrap true)
+(set! :breakindent true)
+(set! :linebreak true)
+(set! :showbreak "\u{21B3} ")
 
 ; Choose theme depending on system dark mode
 (let [system-style (str.trim (u.system "defaults read -g AppleInterfaceStyle"))]
