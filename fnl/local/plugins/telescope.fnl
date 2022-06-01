@@ -84,7 +84,8 @@
                                                      (telescope-themes.get_cursor))
                             :live_grep {:mappings grep-mappings}
                             :grep_string {:mappings grep-mappings}}
-                  :extensions {}})
+                  :extensions {:ui-select (merge {:border true}
+                                                 (telescope-themes.get_cursor))}})
 
 (telescope.load_extension :fzy_native)
 (telescope.load_extension :ui-select)
