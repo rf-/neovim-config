@@ -29,3 +29,5 @@
 (lsp.rust_analyzer.setup {:on_attach on-attach :capabilities cmp-capabilities})
 
 (lsp.clangd.setup {:on_attach on-attach :capabilities cmp-capabilities})
+
+(lsp.tailwindcss.setup {:on_attach on-attach :capabilities cmp-capabilities})
