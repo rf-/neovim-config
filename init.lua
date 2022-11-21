@@ -83,6 +83,8 @@ require("packer").startup(function ()
   use "vale1410/vim-minizinc"
   use "nelstrom/vim-textobj-rubyblock"
 
+  use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install" }
+
   -- Navigation
 
   use "nvim-telescope/telescope.nvim"
