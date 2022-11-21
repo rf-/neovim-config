@@ -13,8 +13,7 @@
                                  (.. ":lua vim.lsp.buf." func-name "()<CR>")
                                  {:silent true})))
 
-(local cmp-capabilities
-       (cmp-lsp.update_capabilities (vim.lsp.protocol.make_client_capabilities)))
+(local cmp-capabilities (cmp-lsp.default_capabilities))
 
 (lsp.tsserver.setup {:on_attach on-attach :capabilities cmp-capabilities})
 
