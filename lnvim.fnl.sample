@@ -15,12 +15,12 @@
 
 (set nvim.o.path (.. nvim.o.path ",./client/src"))
 
-(defn on-attach [client]
-  (when client.resolved_capabilities.document_formatting
+(defn on-attach-null-ls [client]
+  (when client.server_capabilities.documentFormattingProvider
     (augroup! :lsp-formatting
-      (nvim.command "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync({}, 5000, {'null-ls'})"))))
+      (nvim.command "autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ timeout_ms = 5000, name = 'null-ls' })"))))
 
-(null-ls.setup {:on_attach on-attach
+(null-ls.setup {:on_attach on-attach-null-ls
                 :sources [null-ls.builtins.diagnostics.eslint_d
                           null_ls.builtins.diagnostics.rubocop
                           null-ls.builtins.formatting.eslint_d
