@@ -87,9 +87,10 @@
                   :extensions {}})
 
 (telescope.load_extension :fzy_native)
+(telescope.load_extension :ui-select)
 
 (map-fn! :<Leader>a [nv :silent] (telescope-builtin.grep_string))
 (map-fn! :<Leader>f [n :silent] (telescope-builtin.live_grep))
-(map-fn! :<Leader>k [n :silent] (telescope-builtin.lsp_code_actions))
+(map-fn! :<Leader>k [n :silent] (vim.lsp.buf.code_action))
 (map-fn! :<Leader>t [n :silent] (telescope-builtin.buffers))
 (map-fn! :<Leader>T [n :silent] (telescope-builtin.find_files))
