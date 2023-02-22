@@ -25,3 +25,5 @@
 (lsp.tsserver.setup {:on_attach on-attach :capabilities cmp-capabilities})
 
 (lsp.solargraph.setup {:on_attach on-attach :capabilities cmp-capabilities})
+
+(lsp.rust_analyzer.setup {:on_attach on-attach :capabilities cmp-capabilities})
