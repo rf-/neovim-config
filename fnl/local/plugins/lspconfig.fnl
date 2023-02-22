@@ -1,8 +1,15 @@
 (module local.plugins.lspconfig
   {autoload {nvim aniseed.nvim lsp lspconfig cmp-lsp cmp_nvim_lsp}})
 
+(import-macros {:def-autocmd-fn autocmd-fn!
+                :def-augroup augroup!} :zest.macros)
+
 ; Set LSP shortcuts when client attaches
 (defn- on-attach [client buf-nr]
+  (when client.server_capabilities.signatureHelpProvider
+    (augroup! :lsp-signature-help
+              (autocmd-fn! [:CursorHoldI] "*" (vim.lsp.buf.signature_help))))
+
   ;; We can't use Zest here since these need to be buffer-local
   (each [lhs func-name (pairs {"<C-]>" :definition
                                :<C-p> :hover

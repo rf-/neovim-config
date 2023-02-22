@@ -279,6 +279,3 @@
 ; Add shortcuts for jumping between diagnostics
 (map-fn! "[d" [n :silent] (vim.diagnostic.goto_prev {:float false}))
 (map-fn! "]d" [n :silent] (vim.diagnostic.goto_next {:float false}))
-
-; Display signature popup when entering args
-(autocmd-fn! [:CursorHoldI] "*" (vim.lsp.buf.signature_help))
