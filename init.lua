@@ -32,6 +32,7 @@ require("packer").startup(function ()
   -- Ergonomics
 
   use "godlygeek/tabular"
+  use "jeetsukumaran/vim-indentwise"
   use "justinmk/vim-sneak"
   use "tpope/vim-endwise"
   use "tpope/vim-repeat"
