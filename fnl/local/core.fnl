@@ -279,6 +279,13 @@
                         :update_in_insert true
                         :severity_sort true})
 
+
+(tset vim.lsp.handlers "textDocument/signatureHelp"
+  (vim.lsp.with
+    vim.lsp.handlers.signature_help
+    {:silent true
+     :focusable false}))
+
 ; Add shortcuts for jumping between diagnostics
 (map-fn! "[d" [n :silent] (vim.diagnostic.goto_prev {:float false}))
 (map-fn! "]d" [n :silent] (vim.diagnostic.goto_next {:float false}))
