@@ -59,6 +59,7 @@ require("packer").startup(function ()
   -- Snippets
 
   use "hrsh7th/vim-vsnip"
+  use "github/copilot.vim"
 
   -- Language support
 
