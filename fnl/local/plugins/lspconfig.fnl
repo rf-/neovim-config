@@ -8,7 +8,7 @@
 (defn- on-attach [client buf-nr]
   (when client.server_capabilities.signatureHelpProvider
     (augroup! :lsp-signature-help
-              (autocmd-fn! [:CursorHoldI] "*" (vim.lsp.buf.signature_help))))
+              (autocmd-fn! [:CursorHoldI] "<buffer>" (vim.lsp.buf.signature_help))))
 
   ;; We can't use Zest here since these need to be buffer-local
   (each [lhs func-name (pairs {"<C-]>" :definition
