@@ -172,6 +172,9 @@
 ; Map <Leader>q to close the current split (or quit)
 (map! :<Leader>q [nv] ":q<CR>")
 
+; Map <Leader>gd to show diagnostics
+(map-fn! :<Leader>gd [n :silent] (vim.diagnostic.open_float))
+
 ; Map F10 to show syntax groups under cursor
 (map-fn! :<F10> [nv :silent] (nvim.echo (u.inspect-syntax-group)))
 
