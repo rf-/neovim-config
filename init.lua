@@ -27,7 +27,6 @@ require("packer").startup(function ()
   use "tsbohc/zest.nvim"
 
   use "nvim-lua/plenary.nvim"
-  use_rocks "stdlib"
 
   -- Ergonomics
 
@@ -99,6 +98,9 @@ require("packer").startup(function ()
 
   use "rf-/edge"
 end)
+
+-- Fix Packer or whatever breaking load path
+package.path = vim.fs.normalize("~") .. "/.config/nvim/lua/?.lua," .. package.path
 
 if not vim.env.PACKER_SYNC then
   vim.g["aniseed#env"] = {
