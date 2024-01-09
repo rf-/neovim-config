@@ -4,11 +4,18 @@
 (import-macros {:def-autocmd-fn autocmd-fn!
                 :def-augroup augroup!} :zest.macros)
 
+(nvim.create_augroup :lsp-signature-help {:clear true})
+
 ; Set LSP shortcuts when client attaches
 (defn- on-attach [client buf-nr]
   (when client.server_capabilities.signatureHelpProvider
-    (augroup! :lsp-signature-help
-              (autocmd-fn! [:CursorHoldI] "<buffer>" (vim.lsp.buf.signature_help))))
+    (vim.api.nvim_clear_autocmds {:event :CursorHoldI
+                                  :buffer buf-nr
+                                  :group :lsp-signature-help})
+    (nvim.create_autocmd :CursorHoldI
+                         {:command "lua vim.lsp.buf.signature_help()"
+                          :buffer buf-nr
+                          :group :lsp-signature-help}))
 
   ;; We can't use Zest here since these need to be buffer-local
   (each [lhs func-name (pairs {"<C-]>" :definition
@@ -30,4 +37,4 @@
 
 (lsp.clangd.setup {:on_attach on-attach :capabilities cmp-capabilities})
 
-(lsp.tailwindcss.setup {:on_attach on-attach :capabilities cmp-capabilities})
+;(lsp.tailwindcss.setup {:on_attach on-attach :capabilities cmp-capabilities})
