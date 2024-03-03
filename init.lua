@@ -1,5 +1,8 @@
 -- Based on https://github.com/Olical/dotfiles
 
+-- Optimize Lua loading
+vim.loader.enable()
+
 local cmd = vim.api.nvim_command
 local fn = vim.fn
 local fmt = string.format
@@ -23,7 +26,6 @@ require("packer").startup(function ()
   use "Olical/aniseed"
   use "Olical/conjure"
   use "Olical/nvim-local-fennel"
-  use "lewis6991/impatient.nvim"
   use "tsbohc/zest.nvim"
 
   use "nvim-lua/plenary.nvim"
