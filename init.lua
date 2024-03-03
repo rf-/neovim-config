@@ -68,10 +68,9 @@ require("packer").startup(function ()
   use "sheerun/vim-polyglot"
   use "rf-/yats.vim"
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
-  use "nvim-treesitter/playground"
 
   use "neovim/nvim-lspconfig"
-  use "jose-elias-alvarez/null-ls.nvim"
+  use "nvimtools/none-ls.nvim"
 
   use "folke/trouble.nvim"
   use "seblj/nvim-echo-diagnostics"
