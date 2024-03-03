@@ -1,9 +1,7 @@
 (module config
   {autoload {nvim aniseed.nvim
-             u local.utils
-             str std.string
              null-ls null-ls
-             lsp lspconfig}})
+             lsp local.lsp}})
 
 (import-macros {:def-keymap map!
                 :def-keymap-fn map-fn!
@@ -15,13 +13,13 @@
 
 (set nvim.o.path (.. nvim.o.path ",./client/src"))
 
-(defn on-attach-null-ls [client]
-  (when client.server_capabilities.documentFormattingProvider
-    (augroup! :lsp-formatting
-      (nvim.command "autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ timeout_ms = 5000, name = 'null-ls' })"))))
+;(vim.lsp.set_log_level "debug")
 
-(null-ls.setup {:on_attach on-attach-null-ls
-                :sources [null-ls.builtins.diagnostics.eslint_d
-                          null_ls.builtins.diagnostics.rubocop
-                          null-ls.builtins.formatting.eslint_d
-                          null-ls.builtins.code_actions.eslint_d]})
+(lsp.auto-format-on-save
+  [:typescript :typescriptreact :json :javascript :css])
+
+(lsp.auto-format-on-save
+  [:ruby]
+  {:name "null-ls"})
+
+(null-ls.setup {:sources [null_ls.builtins.diagnostics.rubocop]})
