@@ -1,5 +1,9 @@
 (module local.plugins.lspconfig
-  {autoload {nvim aniseed.nvim lsp lspconfig cmp-lsp cmp_nvim_lsp}})
+  {autoload {nvim aniseed.nvim
+             lsp lspconfig
+             configs "lspconfig.configs"
+             cmp-lsp cmp_nvim_lsp
+             tbl std.table}})
 
 (import-macros {:def-autocmd-fn autocmd-fn!
                 :def-augroup augroup!} :zest.macros)
@@ -39,14 +43,20 @@
 
 (local cmp-capabilities (cmp-lsp.default_capabilities))
 
+; Set up servers we pretty much always want when available
+
 (lsp.tsserver.setup {:on_attach on-attach-tsserver :capabilities cmp-capabilities})
-
 (lsp.solargraph.setup {:on_attach on-attach :capabilities cmp-capabilities})
-
 (lsp.rust_analyzer.setup {:on_attach on-attach :capabilities cmp-capabilities})
-
 (lsp.clangd.setup {:on_attach on-attach :capabilities cmp-capabilities})
-
-(lsp.tailwindcss.setup {:on_attach on-attach :capabilities cmp-capabilities})
-
 (lsp.eslint.setup {:on_attach on-attach-eslint :capabilities cmp-capabilities})
+
+; Set up default config for servers we want to opt into
+; (defn- configure-server [server-name]
+;   (tset configs
+;         server-name
+;         {:default_config
+;          (tbl.merge {} (. (. configs server-name) "default_config")
+;                     {:on_attach on-attach :capabilities cmp-capabilities})}))
+; 
+; (configure-server :tailwindcss)
