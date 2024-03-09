@@ -1,5 +1,6 @@
 (module local.plugins.lspconfig
   {autoload {nvim aniseed.nvim
+             view aniseed.view
              lsp lspconfig
              configs "lspconfig.configs"
              cmp-lsp cmp_nvim_lsp
@@ -33,6 +34,15 @@
                                  (.. ":lua vim.lsp.buf." func-name "()<CR>")
                                  {:silent true})))
 
+(local cmp-capabilities (cmp-lsp.default_capabilities))
+
+(defn setup [server-name extra-config]
+  (let [setup-fn (. (. lsp server-name) :setup)
+        config (tbl.merge
+                 {:on_attach on-attach :capabilities cmp-capabilities}
+                 (or extra-config {}))]
+    (setup-fn config)))
+
 (defn- on-attach-tsserver [client buf-nr]
   (tset client.server_capabilities :documentFormattingProvider false)
   (on-attach client buf-nr))
@@ -41,22 +51,8 @@
   (tset client.server_capabilities :documentFormattingProvider true)
   (on-attach client buf-nr))
 
-(local cmp-capabilities (cmp-lsp.default_capabilities))
-
-; Set up servers we pretty much always want when available
-
-(lsp.tsserver.setup {:on_attach on-attach-tsserver :capabilities cmp-capabilities})
-(lsp.solargraph.setup {:on_attach on-attach :capabilities cmp-capabilities})
-(lsp.rust_analyzer.setup {:on_attach on-attach :capabilities cmp-capabilities})
-(lsp.clangd.setup {:on_attach on-attach :capabilities cmp-capabilities})
-(lsp.eslint.setup {:on_attach on-attach-eslint :capabilities cmp-capabilities})
-
-; Set up default config for servers we want to opt into
-; (defn- configure-server [server-name]
-;   (tset configs
-;         server-name
-;         {:default_config
-;          (tbl.merge {} (. (. configs server-name) "default_config")
-;                     {:on_attach on-attach :capabilities cmp-capabilities})}))
-; 
-; (configure-server :tailwindcss)
+(setup :solargraph)
+(setup :rust_analyzer)
+(setup :clangd)
+(setup :tsserver {:on_attach on-attach-tsserver})
+(setup :eslint {:on_attach on-attach-eslint})

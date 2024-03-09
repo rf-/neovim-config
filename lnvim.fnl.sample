@@ -23,3 +23,5 @@
   {:name "null-ls"})
 
 (null-ls.setup {:sources [null_ls.builtins.diagnostics.rubocop]})
+
+(lsp.setup :tailwindcss)
