@@ -60,7 +60,21 @@ require("packer").startup(function ()
   -- Snippets
 
   use "hrsh7th/vim-vsnip"
-  use "github/copilot.vim"
+  use {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({})
+    end
+  }
+  use {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    config = function()
+      require("CopilotChat").setup({})
+    end
+  }
 
   -- Language support
 
