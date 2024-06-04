@@ -7,3 +7,4 @@
 
 (require :local.core)
 (require :local.plugins)
+(require :local.commands)
