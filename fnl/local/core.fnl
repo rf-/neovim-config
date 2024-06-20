@@ -143,7 +143,7 @@
 ; Remap <C-d> and <C-u> to move the cursor instead of the window
 (each [c-u-or-d j-or-k (pairs {:<C-d> :j :<C-u> :k})]
   (map-fn! c-u-or-d [n :silent]
-           (nvim.command (.. "normal " nvim.wo.scroll j-or-k))))
+           (nvim.command (.. "normal! " nvim.wo.scroll j-or-k))))
 
 ; Remap <C-{h,j,k,l}> to switch between splits
 (each [_ key (pairs [:h :j :k :l])]
