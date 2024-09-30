@@ -13,7 +13,7 @@ def get_listed_buffers(nvim):
 # is good enough to recognize '-f' and `+11`, which is all this script really
 # needs right now.
 filenames = [
-    re.sub(' ', '\ ', os.path.abspath(arg))
+    re.sub(' ', '\\ ', os.path.abspath(arg))
         for arg in sys.argv[1:] if not arg[0] in ['-', '+']
 ]
 
