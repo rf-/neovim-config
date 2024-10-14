@@ -8,4 +8,4 @@
       (tset vim.g :__ag_results results)
       (vim.cmd "cexpr g:__ag_results")
       (vim.cmd "copen")))
-  {:nargs "*"})
+  {:nargs "*" :complete "dir"})
