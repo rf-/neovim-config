@@ -25,7 +25,6 @@ if not vim.g.vscode then
 
     use "wbthomason/packer.nvim"
     use "Olical/aniseed"
-    use "Olical/conjure"
     use "Olical/nvim-local-fennel"
     use "tsbohc/zest.nvim"
 

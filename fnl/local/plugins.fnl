@@ -8,7 +8,6 @@
     (when (not ok?)
       (print (.. "Error loading plugin config: " val-or-err)))))
 
-(config :aniseed)
 (config :nerdcommenter)
 (config :fugitive)
 (config :gitgutter)
