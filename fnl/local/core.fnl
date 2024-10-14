@@ -183,7 +183,7 @@
 (map! "<C-\\><C-]>" [tnvi] "<C-\\><C-n>gt")
 
 ; Map <C-\><C-t> to open a new terminal split
-(map! "<C-\\><C-t>" [tnvi] "<C-\\><C-n>:split<CR>:term<CR>")
+(map! "<C-\\><C-t>" [tnvi] "<C-\\><C-n>:split<CR><C-\\><C-n>:term<CR>")
 
 ; Map <C-\><C-p> to paste in terminal mode
 (map! "<C-\\><C-p>" [t] "<C-\\><C-n>p")
