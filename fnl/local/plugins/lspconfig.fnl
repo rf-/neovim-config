@@ -43,7 +43,7 @@
                  (or extra-config {}))]
     (setup-fn config)))
 
-(defn- on-attach-tsserver [client buf-nr]
+(defn- on-attach-ts_ls [client buf-nr]
   (tset client.server_capabilities :documentFormattingProvider false)
   (on-attach client buf-nr))
 
@@ -54,5 +54,5 @@
 (setup :solargraph)
 (setup :rust_analyzer)
 (setup :clangd)
-(setup :tsserver {:on_attach on-attach-tsserver})
+(setup :ts_ls {:on_attach on-attach-ts_ls})
 (setup :eslint {:on_attach on-attach-eslint})
