@@ -86,7 +86,7 @@ if not vim.g.vscode then
     use "neovim/nvim-lspconfig"
     use "nvimtools/none-ls.nvim"
 
-    use "folke/trouble.nvim"
+    use { "folke/trouble.nvim", tag = "v2.10.0" }
     use "seblj/nvim-echo-diagnostics"
 
     use "hrsh7th/cmp-nvim-lsp"
