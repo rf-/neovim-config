@@ -1,54 +1,49 @@
-(module local.core
-  {autoload {nvim aniseed.nvim str std.string u local.utils}})
+(local {: g : o : bo : wo : env : opt : keymap} vim)
+(local {:set map!} keymap)
+(local {:nvim_command command :nvim_create_autocmd autocmd} vim.api)
+(local str (require :std.string))
+(local u (require :local.utils))
+(local {: println} (require :nfnl.core))
 
-(import-macros {:opt-set set!
-                :opt-get get!
-                :opt-append set+!
-                :def-keymap map!
-                :def-keymap-fn map-fn!
-                :def-autocmd autocmd!
-                :def-autocmd-fn autocmd-fn!} :zest.macros)
-
-(set nvim.g.mapleader " ")
-(set nvim.g.maplocalleader " ")
+(set g.mapleader " ")
+(set g.maplocalleader " ")
 
 ; Use custom paths for Python if present
-(let [python-2-path nvim.env.NEOVIM_PYTHON2_PATH
-      python-3-path nvim.env.NEOVIM_PYTHON3_PATH]
+(let [python-2-path env.NEOVIM_PYTHON2_PATH
+      python-3-path env.NEOVIM_PYTHON3_PATH]
   (if python-2-path
-      (set nvim.g.python_host_prog python-2-path))
+      (set g.python_host_prog python-2-path))
   (if python-3-path
-      (set nvim.g.python3_host_prog python-3-path)))
+      (set g.python3_host_prog python-3-path)))
 
 ; Basic settings
-(set! :ambiwidth :single)
-(set! :autoread true)
-(set! :colorcolumn [80])
-(set! :expandtab true)
-(set! :hidden true)
-(set! :mouse :a)
-(set! :number true)
-(set! :shiftwidth 2)
-(set! :showmode false)
-(set! :smarttab true)
-(set! :softtabstop 2)
-(set! :tabstop 8)
-(set! :termguicolors true)
-(set! :background :light)
+(set o.ambiwidth :single)
+(set o.autoread true)
+(set o.colorcolumn :80)
+(set o.expandtab true)
+(set o.hidden true)
+(set o.mouse :a)
+(set o.number true)
+(set o.shiftwidth 2)
+(set o.showmode false)
+(set o.smarttab true)
+(set o.softtabstop 2)
+(set o.tabstop 8)
+(set o.termguicolors true)
 
 ; Line wrapping: wrap at word boundaries, indent and mark next line
-(set! :wrap true)
-(set! :breakindent true)
-(set! :linebreak true)
-(set! :showbreak "\u{21B3} ")
+(set o.wrap true)
+(set o.breakindent true)
+(set o.linebreak true)
+(set o.showbreak "\u{21B3} ")
 
 ; Choose theme depending on system dark mode
 (let [system-style (str.trim (u.system "defaults read -g AppleInterfaceStyle"))]
-  (set! :background (if (= system-style :Dark) :dark :light)))
+  (set o.background (if (= system-style :Dark) :dark :light)))
 
 ; Display trailing whitespace
-(set! :list true)
-(set! :listchars "tab:  ,trail:·")
+(set o.list true)
+(set o.listchars "tab:  ,trail:·")
 
 ; Format options:
 ; * c: Autowrap comments using textwidth
@@ -56,185 +51,200 @@
 ; * o: Insert comment leader after hitting o or O
 ; * q: Allow formatting of comments with `gq`
 ; * j: Remove comment leader on join
-(set! :formatoptions :croqj)
+(set o.formatoptions :croqj)
 
 ; Set default width, don't use two spaces after periods
-(set! :textwidth 79)
-(set! :joinspaces false)
+(set o.textwidth 79)
+(set o.joinspaces false)
 
 ; Keep the current split at a min width of 88 cols
-(set! :winwidth 88)
+(set o.winwidth 88)
 
 ; Open new splits below and to the right
-(set! :splitbelow true)
-(set! :splitright true)
+(set o.splitbelow true)
+(set o.splitright true)
 
 ; Keep some padding between the cursor and the edge of the screen
-(set! :scrolloff 1)
-(set! :sidescrolloff 5)
+(set o.scrolloff 1)
+(set o.sidescrolloff 5)
 
 ; History and persistent undo
-(set! :history 1000)
-(set! :undofile true)
-(set! :undodir (nvim.fn.expand "~/.config/nvim/undo"))
-(set! :undolevels 2000)
-(set! :undoreload 20000)
+(set o.history 1000)
+(set o.undofile true)
+(set o.undodir (vim.fn.expand "~/.config/nvim/undo"))
+(set o.undolevels 2000)
+(set o.undoreload 20000)
 
 ; Searching
-(set! :hlsearch true)
-(set! :incsearch true)
-(set! :ignorecase true)
-(set! :smartcase true)
+(set o.hlsearch true)
+(set o.incsearch true)
+(set o.ignorecase true)
+(set o.smartcase true)
 
 ; Directories for swp files
-(set! :backupdir (nvim.fn.expand "~/.config/nvim/backup"))
-(set! :directory (nvim.fn.expand "~/.config/nvim/backup"))
+(set o.backupdir (vim.fn.expand "~/.config/nvim/backup"))
+(set o.directory (vim.fn.expand "~/.config/nvim/backup"))
 
 ; Copy and paste to/from system clipboard
-(set! :clipboard :unnamedplus)
+(set o.clipboard :unnamedplus)
 
 ; Don't show completion messages in status line
-(set+! :shortmess :c)
+(opt.shortmess:append :c)
 
 ; Show matching brackets (but not for very long)
-(set! :showmatch true)
-(set! :matchtime 1)
+(set o.showmatch true)
+(set o.matchtime 1)
 
 ; Use cool popup blending
-(set! :pumblend 20)
-(set! :winblend 10)
+(set o.pumblend 20)
+(set o.winblend 10)
 
 ; Use popup menu for command-line completion
-(set! :wildoptions [:pum])
+(set o.wildoptions :pum)
 
 ; Complete longest common string first, then open menu
-(set! :wildmode "longest:full")
+(set o.wildmode "longest:full")
 
 ; Set up completion according to `nvim-cmp` recommendation
-(set! :completeopt [:menu :menuone :noselect])
+(set o.completeopt "menu,menuone,noselect")
 
 ; See instant feedback when entering commands
-(set! :inccommand :nosplit)
+(set o.inccommand :nosplit)
 
 ; Merge sign column with line numbers
-(set! :signcolumn :number)
+(set o.signcolumn :number)
 
 ; Increase terminal scrollback
-(set nvim.g.terminal_scrollback_buffer_size 100000)
+(set g.terminal_scrollback_buffer_size 100000)
+
+; Load project-specific config files
+(set o.exrc true)
 
 ; Normalize the behavior of Y to match other capital letters
-(map! :Y [n] :y$)
+(map! [:n] :Y :y$)
 
 ; Allow holding shift while jumping to mark, which is easier for globals
-(map! "~" [n] "`")
+(map! [:n] "~" "`")
 
 ; Remap Q to run macro in register q
-(map! :Q [nv] "@q")
+(map! [:n :v] :Q "@q")
 
 ; Remap <M-k> in insert to produce digraphs (e.g., <M-k>'9 to produce ’)
-(map! :<M-k> [i] :<C-k>)
+(map! [:i] :<M-k> :<C-k>)
 
 ; Remap arrow keys to scroll by visible lines, not absolute lines
-(map! :<Down> [nv] :gj)
-(map! :<Up> [nv] :gk)
-(map! :<Down> [i] :<C-o>gj)
-(map! :<Up> [i] :<C-o>gk)
+(map! [:n :v] :<Down> :gj)
+(map! [:n :v] :<Up> :gk)
+(map! [:i] :<Down> :<C-o>gj)
+(map! [:i] :<Up> :<C-o>gk)
 
 ; Remap <C-d> and <C-u> to move the cursor instead of the window
 (each [c-u-or-d j-or-k (pairs {:<C-d> :j :<C-u> :k})]
-  (map-fn! c-u-or-d [n :silent]
-           (nvim.command (.. "normal! " nvim.wo.scroll j-or-k))))
+  (map! [:n] c-u-or-d (fn [] (command (.. "normal! " vim.wo.scroll j-or-k)))
+        {:silent true}))
 
 ; Remap <C-{h,j,k,l}> to switch between splits
 (each [_ key (pairs [:h :j :k :l])]
-  (map! (.. :<C- key ">") [tnvi] (.. "<C-\\><C-n><C-w>" key)))
+  (map! [:t :n :v :i] (.. :<C- key ">") (.. "<C-\\><C-n><C-w>" key)))
 
 ; Map <C-w><C-p> to close preview window, since <C-w><C-z> is very awkward
-(map! :<C-w><C-p> [nv] ":pclose!<CR>")
+(map! [:n :v] :<C-w><C-p> ":pclose!<CR>")
 
 ; Map <Leader>3 or <Leader># to go to alternate file
-(map! "<Leader>#" [nv] ":e#<CR>")
-(map! :<Leader>3 [nv] ":e#<CR>")
+(map! [:n :v] "<Leader>#" ":e#<CR>")
+(map! [:n :v] :<Leader>3 ":e#<CR>")
 
 ; Map <Leader>e to quickly open a Ruby REPL
-(map! :<Leader>e [nv] ":bel 10split term://pry<CR>")
+(map! [:n :v] :<Leader>e ":bel 10split term://pry<CR>")
 
 ; Map <Leader>h to clear the current search highlight
-(map! :<Leader>h [nv] ":nohlsearch<CR>")
+(map! [:n :v] :<Leader>h ":nohlsearch<CR>")
 
 ; Map <Leader>r to toggle relative line numbering
-(map-fn! :<Leader>r [nv :silent]
-         (set! :relativenumber (not nvim.wo.relativenumber)))
+(map! [:n :v] :<Leader>r
+      (fn [] (set wo.relativenumber (not wo.relativenumber))) {:silent true})
 
 ; Map <Leader>w to save
-(map! :<Leader>w [n] ":w<CR>")
+(map! [:n] :<Leader>w ":w<CR>")
 
 ; Map <Leader>q to close the current split (or quit)
-(map! :<Leader>q [nv] ":q<CR>")
+(map! [:n :v] :<Leader>q ":q<CR>")
 
 ; Map <Leader>gd to show diagnostics
-(map-fn! :<Leader>gd [n :silent] (vim.diagnostic.open_float))
+(map! [:n] :<Leader>gd (fn [] (vim.diagnostic.open_float)) {:silent true})
 
 ; Map F10 to show syntax groups under cursor
-(map-fn! :<F10> [nv :silent] (nvim.echo (u.inspect-syntax-group)))
+(map! [:n :v] :<F10> (fn [] (println (u.inspect-syntax-group))) {:silent true})
 
 ; Map <C-\><C-[> and <C-\><C-]> to switch tabs in all modes
-(map! "<C-\\><C-[>" [tnvi] "<C-\\><C-n>gT")
-(map! "<C-\\><C-]>" [tnvi] "<C-\\><C-n>gt")
+(map! [:t :n :v :i] "<C-\\><C-[>" "<C-\\><C-n>gT")
+(map! [:t :n :v :i] "<C-\\><C-]>" "<C-\\><C-n>gt")
 
 ; Map <C-\><C-t> to open a new terminal split
-(map! "<C-\\><C-t>" [tnvi] "<C-\\><C-n>:split<CR><C-\\><C-n>:term<CR>")
+(map! [:t :n :v :i] "<C-\\><C-t>" "<C-\\><C-n>:split<CR><C-\\><C-n>:term<CR>")
 
 ; Map <C-\><C-p> to paste in terminal mode
-(map! "<C-\\><C-p>" [t] "<C-\\><C-n>p")
+(map! [:t] "<C-\\><C-p>" "<C-\\><C-n>p")
 
 ; Map <C-\><C-\> to exit terminal mode
-(map! "<C-\\><C-\\>" [t] "<C-\\><C-n>")
+(map! [:t] "<C-\\><C-\\>" "<C-\\><C-n>")
 
 ; Remap <M-k> to <C-k> in terminal to access "kill rest of line" bindings
-(map! :<M-k> [t] :<C-k>)
+(map! [:t] :<M-k> :<C-k>)
 
 ; Map <Enter> in terminal to also enter insert mode
 ; (We have to do this the ugly way because otherwise it breaks the Enter key in
 ; quickfix and I don't know why)
-(nvim.command "nmap <expr> <CR> &buftype == 'terminal' ? \"i\\<CR>\" : \"\\<CR>\"")
+(command "nmap <expr> <CR> &buftype == 'terminal' ? \"i\\<CR>\" : \"\\<CR>\"")
 
 ; Return to previous location on open
-(autocmd-fn! [:BufReadPost] "*"
-             (let [saved-line-nr (nvim.fn.line "'\"")
-                   last-line-nr (nvim.fn.line "$")]
-               (if (and (> saved-line-nr 0) (<= saved-line-nr last-line-nr))
-                   (nvim.command "normal g'\""))))
+(autocmd :BufReadPost {:pattern "*"
+                       :callback (fn []
+                                   (let [saved-line-nr (vim.fn.line "'\"")
+                                         last-line-nr (vim.fn.line "$")]
+                                     (if (and (> saved-line-nr 0)
+                                              (<= saved-line-nr last-line-nr))
+                                         (command "normal g'\"")))
+                                   nil)})
 
 ; Make <C-d> and <C-u> scroll by 25% of window size instead of 50%
-(autocmd-fn! [:BufReadPost :WinEnter] "*"
-             (set! :scroll (math.floor (/ (nvim.fn.winheight 0) 4))))
+(autocmd [:BufReadPost :WinEnter]
+         {:pattern "*"
+          :callback (fn []
+                      (set wo.scroll (math.floor (/ (vim.fn.winheight 0) 4)))
+                      nil)})
 
 ; On entering a terminal buffer, automatically enter insert mode unless we're scrolled up
-(autocmd-fn! [:TermOpen :BufWinEnter :WinEnter] "term://*"
-             (let [last-line-on-screen-nr (nvim.fn.line :w$)
-                   last-line-nr (nvim.fn.line "$")]
-               (if (>= last-line-on-screen-nr last-line-nr)
-                   (nvim.command :startinsert))))
+(autocmd [:TermOpen :BufWinEnter :WinEnter]
+         {:pattern "term://*"
+          :callback (fn []
+                      (let [last-line-on-screen-nr (vim.fn.line :w$)
+                            last-line-nr (vim.fn.line "$")]
+                        (if (>= last-line-on-screen-nr last-line-nr)
+                            (command :startinsert)))
+                      nil)})
 
 ; Disable line numbers in terminals
-(autocmd! [:TermOpen :BufWinEnter] "term://*" "setlocal nonumber")
-(autocmd! [:BufWinLeave] "term://*" "setlocal number")
+(autocmd [:TermOpen :BufWinEnter]
+         {:pattern "term://*" :command "setlocal nonumber"})
+
+(autocmd [:BufWinLeave] {:pattern "term://*" :command "setlocal number"})
 
 ; Disable awful default mappings for SQL
-(set nvim.g.omni_sql_no_default_maps true)
+(set g.omni_sql_no_default_maps true)
 
 ; Workaround for bad highlighting in SignColumn
 ; TODO: Figure out if this is still needed
-(nvim.command "highlight clear SignColumn")
+(command "highlight clear SignColumn")
 
 ; Workaround for bad highlighting of Rust doc comments
 ; TODO: Figure out of this is still needed
-(nvim.command "highlight link rustCommentLineDoc Comment")
+(command "highlight link rustCommentLineDoc Comment")
 
 ; Workaround for unwanted "l" option (I think added by vim-ruby?)
 ; TODO: Figure out if this is still needed
-(autocmd! [:BufRead :BufNewFile] "*" "setlocal formatoptions-=l")
+(autocmd [:BufRead :BufNewFile]
+         {:pattern "*" :command "setlocal formatoptions-=l"})
 
 ; Configure whitespace for various filetypes
 (let [filetype-settings {:coffee {:shiftwidth 2 :softtabstop 2}
@@ -249,28 +259,34 @@
                          :typescript {:shiftwidth 2 :softtabstop 2}
                          :typescriptreact {:shiftwidth 2 :softtabstop 2}}]
   (each [filetype settings (pairs filetype-settings)]
-    (autocmd-fn! [:FileType] filetype
-                 (each [setting value (pairs settings)]
-                   (tset nvim.lo setting value)))))
+    (autocmd [:FileType] {:pattern filetype
+                          :callback (fn []
+                                      (each [setting value (pairs settings)]
+                                        (tset bo setting value))
+                                      nil)})))
 
 ; Include ? and ! in "words" in Ruby, so that tags work correctly with bang and
 ; question mark methods
-(autocmd! [:FileType] :ruby "setlocal iskeyword+=!,?")
+(autocmd [:FileType] {:pattern :ruby :command "setlocal iskeyword+=!,?"})
 
 ; Enable wrapping for text files
-(autocmd! [:BufRead :BufNewFile] :*.txt
-          "setlocal wrap wrapmargin=2 textwidth=72")
+(autocmd [:BufRead :BufNewFile]
+         {:pattern :*.txt :command "setlocal wrap wrapmargin=2 textwidth=72"})
 
 ; Support weird Ruby filenames
-(autocmd! [:BufRead :BufNewFile]
-          "{Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}"
-          "set filetype=ruby")
+(autocmd [:BufRead :BufNewFile]
+         {:pattern "{Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}"
+          :command "set filetype=ruby"})
 
 ; Add shortcuts for scoring word lists
-(autocmd! [:BufRead :BufNewFile] :*.dict "set filetype=dict")
-(autocmd-fn! [:FileType] :dict
-             (each [idx score (ipairs [0 10 21 51 61])]
-               (map! (tostring idx) [n] (.. "0f;lciw" score "<Esc>:noh<CR>"))))
+(autocmd [:BufRead :BufNewFile] {:pattern :*.dict :command "set filetype=dict"})
+(autocmd [:FileType] {:pattern :dict
+                      :callback (fn []
+                                  (each [idx score (ipairs [0 10 21 51 61])]
+                                    (map! [:n] (tostring idx)
+                                          (fn []
+                                            (.. "0f;lciw" score "<Esc>:noh<CR>"))))
+                                  nil)})
 
 ; Customize display of LSP diagnostics
 (vim.diagnostic.config {:underline true
@@ -280,11 +296,12 @@
                         :severity_sort true})
 
 (tset vim.lsp.handlers "textDocument/signatureHelp"
-  (vim.lsp.with
-    vim.lsp.handlers.signature_help
-    {:silent true
-     :focusable false}))
+      (vim.lsp.with vim.lsp.handlers.signature_help
+        {:silent true :focusable false}))
 
 ; Add shortcuts for jumping between diagnostics
-(map-fn! "[d" [n :silent] (vim.diagnostic.goto_prev {:float false}))
-(map-fn! "]d" [n :silent] (vim.diagnostic.goto_next {:float false}))
+(map! [:n] "[d" (fn [] (vim.diagnostic.goto_prev {:float false}))
+      {:silent true})
+
+(map! [:n] "]d" (fn [] (vim.diagnostic.goto_next {:float false}))
+      {:silent true})

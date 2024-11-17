@@ -1,8 +1,6 @@
-(module local.plugins.nerdcommenter
-  {autoload {nvim aniseed.nvim}})
+(local {: g : keymap} vim)
+(local {:set map!} keymap)
 
-(import-macros {:def-keymap map!} :zest.macros)
+(set g.NERDCreateDefaultMappings false)
 
-(set nvim.g.NERDCreateDefaultMappings false)
-
-(map! :<Leader>/ [nv :remap] :<Plug>NERDCommenterToggle)
+(map! [:n :v] :<Leader>/ :<Plug>NERDCommenterToggle)

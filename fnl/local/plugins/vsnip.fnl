@@ -1,7 +1,7 @@
-(module local.plugins.vsnip
-  {autoload {nvim aniseed.nvim}})
+(local {: g} vim)
+(local {:nvim_command command} vim.api)
 
-(set nvim.g.vsnip_snippet_dir (nvim.fn.expand "~/.config/nvim/snippets"))
+(set g.vsnip_snippet_dir (vim.fn.expand "~/.config/nvim/snippets"))
 
-(nvim.command "imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'")
-(nvim.command "smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'")
+(command "imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'")
+(command "smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'")

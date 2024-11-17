@@ -1,7 +1,6 @@
-(module local.plugins.trouble
-  {autoload {nvim aniseed.nvim trouble trouble}})
-
-(import-macros {:def-keymap map!} :zest.macros)
+(local trouble (require :trouble))
+(local {: keymap} vim)
+(local {:set map!} keymap)
 
 (trouble.setup {:mode :document_diagnostics
                 :icons false
@@ -14,4 +13,4 @@
                         :information :info}
                 :use_diagnostic_signs true})
 
-(map! :<Leader>d [nv :silent] ":TroubleToggle<CR>")
+(map! [:n :v] :<Leader>d ":TroubleToggle<CR>" {:silent true})

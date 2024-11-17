@@ -1,9 +1,7 @@
-(module local.plugins.mundo
-  {autoload {nvim aniseed.nvim}})
+(local {: g : keymap} vim)
+(local {:set map!} keymap)
 
-(import-macros {:def-keymap map!} :zest.macros)
+(set g.mundo_right 1)
+(set g.mundo_help 0)
 
-(set nvim.g.mundo_right 1)
-(set nvim.g.mundo_help 0)
-
-(map! :<Leader>u [n] ":MundoToggle<CR>")
+(map! [:n] :<Leader>u ":MundoToggle<CR>")

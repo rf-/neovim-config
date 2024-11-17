@@ -1,11 +1,10 @@
-(module local.commands
-  {autoload {u local.utils}})
+(local {: g} vim)
+(local {:nvim_command command :nvim_create_user_command create-command} vim.api)
+(local u (require :local.utils))
 
-(vim.api.nvim_create_user_command
-  :Ag
-  (fn [opts]
-    (let [results (u.system (.. "ag --nogroup " opts.args))]
-      (tset vim.g :__ag_results results)
-      (vim.cmd "cexpr g:__ag_results")
-      (vim.cmd "copen")))
-  {:nargs "*" :complete "dir"})
+(create-command :Ag (fn [opts]
+                      (let [results (u.system (.. "ag --nogroup " opts.args))]
+                        (set g.__ag_results results)
+                        (command "cexpr g:__ag_results")
+                        (command "copen")))
+                {:nargs "*" :complete "dir"})

@@ -1,0 +1,26 @@
+(local null-ls (require :null-ls))
+(local lsp (require :local.lsp))
+
+(local {: g : o : bo : wo : env : opt : keymap} vim)
+(local {:set map!} keymap)
+(local {:nvim_command command :nvim_create_autocmd autocmd} vim.api)
+(local {:nvim_command command
+        :nvim_create_augroup create-augroup
+        :nvim_create_autocmd create-autocmd
+        :nvim_clear_autocmds clear-autocmds} vim.api)
+
+(set o.colorcolumn :100)
+(set o.textwidth 99)
+
+(set o.path (.. o.path ",./client/src"))
+
+;(vim.lsp.set_log_level "debug")
+
+(lsp.auto-format-on-save [:typescript :typescriptreact :json :javascript :css])
+
+(lsp.auto-format-on-save [:ruby :fennel] {:name "null-ls"})
+
+(null-ls.setup {:sources [null_ls.builtins.diagnostics.rubocop
+                          null_ls.builtins.formatting.fnlfmt]})
+
+(lsp.setup :tailwindcss)

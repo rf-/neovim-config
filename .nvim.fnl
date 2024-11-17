@@ -1,0 +1,5 @@
+(when (not vim.env.PACKER_SYNC)
+  (local null-ls (require :null-ls))
+  (local lsp (require :local.lsp))
+  (null-ls.setup {:sources [null_ls.builtins.formatting.fnlfmt]})
+  (lsp.auto-format-on-save [:fennel]))

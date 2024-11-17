@@ -1,9 +1,7 @@
-(module local.plugins
-  {autoload {nvim aniseed.nvim a aniseed.core packer packer}})
+(local {: ex : g} vim)
+(local {:nvim_command command} vim.api)
 
-(local {: use : use_rocks} packer)
-
-(defn config [name]
+(fn config [name]
   (let [(ok? val-or-err) (pcall require (.. :local.plugins. name))]
     (when (not ok?)
       (print (.. "Error loading plugin config: " val-or-err)))))
@@ -23,6 +21,6 @@
 (config :trouble)
 (config :echo-diagnostics)
 
-(set nvim.g.edge_style :aura)
-(set nvim.g.edge_enable_italic 1)
-(nvim.ex.colorscheme :edge)
+(set g.edge_style :aura)
+(set g.edge_enable_italic 1)
+(command "colorscheme edge")

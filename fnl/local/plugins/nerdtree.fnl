@@ -1,10 +1,8 @@
-(module local.plugins.nerdtree
-  {autoload {nvim aniseed.nvim}})
+(local {: g : keymap} vim)
+(local {:set map!} keymap)
 
-(import-macros {:def-keymap map!} :zest.macros)
+(set g.NERDTreeHijackNetrw :0)
 
-(set nvim.g.NERDTreeHijackNetrw :0)
-
-(map! :<Leader>n [nv] ":NERDTreeToggle<CR>")
-(map! :<Leader>N [nv] ":NERDTree<CR>")
-(map! "-" [nv] ":NERDTreeFind<CR>")
+(map! [:n :v] :<Leader>n ":NERDTreeToggle<CR>")
+(map! [:n :v] :<Leader>N ":NERDTree<CR>")
+(map! [:n :v] "-" ":NERDTreeFind<CR>")

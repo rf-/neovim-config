@@ -1,7 +1,5 @@
-(module local.plugins.fugitive
-  {autoload {nvim aniseed.nvim}})
+(local {: keymap} vim)
+(local {:set map!} keymap)
 
-(import-macros {:def-keymap map!} :zest.macros)
-
-(map! :<Leader>gg [n] ":Git<CR>")
-(map! :<Leader>gb [n] ":Git blame<CR>")
+(map! [:n] :<Leader>gg ":Git<CR>")
+(map! [:n] :<Leader>gb ":Git blame<CR>")

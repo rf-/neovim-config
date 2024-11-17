@@ -1,7 +1,5 @@
-(module local.plugins.splitjoin
-  {autoload {nvim aniseed.nvim}})
+(local {: keymap} vim)
+(local {:set map!} keymap)
 
-(import-macros {:def-keymap map!} :zest.macros)
-
-(map! :<Leader>j [n] ":SplitjoinJoin<CR>")
-(map! :<Leader>s [n] ":SplitjoinSplit<CR>")
+(map! [:n] :<Leader>j ":SplitjoinJoin<CR>")
+(map! [:n] :<Leader>s ":SplitjoinSplit<CR>")

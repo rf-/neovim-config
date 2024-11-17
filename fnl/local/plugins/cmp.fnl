@@ -1,6 +1,4 @@
-(module local.plugins.cmp
-  {autoload {nvim aniseed.nvim cmp cmp}})
-
+(local cmp (require :cmp))
 (local cm cmp.mapping)
 
 (cmp.setup {:snippet {:expand (fn [args]

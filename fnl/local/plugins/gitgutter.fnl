@@ -1,7 +1,5 @@
-(module local.plugins.gitgutter
-  {autoload {nvim aniseed.nvim}})
+(local {: keymap} vim)
+(local {:set map!} keymap)
 
-(import-macros {:def-keymap map!} :zest.macros)
-
-(map! "[g" [n] ":GitGutterPrevHunk<CR>")
-(map! "]g" [n] ":GitGutterNextHunk<CR>")
+(map! [:n] "[g" ":GitGutterPrevHunk<CR>")
+(map! [:n] "]g" ":GitGutterNextHunk<CR>")

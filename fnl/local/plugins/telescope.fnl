@@ -1,20 +1,17 @@
-(module local.plugins.telescope
-  {autoload {nvim aniseed.nvim
-             std-fn std.functional
-             std-table std.table
-             telescope telescope
-             telescope-action-state telescope.actions.state
-             telescope-actions telescope.actions
-             telescope-builtin telescope.builtin
-             telescope-from-entry telescope.from_entry
-             telescope-themes telescope.themes}})
+(local {: map : bind : foldl} (require :std.functional))
+(local {: merge} (require :std.table))
+(local telescope (require :telescope))
+(local telescope-action-state (require :telescope.actions.state))
+(local telescope-actions (require :telescope.actions))
+(local telescope-builtin (require :telescope.builtin))
+(local telescope-from-entry (require :telescope.from_entry))
+(local telescope-themes (require :telescope.themes))
 
-(local {: map : bind : foldl} std-fn)
-(local {: merge} std-table)
+(local {: keymap} vim)
+(local {:set map!} keymap)
+(local {:nvim_command command} vim.api)
 
-(import-macros {:def-keymap-fn map-fn!} :zest.macros)
-
-(defn- entry-to-qf [entry]
+(fn entry-to-qf [entry]
   {:bufnr entry.bufnr
    :filename (telescope-from-entry.path entry false)
    :lnum (or entry.lnum 1)
@@ -22,14 +19,14 @@
    :text (or entry.text (if (= (type entry.value) :table) entry.value.text
                             entry.value))})
 
-(defn- map-vals [func tbl]
+(fn map-vals [func tbl]
   (map (fn [_ value]
          (func value)) tbl))
 
-(defn- escape-filename [filename]
-  (nvim.fn.escape filename " %#'\""))
+(fn escape-filename [filename]
+  (vim.fn.escape filename " %#'\""))
 
-(defn- open-one-or-more [cmd qf-or-args prompt-bufnr]
+(fn open-one-or-more [cmd qf-or-args prompt-bufnr]
   (let [picker (telescope-action-state.get_current_picker prompt-bufnr)
         multi-selection (picker:get_multi_selection)
         has-multi (> (length multi-selection) 0)
@@ -38,21 +35,21 @@
     (telescope-actions.close prompt-bufnr)
     (when (> (length qfs) 0)
       (let [qf (. qfs 1)]
-        (nvim.command (.. cmd " " (escape-filename qf.filename)))
-        (nvim.command (.. "normal! " qf.lnum :G qf.col :|zz))))
+        (command (.. cmd " " (escape-filename qf.filename)))
+        (command (.. "normal! " qf.lnum :G qf.col :|zz))))
     (when (and (> (length qfs) 1) (= qf-or-args :qf))
-      (nvim.fn.setqflist qfs)
-      (nvim.command :copen)
-      (nvim.command "wincmd J")
-      (nvim.command "10 wincmd _")
-      (nvim.command "wincmd p"))
+      (vim.fn.setqflist qfs)
+      (command :copen)
+      (command "wincmd J")
+      (command "10 wincmd _")
+      (command "wincmd p"))
     (when (and (> (length qfs) 1) (= qf-or-args :args))
       (let [filenames (map-vals (fn [e]
                                   (escape-filename e.filename))
                                 qfs)]
-        (nvim.command (.. "args " (table.concat filenames " ")))))))
+        (command (.. "args " (table.concat filenames " ")))))))
 
-(defn- map-all [mappings]
+(fn map-all [mappings]
   {:i mappings :n mappings})
 
 (local grep-mappings
@@ -90,8 +87,8 @@
 (telescope.load_extension :fzy_native)
 (telescope.load_extension :ui-select)
 
-(map-fn! :<Leader>a [nv :silent] (telescope-builtin.grep_string))
-(map-fn! :<Leader>f [n :silent] (telescope-builtin.live_grep))
-(map-fn! :<Leader>k [n :silent] (vim.lsp.buf.code_action))
-(map-fn! :<Leader>t [n :silent] (telescope-builtin.buffers))
-(map-fn! :<Leader>T [n :silent] (telescope-builtin.find_files))
+(map! [:n :v] :<Leader>a telescope-builtin.grep_string {:silent true})
+(map! [:n] :<Leader>f telescope-builtin.live_grep {:silent true})
+(map! [:n] :<Leader>k vim.lsp.buf.code_action {:silent true})
+(map! [:n] :<Leader>t telescope-builtin.buffers {:silent true})
+(map! [:n] :<Leader>T telescope-builtin.find_files {:silent true})
