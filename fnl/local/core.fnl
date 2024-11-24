@@ -265,6 +265,9 @@
                                         (tset bo setting value))
                                       nil)})))
 
+; Treat `.` as a word break in Fennel
+(autocmd [:FileType] {:pattern :fennel :command "setlocal iskeyword-=."})
+
 ; Include ? and ! in "words" in Ruby, so that tags work correctly with bang and
 ; question mark methods
 (autocmd [:FileType] {:pattern :ruby :command "setlocal iskeyword+=!,?"})
