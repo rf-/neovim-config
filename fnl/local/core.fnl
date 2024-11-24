@@ -82,8 +82,8 @@
 (set o.smartcase true)
 
 ; Directories for swp files
-(set o.backupdir (vim.fn.expand "~/.config/nvim/backup"))
-(set o.directory (vim.fn.expand "~/.config/nvim/backup"))
+(set o.backupdir (vim.fn.expand "~/.config/nvim/backup//"))
+(set o.directory (vim.fn.expand "~/.config/nvim/swap//"))
 
 ; Copy and paste to/from system clipboard
 (set o.clipboard :unnamedplus)
