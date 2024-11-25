@@ -246,6 +246,10 @@
 (autocmd [:BufRead :BufNewFile]
          {:pattern "*" :command "setlocal formatoptions-=l"})
 
+; Override bad "*.mm" detection from Polyglot
+(autocmd [:BufReadPost :BufNewFile]
+         {:pattern "*.mm" :command "set filetype=objcpp"})
+
 ; Configure whitespace for various filetypes
 (let [filetype-settings {:coffee {:shiftwidth 2 :softtabstop 2}
                          :css {:shiftwidth 2 :softtabstop 2}
