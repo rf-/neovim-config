@@ -8,3 +8,11 @@
                         (command "cexpr g:__ag_results")
                         (command "copen")))
                 {:nargs "*" :complete "dir"})
+
+(create-command :Sg (fn [opts]
+                      (let [results (u.system (.. "sg --heading never --pattern "
+                                                  opts.args))]
+                        (set g.__sg_results results)
+                        (command "cexpr g:__sg_results")
+                        (command "copen")))
+                {:nargs "*" :complete "dir"})
