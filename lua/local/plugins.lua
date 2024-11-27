@@ -24,6 +24,7 @@ config("telescope")
 config("nerdtree")
 config("trouble")
 config("echo-diagnostics")
+config("lspsaga")
 g.edge_style = "aura"
 g.edge_enable_italic = 1
 return command("colorscheme edge")

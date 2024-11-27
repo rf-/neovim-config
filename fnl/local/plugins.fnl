@@ -20,6 +20,7 @@
 (config :nerdtree)
 (config :trouble)
 (config :echo-diagnostics)
+(config :lspsaga)
 
 (set g.edge_style :aura)
 (set g.edge_enable_italic 1)

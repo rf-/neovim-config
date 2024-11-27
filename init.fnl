@@ -89,6 +89,7 @@
 
       (use "neovim/nvim-lspconfig")
       (use "nvimtools/none-ls.nvim")
+      (use "nvimdev/lspsaga.nvim")
 
       (use "folke/trouble.nvim" {:tag "v2.10.0"})
       (use "seblj/nvim-echo-diagnostics")
