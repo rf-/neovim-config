@@ -33,7 +33,6 @@
       (use "wbthomason/packer.nvim")
       (use "nvim-lua/plenary.nvim")
       (use "Olical/nfnl")
-      (use "tsbohc/zest.nvim")
 
       ; Ergonomics
 
