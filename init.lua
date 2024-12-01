@@ -78,7 +78,7 @@ local function init()
     use("nvim-telescope/telescope.nvim")
     use("nvim-telescope/telescope-fzy-native.nvim")
     use("nvim-telescope/telescope-ui-select.nvim")
-    use("preservim/nerdtree")
+    use("nvim-neo-tree/neo-tree.nvim", {branch = "v3.x", requires = {"MunifTanjim/nui.nvim"}})
     return use("rf-/edge")
   end
   packer.startup(_2_)

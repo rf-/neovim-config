@@ -111,7 +111,7 @@
       (use "nvim-telescope/telescope-fzy-native.nvim")
       (use "nvim-telescope/telescope-ui-select.nvim")
 
-      (use "preservim/nerdtree")
+      (use "nvim-neo-tree/neo-tree.nvim" {:branch "v3.x" :requires ["MunifTanjim/nui.nvim"]})
 
       ; Color
 

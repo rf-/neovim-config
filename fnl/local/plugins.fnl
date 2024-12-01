@@ -6,6 +6,7 @@
     (when (not ok?)
       (print (.. "Error loading plugin config: " val-or-err)))))
 
+(config :neo-tree)
 (config :nerdcommenter)
 (config :fugitive)
 (config :gitgutter)
@@ -17,7 +18,6 @@
 (config :cmp)
 (config :vsnip)
 (config :telescope)
-(config :nerdtree)
 (config :trouble)
 (config :echo-diagnostics)
 (config :lspsaga)

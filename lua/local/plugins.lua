@@ -10,6 +10,7 @@ local function config(name)
     return nil
   end
 end
+config("neo-tree")
 config("nerdcommenter")
 config("fugitive")
 config("gitgutter")
@@ -21,7 +22,6 @@ config("lspconfig")
 config("cmp")
 config("vsnip")
 config("telescope")
-config("nerdtree")
 config("trouble")
 config("echo-diagnostics")
 config("lspsaga")
