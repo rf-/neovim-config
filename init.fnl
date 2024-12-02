@@ -90,6 +90,12 @@
       (use "nvimtools/none-ls.nvim")
       (use "nvimdev/lspsaga.nvim")
 
+      (use "antosha417/nvim-lsp-file-operations"
+        {:requires ["nvim-neo-tree/neo-tree.nvim"]
+         :config (fn []
+                   (let [lsp-file-operations (require "lsp-file-operations")]
+                     (lsp-file-operations.setup)))})
+
       (use "folke/trouble.nvim" {:tag "v2.10.0"})
       (use "seblj/nvim-echo-diagnostics")
 
@@ -111,7 +117,8 @@
       (use "nvim-telescope/telescope-fzy-native.nvim")
       (use "nvim-telescope/telescope-ui-select.nvim")
 
-      (use "nvim-neo-tree/neo-tree.nvim" {:branch "v3.x" :requires ["MunifTanjim/nui.nvim"]})
+      (use "nvim-neo-tree/neo-tree.nvim"
+           {:branch "v3.x" :requires ["MunifTanjim/nui.nvim"]})
 
       ; Color
 
