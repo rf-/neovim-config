@@ -65,18 +65,8 @@
 
       (use "hrsh7th/vim-vsnip")
 
-      (use "zbirenbaum/copilot.lua"
-           {:cmd "Copilot"
-            :event "InsertEnter"
-            :config (fn []
-                      (let [copilot (require "copilot")]
-                        (copilot.setup {})))})
-
-      (use "CopilotC-Nvim/CopilotChat.nvim"
-           {:branch "canary"
-            :config (fn []
-                      (let [copilot-chat (require "CopilotChat")]
-                        (copilot-chat.setup {})))})
+      (use "zbirenbaum/copilot.lua")
+      (use "CopilotC-Nvim/CopilotChat.nvim")
 
       ; Language support
 

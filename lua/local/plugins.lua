@@ -25,6 +25,14 @@ config("telescope")
 config("trouble")
 config("echo-diagnostics")
 config("lspsaga")
+do
+  local copilot = require("copilot")
+  copilot.setup({suggestion = {auto_trigger = true}})
+end
+do
+  local copilot_chat = require("CopilotChat")
+  copilot_chat.setup({})
+end
 g.edge_style = "aura"
 g.edge_enable_italic = 1
 return command("colorscheme edge")
