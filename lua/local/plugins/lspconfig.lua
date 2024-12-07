@@ -38,7 +38,7 @@ local function on_attach_eslint(client, buf_nr)
 end
 setup("solargraph")
 setup("rust_analyzer")
-setup("clangd")
+setup("clangd", {capabilities = {offsetEncoding = {"utf-16"}}})
 setup("ts_ls", {on_attach = on_attach_ts_ls})
 setup("eslint", {on_attach = on_attach_eslint})
 return {setup = setup}
