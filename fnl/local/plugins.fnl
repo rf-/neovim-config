@@ -21,12 +21,7 @@
 (config :trouble)
 (config :echo-diagnostics)
 (config :lspsaga)
-
-(let [copilot (require "copilot")]
-  (copilot.setup {:suggestion {:auto_trigger true}}))
-
-(let [copilot-chat (require "CopilotChat")]
-  (copilot-chat.setup {}))
+(config :copilot)
 
 (set g.edge_style :aura)
 (set g.edge_enable_italic 1)
