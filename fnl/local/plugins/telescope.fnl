@@ -20,8 +20,7 @@
                             entry.value))})
 
 (fn map-vals [func tbl]
-  (map (fn [_ value]
-         (func value)) tbl))
+  (map #(func $2) tbl))
 
 (fn escape-filename [filename]
   (vim.fn.escape filename " %#'\""))
@@ -44,9 +43,7 @@
       (command "10 wincmd _")
       (command "wincmd p"))
     (when (and (> (length qfs) 1) (= qf-or-args :args))
-      (let [filenames (map-vals (fn [e]
-                                  (escape-filename e.filename))
-                                qfs)]
+      (let [filenames (map-vals #(escape-filename $.filename) qfs)]
         (command (.. "args " (table.concat filenames " ")))))))
 
 (fn map-all [mappings]

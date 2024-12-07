@@ -140,7 +140,7 @@
 
 ; Remap <C-d> and <C-u> to move the cursor instead of the window
 (each [c-u-or-d j-or-k (pairs {:<C-d> :j :<C-u> :k})]
-  (map! [:n] c-u-or-d (fn [] (command (.. "normal! " vim.wo.scroll j-or-k)))
+  (map! [:n] c-u-or-d #(command (.. "normal! " vim.wo.scroll j-or-k))
         {:silent true}))
 
 ; Remap <C-{h,j,k,l}> to switch between splits
@@ -161,8 +161,8 @@
 (map! [:n :v] :<Leader>h ":nohlsearch<CR>")
 
 ; Map <Leader>r to toggle relative line numbering
-(map! [:n :v] :<Leader>r
-      (fn [] (set wo.relativenumber (not wo.relativenumber))) {:silent true})
+(map! [:n :v] :<Leader>r #(set wo.relativenumber (not wo.relativenumber))
+      {:silent true})
 
 ; Map <Leader>w to save
 (map! [:n] :<Leader>w ":w<CR>")
@@ -171,10 +171,10 @@
 (map! [:n :v] :<Leader>q ":q<CR>")
 
 ; Map <Leader>gd to show diagnostics
-(map! [:n] :<Leader>gd (fn [] (vim.diagnostic.open_float)) {:silent true})
+(map! [:n] :<Leader>gd #(vim.diagnostic.open_float) {:silent true})
 
 ; Map F10 to show syntax groups under cursor
-(map! [:n :v] :<F10> (fn [] (println (u.inspect-syntax-group))) {:silent true})
+(map! [:n :v] :<F10> #(println (u.inspect-syntax-group)) {:silent true})
 
 ; Map <C-\><C-[> and <C-\><C-]> to switch tabs in all modes
 (map! [:t :n :v :i] "<C-\\><C-[>" "<C-\\><C-n>gT")
@@ -291,8 +291,7 @@
                       :callback (fn []
                                   (each [idx score (ipairs [0 10 21 51 61])]
                                     (map! [:n] (tostring idx)
-                                          (fn []
-                                            (.. "0f;lciw" score "<Esc>:noh<CR>"))))
+                                          #(.. "0f;lciw" score "<Esc>:noh<CR>")))
                                   nil)})
 
 ; Customize display of LSP diagnostics
@@ -302,13 +301,11 @@
                         :update_in_insert true
                         :severity_sort true})
 
-(tset vim.lsp.handlers "textDocument/signatureHelp"
-      (vim.lsp.with vim.lsp.handlers.signature_help
-        {:silent true :focusable false}))
+(set vim.lsp.handlers.textDocument/signatureHelp
+     (vim.lsp.with vim.lsp.handlers.signature_help
+       {:silent true :focusable false}))
 
 ; Add shortcuts for jumping between diagnostics
-(map! [:n] "[d" (fn [] (vim.diagnostic.goto_prev {:float false}))
-      {:silent true})
+(map! [:n] "[d" #(vim.diagnostic.goto_prev {:float false}) {:silent true})
 
-(map! [:n] "]d" (fn [] (vim.diagnostic.goto_next {:float false}))
-      {:silent true})
+(map! [:n] "]d" #(vim.diagnostic.goto_next {:float false}) {:silent true})

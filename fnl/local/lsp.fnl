@@ -21,7 +21,7 @@
     nil))
 
 (fn auto-format-on-save [filetypes extra-opts]
-  (let [callback (fn [] (create-auto-format-autocmd extra-opts))]
+  (let [callback #(create-auto-format-autocmd extra-opts)]
     (each [_ filetype (ipairs filetypes)]
       (create-autocmd :FileType {:pattern filetype :callback callback}))))
 

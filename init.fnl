@@ -82,9 +82,7 @@
 
       (use "antosha417/nvim-lsp-file-operations"
         {:requires ["nvim-neo-tree/neo-tree.nvim"]
-         :config (fn []
-                   (let [lsp-file-operations (require "lsp-file-operations")]
-                     (lsp-file-operations.setup)))})
+         :config #((. (require "lsp-file-operations") :setup))})
 
       (use "folke/trouble.nvim" {:tag "v2.10.0"})
       (use "seblj/nvim-echo-diagnostics")

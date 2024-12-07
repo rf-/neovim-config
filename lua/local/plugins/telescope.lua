@@ -26,8 +26,8 @@ local function entry_to_qf(entry)
   return {bufnr = entry.bufnr, filename = telescope_from_entry.path(entry, false), lnum = (entry.lnum or 1), col = (entry.col or 1), text = or_3_}
 end
 local function map_vals(func, tbl)
-  local function _5_(_, value)
-    return func(value)
+  local function _5_(_241, _242)
+    return func(_242)
   end
   return map(_5_, tbl)
 end
@@ -62,8 +62,8 @@ local function open_one_or_more(cmd, qf_or_args, prompt_bufnr)
   end
   if ((#qfs > 1) and (qf_or_args == "args")) then
     local filenames
-    local function _9_(e)
-      return escape_filename(e.filename)
+    local function _9_(_241)
+      return escape_filename(_241.filename)
     end
     filenames = map_vals(_9_, qfs)
     return command(("args " .. table.concat(filenames, " ")))

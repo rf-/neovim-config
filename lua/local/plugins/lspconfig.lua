@@ -29,11 +29,11 @@ local function setup(server_name, extra_config)
   return setup_fn(config)
 end
 local function on_attach_ts_ls(client, buf_nr)
-  client.server_capabilities["documentFormattingProvider"] = false
+  client.server_capabilities.documentFormattingProvider = false
   return on_attach(client, buf_nr)
 end
 local function on_attach_eslint(client, buf_nr)
-  client.server_capabilities["documentFormattingProvider"] = true
+  client.server_capabilities.documentFormattingProvider = true
   return on_attach(client, buf_nr)
 end
 setup("solargraph")

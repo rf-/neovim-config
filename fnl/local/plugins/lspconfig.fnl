@@ -35,11 +35,11 @@
     (setup-fn config)))
 
 (fn on-attach-ts_ls [client buf-nr]
-  (tset client.server_capabilities :documentFormattingProvider false)
+  (set client.server_capabilities.documentFormattingProvider false)
   (on-attach client buf-nr))
 
 (fn on-attach-eslint [client buf-nr]
-  (tset client.server_capabilities :documentFormattingProvider true)
+  (set client.server_capabilities.documentFormattingProvider true)
   (on-attach client buf-nr))
 
 (setup :solargraph)
