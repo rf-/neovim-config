@@ -2,10 +2,10 @@
 (local {:nvim_command command :nvim_create_user_command create-command} vim.api)
 (local u (require :local.utils))
 
-(create-command :Ag (fn [opts]
-                      (let [results (u.system (.. "ag --nogroup " opts.args))]
-                        (set g.__ag_results results)
-                        (command "cexpr g:__ag_results")
+(create-command :Rg (fn [opts]
+                      (let [results (u.system (.. "rg --nogroup " opts.args))]
+                        (set g.__rg_results results)
+                        (command "cexpr g:__rg_results")
                         (command "copen")))
                 {:nargs "*" :complete "dir"})
 
