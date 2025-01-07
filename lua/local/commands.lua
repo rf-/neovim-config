@@ -4,7 +4,7 @@ local command = vim.api["nvim_command"]
 local create_command = vim.api["nvim_create_user_command"]
 local u = require("local.utils")
 local function _1_(opts)
-  local results = u.system(("rg --nogroup " .. opts.args))
+  local results = u.system(("rg --no-heading --line-number " .. opts.args))
   g.__rg_results = results
   command("cexpr g:__rg_results")
   return command("copen")

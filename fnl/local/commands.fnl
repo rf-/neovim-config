@@ -3,7 +3,8 @@
 (local u (require :local.utils))
 
 (create-command :Rg (fn [opts]
-                      (let [results (u.system (.. "rg --nogroup " opts.args))]
+                      (let [results (u.system (.. "rg --no-heading --line-number "
+                                                  opts.args))]
                         (set g.__rg_results results)
                         (command "cexpr g:__rg_results")
                         (command "copen")))
