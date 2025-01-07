@@ -35,6 +35,7 @@
     (setup-fn config)))
 
 (fn on-attach-ts_ls [client buf-nr]
+  (set vim.o.formatexpr "")
   (set client.server_capabilities.documentFormattingProvider false)
   (on-attach client buf-nr))
 

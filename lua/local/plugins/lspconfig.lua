@@ -29,6 +29,7 @@ local function setup(server_name, extra_config)
   return setup_fn(config)
 end
 local function on_attach_ts_ls(client, buf_nr)
+  vim.o.formatexpr = ""
   client.server_capabilities.documentFormattingProvider = false
   return on_attach(client, buf_nr)
 end
