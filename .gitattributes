@@ -1,2 +1,3 @@
-init.lua linguist-generated=true linguist-vendored=true
-lua/local/**/* linguist-generated=true linguist-vendored=true
+init.lua linguist-generated
+lua/local/**/* linguist-generated
+lua/std/**/* linguist-vendored
