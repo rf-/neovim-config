@@ -19,7 +19,7 @@
 ; Basic settings
 (set o.ambiwidth :single)
 (set o.autoread true)
-(set o.colorcolumn :80)
+(set o.colorcolumn "+1")
 (set o.expandtab true)
 (set o.hidden true)
 (set o.mouse :a)
@@ -258,7 +258,7 @@
                          :javascript {:shiftwidth 2 :softtabstop 2}
                          :make {:expandtab false}
                          :python {:shiftwidth 4 :softtabstop 4 :textwidth 79}
-                         :scala {:colorcolumn 100}
+                         :scala {:textwidth 99}
                          :scss {:shiftwidth 2 :softtabstop 2}
                          :typescript {:shiftwidth 2 :softtabstop 2}
                          :typescriptreact {:shiftwidth 2 :softtabstop 2}}]

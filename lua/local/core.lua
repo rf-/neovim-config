@@ -29,7 +29,7 @@ do
 end
 o.ambiwidth = "single"
 o.autoread = true
-o.colorcolumn = "80"
+o.colorcolumn = "+1"
 o.expandtab = true
 o.hidden = true
 o.mouse = "a"
@@ -165,9 +165,8 @@ g.omni_sql_no_default_maps = true
 command("highlight clear SignColumn")
 command("highlight link rustCommentLineDoc Comment")
 autocmd({"BufRead", "BufNewFile"}, {pattern = "*", command = "setlocal formatoptions-=l"})
-autocmd({"BufReadPost", "BufNewFile"}, {pattern = "*.mm", command = "set filetype=objcpp"})
 do
-  local filetype_settings = {coffee = {shiftwidth = 2, softtabstop = 2}, css = {shiftwidth = 2, softtabstop = 2}, go = {tabstop = 4, shiftwidth = 4, expandtab = false}, haxe = {tabstop = 4, shiftwidth = 4, softtabstop = 4}, javascript = {shiftwidth = 2, softtabstop = 2}, make = {expandtab = false}, python = {shiftwidth = 4, softtabstop = 4, textwidth = 79}, scala = {colorcolumn = 100}, scss = {shiftwidth = 2, softtabstop = 2}, typescript = {shiftwidth = 2, softtabstop = 2}, typescriptreact = {shiftwidth = 2, softtabstop = 2}}
+  local filetype_settings = {coffee = {shiftwidth = 2, softtabstop = 2}, css = {shiftwidth = 2, softtabstop = 2}, go = {tabstop = 4, shiftwidth = 4, expandtab = false}, haxe = {tabstop = 4, shiftwidth = 4, softtabstop = 4}, javascript = {shiftwidth = 2, softtabstop = 2}, make = {expandtab = false}, python = {shiftwidth = 4, softtabstop = 4, textwidth = 79}, scala = {textwidth = 99}, scss = {shiftwidth = 2, softtabstop = 2}, typescript = {shiftwidth = 2, softtabstop = 2}, typescriptreact = {shiftwidth = 2, softtabstop = 2}}
   for filetype, settings in pairs(filetype_settings) do
     local function _14_()
       for setting, value in pairs(settings) do
