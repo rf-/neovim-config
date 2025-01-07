@@ -1,6 +1,6 @@
 (let [copilot (require "copilot")
       copilot-auth (require "copilot.auth")
-      (ok? val-or-err) (pcall copilot-auth.get-cred)]
+      (ok? val-or-err) (pcall copilot-auth.get_cred)]
   (if ok?
       ;; If auth is configured, set everything up.
       (do
