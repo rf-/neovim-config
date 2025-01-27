@@ -46,7 +46,10 @@
 (setup :solargraph)
 (setup :rust_analyzer)
 (setup :clangd {:capabilities {:offsetEncoding ["utf-16"]}})
-(setup :ts_ls {:on_attach on-attach-ts_ls})
+(setup :ts_ls
+       {:on_attach on-attach-ts_ls
+        :init_options {:hostInfo "neovim" :maxTsServerMemory 8192}})
+
 (setup :eslint {:on_attach on-attach-eslint})
 
 {: setup}
