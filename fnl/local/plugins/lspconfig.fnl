@@ -50,6 +50,7 @@
        {:on_attach on-attach-ts_ls
         :init_options {:hostInfo "neovim" :maxTsServerMemory 8192}})
 
-(setup :eslint {:on_attach on-attach-eslint})
+(setup :eslint {:cmd_env {:NODE_OPTIONS "--max-old-space-size=8192"}
+                :on_attach on-attach-eslint})
 
 {: setup}

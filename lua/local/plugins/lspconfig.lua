@@ -41,5 +41,5 @@ setup("solargraph")
 setup("rust_analyzer")
 setup("clangd", {capabilities = {offsetEncoding = {"utf-16"}}})
 setup("ts_ls", {on_attach = on_attach_ts_ls, init_options = {hostInfo = "neovim", maxTsServerMemory = 8192}})
-setup("eslint", {on_attach = on_attach_eslint})
+setup("eslint", {cmd_env = {NODE_OPTIONS = "--max-old-space-size=8192"}, on_attach = on_attach_eslint})
 return {setup = setup}
