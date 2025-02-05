@@ -24,6 +24,7 @@
 (config :lspsaga)
 (config :copilot)
 (config :treewalker)
+(config :lsp-file-operations)
 
 (set g.edge_style :aura)
 (set g.edge_enable_italic 1)

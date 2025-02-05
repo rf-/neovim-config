@@ -82,8 +82,7 @@
       (use "nvimdev/lspsaga.nvim")
 
       (use "antosha417/nvim-lsp-file-operations"
-        {:requires ["nvim-neo-tree/neo-tree.nvim"]
-         :config #((. (require "lsp-file-operations") :setup))})
+           {:requires ["nvim-neo-tree/neo-tree.nvim"]})
 
       (use "folke/trouble.nvim" {:tag "v2.10.0"})
       (use "seblj/nvim-echo-diagnostics")
@@ -109,8 +108,7 @@
       (use "nvim-neo-tree/neo-tree.nvim"
            {:branch "v3.x" :requires ["MunifTanjim/nui.nvim"]})
 
-      (use "aaronik/treewalker.nvim"
-           {:config #((. (require "treewalker") :setup) {:highlight false})})
+      (use "aaronik/treewalker.nvim")
 
       ; Color
 
