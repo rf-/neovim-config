@@ -26,6 +26,7 @@ config("trouble")
 config("echo-diagnostics")
 config("lspsaga")
 config("copilot")
+config("treewalker")
 g.edge_style = "aura"
 g.edge_enable_italic = 1
 return command("colorscheme edge")

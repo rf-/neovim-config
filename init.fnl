@@ -8,6 +8,7 @@
 (local {: stdpath : empty : glob} vim.fn)
 (local {: format} string)
 
+;; fnlfmt: skip
 (fn init []
   (local pack-path (.. (stdpath "data") "/site/pack"))
 
@@ -37,7 +38,6 @@
       ; Ergonomics
 
       (use "godlygeek/tabular")
-      (use "jeetsukumaran/vim-indentwise")
       (use "justinmk/vim-sneak")
       (use "tpope/vim-endwise")
       (use "tpope/vim-repeat")
@@ -107,6 +107,9 @@
 
       (use "nvim-neo-tree/neo-tree.nvim"
            {:branch "v3.x" :requires ["MunifTanjim/nui.nvim"]})
+
+      (use "aaronik/treewalker.nvim"
+           {:config #((. (require "treewalker") :setup) {:highlight false})})
 
       ; Color
 

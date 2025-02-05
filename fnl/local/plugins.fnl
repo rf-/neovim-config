@@ -22,6 +22,7 @@
 (config :echo-diagnostics)
 (config :lspsaga)
 (config :copilot)
+(config :treewalker)
 
 (set g.edge_style :aura)
 (set g.edge_enable_italic 1)
