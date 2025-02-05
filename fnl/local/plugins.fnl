@@ -6,6 +6,7 @@
     (when (not ok?)
       (print (.. "Error loading plugin config: " val-or-err)))))
 
+(config :conjure)
 (config :neo-tree)
 (config :nerdcommenter)
 (config :fugitive)

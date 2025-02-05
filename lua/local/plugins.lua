@@ -10,6 +10,7 @@ local function config(name)
     return nil
   end
 end
+config("conjure")
 config("neo-tree")
 config("nerdcommenter")
 config("fugitive")

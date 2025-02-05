@@ -34,6 +34,7 @@
       (use "wbthomason/packer.nvim")
       (use "nvim-lua/plenary.nvim")
       (use "Olical/nfnl")
+      (use "Olical/conjure")
 
       ; Ergonomics
 
