@@ -11,12 +11,13 @@
   (let [(target row) (targets.down)]
     (when target [target row])))
 
-(fn next-ancestor-down [node row]
-  (if (and node (not= (node:type) "source_file"))
-      (let [erow (nodes.get_erow node)]
-        (if (> erow row)
-            [node erow]
-            (next-ancestor-down (node:parent) row)))
+(fn next-ancestor-down [node row last-row]
+  (if node
+      (let [erow (nodes.get_erow node)
+            target-row (if (> erow last-row) last-row erow)]
+        (if (> target-row row)
+            [node target-row]
+            (next-ancestor-down (node:parent) row last-row)))
       nil))
 
 (fn update-jump-list []
@@ -25,7 +26,9 @@
 (fn move-down []
   (let [node (nodes.get_current)
         current-row (vim.fn.line ".")
-        [target row] (or (default-down) (next-ancestor-down node current-row)
+        last-row (vim.fn.line "$")
+        [target row] (or (default-down)
+                         (next-ancestor-down node current-row last-row)
                          [nil nil])
         is-neighbor (and row (= row (+ current-row 1)))]
     (when target

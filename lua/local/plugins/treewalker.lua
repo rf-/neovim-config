@@ -13,13 +13,19 @@ local function default_down()
     return nil
   end
 end
-local function next_ancestor_down(node, row)
-  if (node and (node:type() ~= "source_file")) then
+local function next_ancestor_down(node, row, last_row)
+  if node then
     local erow = nodes.get_erow(node)
-    if (erow > row) then
-      return {node, erow}
+    local target_row
+    if (erow > last_row) then
+      target_row = last_row
     else
-      return next_ancestor_down(node:parent(), row)
+      target_row = erow
+    end
+    if (target_row > row) then
+      return {node, target_row}
+    else
+      return next_ancestor_down(node:parent(), row, last_row)
     end
   else
     return nil
@@ -31,9 +37,10 @@ end
 local function move_down()
   local node = nodes.get_current()
   local current_row = vim.fn.line(".")
-  local _let_4_ = (default_down() or next_ancestor_down(node, current_row) or {nil, nil})
-  local target = _let_4_[1]
-  local row = _let_4_[2]
+  local last_row = vim.fn.line("$")
+  local _let_5_ = (default_down() or next_ancestor_down(node, current_row, last_row) or {nil, nil})
+  local target = _let_5_[1]
+  local row = _let_5_[2]
   local is_neighbor = (row and (row == (current_row + 1)))
   if target then
     if not is_neighbor then
@@ -53,9 +60,9 @@ end
 map_21({"n"}, "[-", ":Treewalker Left<CR>", {silent = true})
 map_21({"n"}, "]-", ":Treewalker Right<CR>", {silent = true})
 map_21({"n"}, "<C-->", ":Treewalker Up<CR>", {silent = true})
-local function _8_()
+local function _9_()
   return move_down()
 end
-map_21({"n"}, "<C-=>", _8_, {silent = true})
+map_21({"n"}, "<C-=>", _9_, {silent = true})
 map_21({"n"}, "<C-S-->", ":Treewalker SwapLeft<CR>", {silent = true})
 return map_21({"n"}, "<C-S-=>", ":Treewalker SwapRight<CR>", {silent = true})
