@@ -20,7 +20,7 @@
               :group :lsp-config-signature-help}))
   (each [lhs func-name (pairs {"<C-]>" :definition
                                :<C-p> :hover
-                               :<Leader>gtd :type_definition
+                               "<C-S-]>" :type_definition
                                :<Leader>gr :references
                                :<Leader>cr :rename})]
     (buf-set-keymap 0 :n lhs (.. ":lua vim.lsp.buf." func-name "()<CR>")

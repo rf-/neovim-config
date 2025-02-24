@@ -17,7 +17,7 @@ local function on_attach(client, buf_nr)
     autocmd("CursorHoldI", {buffer = buf_nr, callback = _1_, group = "lsp-config-signature-help"})
   else
   end
-  for lhs, func_name in pairs({["<C-]>"] = "definition", ["<C-p>"] = "hover", ["<Leader>gtd"] = "type_definition", ["<Leader>gr"] = "references", ["<Leader>cr"] = "rename"}) do
+  for lhs, func_name in pairs({["<C-]>"] = "definition", ["<C-p>"] = "hover", ["<C-S-]>"] = "type_definition", ["<Leader>gr"] = "references", ["<Leader>cr"] = "rename"}) do
     buf_set_keymap(0, "n", lhs, (":lua vim.lsp.buf." .. func_name .. "()<CR>"), {silent = true})
   end
   return nil
