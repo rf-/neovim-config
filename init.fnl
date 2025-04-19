@@ -66,7 +66,7 @@
 
       (use "hrsh7th/vim-vsnip")
 
-      (use "zbirenbaum/copilot.lua")
+      (use "github/copilot.vim")
       (use "CopilotC-Nvim/CopilotChat.nvim")
 
       ; Language support

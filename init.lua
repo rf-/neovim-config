@@ -47,7 +47,7 @@ local function init()
     use("AndrewRadev/splitjoin.vim")
     use("simnalamburt/vim-mundo")
     use("hrsh7th/vim-vsnip")
-    use("zbirenbaum/copilot.lua")
+    use("github/copilot.vim")
     use("CopilotC-Nvim/CopilotChat.nvim")
     g.polyglot_disabled = {"typescript"}
     use("sheerun/vim-polyglot")
