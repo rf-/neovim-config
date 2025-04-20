@@ -18,6 +18,8 @@
              {:buffer buf-nr
               :callback (fn [] (vim.lsp.buf.signature_help) nil)
               :group :lsp-config-signature-help}))
+  (buf-set-keymap 0 :n :<Leader>gs
+                  ":Telescope lsp_dynamic_workspace_symbols<CR>" {:silent true})
   (each [lhs func-name (pairs {"<C-]>" :definition
                                :<C-p> :hover
                                "<C-S-]>" :type_definition
@@ -44,8 +46,12 @@
   (on-attach client buf-nr))
 
 (setup :solargraph)
-(setup :rust_analyzer)
+
+(setup :rust_analyzer
+       {:settings {"rust-analyzer" {:workspace {:symbol {:search {:kind :all_symbols}}}}}})
+
 (setup :clangd {:capabilities {:offsetEncoding ["utf-16"]}})
+
 (setup :ts_ls
        {:on_attach on-attach-ts_ls
         :init_options {:hostInfo "neovim" :maxTsServerMemory 8192}})

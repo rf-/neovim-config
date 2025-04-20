@@ -17,6 +17,7 @@ local function on_attach(client, buf_nr)
     autocmd("CursorHoldI", {buffer = buf_nr, callback = _1_, group = "lsp-config-signature-help"})
   else
   end
+  buf_set_keymap(0, "n", "<Leader>gs", ":Telescope lsp_dynamic_workspace_symbols<CR>", {silent = true})
   for lhs, func_name in pairs({["<C-]>"] = "definition", ["<C-p>"] = "hover", ["<C-S-]>"] = "type_definition", ["<Leader>gr"] = "references", ["<Leader>cr"] = "rename"}) do
     buf_set_keymap(0, "n", lhs, (":lua vim.lsp.buf." .. func_name .. "()<CR>"), {silent = true})
   end
@@ -38,7 +39,7 @@ local function on_attach_eslint(client, buf_nr)
   return on_attach(client, buf_nr)
 end
 setup("solargraph")
-setup("rust_analyzer")
+setup("rust_analyzer", {settings = {["rust-analyzer"] = {workspace = {symbol = {search = {kind = "all_symbols"}}}}}})
 setup("clangd", {capabilities = {offsetEncoding = {"utf-16"}}})
 setup("ts_ls", {on_attach = on_attach_ts_ls, init_options = {hostInfo = "neovim", maxTsServerMemory = 8192}})
 setup("eslint", {cmd_env = {NODE_OPTIONS = "--max-old-space-size=8192"}, on_attach = on_attach_eslint})
