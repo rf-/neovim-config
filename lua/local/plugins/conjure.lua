@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/conjure.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/conjure.fnl
 local g = vim["g"]
 g["conjure#filetypes"] = {"fennel"}
 g["conjure#client#fennel#aniseed#deprecation_warning"] = false

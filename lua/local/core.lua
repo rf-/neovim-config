@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/core.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/core.fnl
 local g = vim["g"]
 local o = vim["o"]
 local bo = vim["bo"]
@@ -11,8 +11,6 @@ local command = vim.api["nvim_command"]
 local autocmd = vim.api["nvim_create_autocmd"]
 local str = require("std.string")
 local u = require("local.utils")
-local _local_1_ = require("nfnl.core")
-local println = _local_1_["println"]
 g.mapleader = " "
 g.maplocalleader = " "
 do
@@ -95,10 +93,10 @@ map_21({"n", "v"}, "<Up>", "gk")
 map_21({"i"}, "<Down>", "<C-o>gj")
 map_21({"i"}, "<Up>", "<C-o>gk")
 for c_u_or_d, j_or_k in pairs({["<C-d>"] = "j", ["<C-u>"] = "k"}) do
-  local function _5_()
+  local function _4_()
     return command(("normal! " .. vim.wo.scroll .. j_or_k))
   end
-  map_21({"n"}, c_u_or_d, _5_, {silent = true})
+  map_21({"n"}, c_u_or_d, _4_, {silent = true})
 end
 for _, key in pairs({"h", "j", "k", "l"}) do
   map_21({"t", "n", "v", "i"}, ("<C-" .. key .. ">"), ("<C-\\><C-n><C-w>" .. key))
@@ -108,21 +106,21 @@ map_21({"n", "v"}, "<Leader>#", ":e#<CR>")
 map_21({"n", "v"}, "<Leader>3", ":e#<CR>")
 map_21({"n", "v"}, "<Leader>e", ":bel 10split term://pry<CR>")
 map_21({"n", "v"}, "<Leader>h", ":nohlsearch<CR>")
-local function _6_()
+local function _5_()
   wo.relativenumber = not wo.relativenumber
   return nil
 end
-map_21({"n", "v"}, "<Leader>r", _6_, {silent = true})
+map_21({"n", "v"}, "<Leader>r", _5_, {silent = true})
 map_21({"n"}, "<Leader>w", ":w<CR>")
 map_21({"n", "v"}, "<Leader>q", ":q<CR>")
-local function _7_()
+local function _6_()
   return vim.diagnostic.open_float()
 end
-map_21({"n"}, "<Leader>gd", _7_, {silent = true})
-local function _8_()
-  return println(u["inspect-syntax-group"]())
+map_21({"n"}, "<Leader>gd", _6_, {silent = true})
+local function _7_()
+  return print(u["inspect-syntax-group"]())
 end
-map_21({"n", "v"}, "<F10>", _8_, {silent = true})
+map_21({"n", "v"}, "<F10>", _7_, {silent = true})
 map_21({"t", "n", "v", "i"}, "<C-\\><C-[>", "<C-\\><C-n>gT")
 map_21({"t", "n", "v", "i"}, "<C-\\><C-]>", "<C-\\><C-n>gt")
 map_21({"t", "n", "v", "i"}, "<C-\\><C-t>", "<C-\\><C-n>:split<CR><C-\\><C-n>:term<CR>")
@@ -130,7 +128,7 @@ map_21({"t"}, "<C-\\><C-p>", "<C-\\><C-n>p")
 map_21({"t"}, "<C-\\><C-\\>", "<C-\\><C-n>")
 map_21({"t"}, "<M-k>", "<C-k>")
 command("nmap <expr> <CR> &buftype == 'terminal' ? \"i\\<CR>\" : \"\\<CR>\"")
-local function _9_()
+local function _8_()
   do
     local saved_line_nr = vim.fn.line("'\"")
     local last_line_nr = vim.fn.line("$")
@@ -141,13 +139,13 @@ local function _9_()
   end
   return nil
 end
-autocmd("BufReadPost", {pattern = "*", callback = _9_})
-local function _11_()
+autocmd("BufReadPost", {pattern = "*", callback = _8_})
+local function _10_()
   wo.scroll = math.floor((vim.fn.winheight(0) / 4))
   return nil
 end
-autocmd({"BufReadPost", "WinEnter"}, {pattern = "*", callback = _11_})
-local function _12_()
+autocmd({"BufReadPost", "WinEnter"}, {pattern = "*", callback = _10_})
+local function _11_()
   do
     local last_line_on_screen_nr = vim.fn.line("w$")
     local last_line_nr = vim.fn.line("$")
@@ -158,7 +156,7 @@ local function _12_()
   end
   return nil
 end
-autocmd({"TermOpen", "BufWinEnter", "WinEnter"}, {pattern = "term://*", callback = _12_})
+autocmd({"TermOpen", "BufWinEnter", "WinEnter"}, {pattern = "term://*", callback = _11_})
 autocmd({"TermOpen", "BufWinEnter"}, {pattern = "term://*", command = "setlocal nonumber"})
 autocmd({"BufWinLeave"}, {pattern = "term://*", command = "setlocal number"})
 g.omni_sql_no_default_maps = true
@@ -169,13 +167,13 @@ autocmd({"BufReadPost", "BufNewFile"}, {pattern = "*.mm", command = "set filetyp
 do
   local filetype_settings = {coffee = {shiftwidth = 2, softtabstop = 2}, css = {shiftwidth = 2, softtabstop = 2}, go = {tabstop = 4, shiftwidth = 4, expandtab = false}, haxe = {tabstop = 4, shiftwidth = 4, softtabstop = 4}, javascript = {shiftwidth = 2, softtabstop = 2}, make = {expandtab = false}, python = {shiftwidth = 4, softtabstop = 4, textwidth = 79}, scala = {textwidth = 99}, scss = {shiftwidth = 2, softtabstop = 2}, typescript = {shiftwidth = 2, softtabstop = 2}, typescriptreact = {shiftwidth = 2, softtabstop = 2}}
   for filetype, settings in pairs(filetype_settings) do
-    local function _14_()
+    local function _13_()
       for setting, value in pairs(settings) do
         bo[setting] = value
       end
       return nil
     end
-    autocmd({"FileType"}, {pattern = filetype, callback = _14_})
+    autocmd({"FileType"}, {pattern = filetype, callback = _13_})
   end
 end
 autocmd({"FileType"}, {pattern = "fennel", command = "setlocal iskeyword-=."})
@@ -183,23 +181,23 @@ autocmd({"FileType"}, {pattern = "ruby", command = "setlocal iskeyword+=!,?"})
 autocmd({"BufRead", "BufNewFile"}, {pattern = "*.txt", command = "setlocal wrap wrapmargin=2 textwidth=72"})
 autocmd({"BufRead", "BufNewFile"}, {pattern = "{Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}", command = "set filetype=ruby"})
 autocmd({"BufRead", "BufNewFile"}, {pattern = "*.dict", command = "set filetype=dict"})
-local function _15_()
+local function _14_()
   for idx, score in ipairs({0, 10, 21, 51, 61}) do
-    local function _16_()
+    local function _15_()
       return ("0f;lciw" .. score .. "<Esc>:noh<CR>")
     end
-    map_21({"n"}, tostring(idx), _16_)
+    map_21({"n"}, tostring(idx), _15_)
   end
   return nil
 end
-autocmd({"FileType"}, {pattern = "dict", callback = _15_})
+autocmd({"FileType"}, {pattern = "dict", callback = _14_})
 vim.diagnostic.config({underline = true, signs = true, update_in_insert = true, severity_sort = true, virtual_text = false})
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {silent = true, focusable = false})
-local function _17_()
+local function _16_()
   return vim.diagnostic.goto_prev({float = false})
 end
-map_21({"n"}, "[d", _17_, {silent = true})
-local function _18_()
+map_21({"n"}, "[d", _16_, {silent = true})
+local function _17_()
   return vim.diagnostic.goto_next({float = false})
 end
-return map_21({"n"}, "]d", _18_, {silent = true})
+return map_21({"n"}, "]d", _17_, {silent = true})

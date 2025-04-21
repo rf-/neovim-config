@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/treewalker.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/treewalker.fnl
 local treewalker = require("treewalker")
 local nodes = require("treewalker.nodes")
 local targets = require("treewalker.targets")

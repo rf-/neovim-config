@@ -3,7 +3,6 @@
 (local {:nvim_command command :nvim_create_autocmd autocmd} vim.api)
 (local str (require :std.string))
 (local u (require :local.utils))
-(local {: println} (require :nfnl.core))
 
 (set g.mapleader " ")
 (set g.maplocalleader " ")
@@ -174,7 +173,7 @@
 (map! [:n] :<Leader>gd #(vim.diagnostic.open_float) {:silent true})
 
 ; Map F10 to show syntax groups under cursor
-(map! [:n :v] :<F10> #(println (u.inspect-syntax-group)) {:silent true})
+(map! [:n :v] :<F10> #(print (u.inspect-syntax-group)) {:silent true})
 
 ; Map <C-\><C-[> and <C-\><C-]> to switch tabs in all modes
 (map! [:t :n :v :i] "<C-\\><C-[>" "<C-\\><C-n>gT")
@@ -307,5 +306,4 @@
 
 ; Add shortcuts for jumping between diagnostics
 (map! [:n] "[d" #(vim.diagnostic.goto_prev {:float false}) {:silent true})
-
 (map! [:n] "]d" #(vim.diagnostic.goto_next {:float false}) {:silent true})

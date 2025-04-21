@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/trouble.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/trouble.fnl
 local trouble = require("trouble")
 local keymap = vim["keymap"]
 local map_21 = keymap["set"]

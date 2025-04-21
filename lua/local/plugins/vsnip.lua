@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/vsnip.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/vsnip.fnl
 local g = vim["g"]
 local command = vim.api["nvim_command"]
 g.vsnip_snippet_dir = vim.fn.expand("~/.config/nvim/snippets")

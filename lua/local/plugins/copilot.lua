@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/copilot.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/copilot.fnl
 local g = vim["g"]
 local copilot_chat = require("CopilotChat")
 g.copilot_filetypes = {markdown = false, text = false}

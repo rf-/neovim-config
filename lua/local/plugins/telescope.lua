@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/telescope.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/telescope.fnl
 local _local_1_ = require("std.functional")
 local map = _local_1_["map"]
 local bind = _local_1_["bind"]

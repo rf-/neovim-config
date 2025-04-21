@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/utils.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/utils.fnl
 local get_line_number = vim.fn["line"]
 local get_col_number = vim.fn["col"]
 local syn_id = vim.fn["synID"]

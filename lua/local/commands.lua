@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/commands.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/commands.fnl
 local g = vim["g"]
 local command = vim.api["nvim_command"]
 local create_command = vim.api["nvim_create_user_command"]

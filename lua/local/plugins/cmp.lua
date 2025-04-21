@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/cmp.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/cmp.fnl
 local cmp = require("cmp")
 local cm = cmp.mapping
 local function _1_(_241)

@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/mundo.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/mundo.fnl
 local g = vim["g"]
 local keymap = vim["keymap"]
 local map_21 = keymap["set"]

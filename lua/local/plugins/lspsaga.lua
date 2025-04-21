@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/lspsaga.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/lspsaga.fnl
 local lspsaga = require("lspsaga")
 local keymap = vim["keymap"]
 local map_21 = keymap["set"]

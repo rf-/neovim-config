@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/lsp.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/lsp.fnl
 local tbl = require("std.table")
 local local_plugins_lspconfig = require("local.plugins.lspconfig")
 local create_augroup = vim.api["nvim_create_augroup"]

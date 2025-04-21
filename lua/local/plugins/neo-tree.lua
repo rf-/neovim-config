@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/neo-tree.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/neo-tree.fnl
 local g = vim["g"]
 local keymap = vim["keymap"]
 local wait = vim["wait"]

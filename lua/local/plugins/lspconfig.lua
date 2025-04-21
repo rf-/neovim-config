@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/lspconfig.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/lspconfig.fnl
 local lspconfig = require("lspconfig")
 local cmp_lsp = require("cmp_nvim_lsp")
 local tbl = require("std.table")

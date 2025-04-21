@@ -1,4 +1,4 @@
--- [nfnl] Compiled from fnl/local/plugins/fugitive.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] fnl/local/plugins/fugitive.fnl
 local keymap = vim["keymap"]
 local map_21 = keymap["set"]
 map_21({"n"}, "<Leader>gg", ":Git<CR>")

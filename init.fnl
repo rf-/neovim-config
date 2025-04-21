@@ -1,5 +1,3 @@
-; Based on https://github.com/Olical/dotfiles
-
 ; Optimize Lua loading
 (vim.loader.enable)
 
@@ -8,118 +6,131 @@
 (local {: stdpath : empty : glob} vim.fn)
 (local {: format} string)
 
+(fn bootstrap-lazy []
+  (local lazypath (.. (vim.fn.stdpath "data") "/lazy/lazy.nvim"))
+  (when (not (vim.uv.fs_stat lazypath))
+    (local lazyrepo "https://github.com/folke/lazy.nvim.git")
+    (local out (vim.fn.system ["git"
+                               "clone"
+                               "--filter=blob:none"
+                               "--branch=stable"
+                               lazyrepo
+                               lazypath]))
+    (when (not= vim.v.shell_error 0)
+      (vim.api.nvim_echo [["Failed to clone lazy.nvim:\n" "ErrorMsg"]
+                          [out]
+                          ["\nPress any key to exit..."]]
+                         true {})
+      (vim.fn.getchar)
+      (os.exit 1)))
+  (vim.opt.rtp:prepend lazypath)
+  (require :lazy))
+
 ;; fnlfmt: skip
-(fn init []
-  (local pack-path (.. (stdpath "data") "/site/pack"))
-
-  (fn ensure [user repo]
-    (let [install-path (format "%s/packer/start/%s" pack-path repo)]
-      (if (> (empty (glob install-path)) 0)
-        (command (format "!git clone https://github.com/%s/%s %s" user repo install-path))
-        (command (format "packadd %s" repo)))))
-
-  (ensure "wbthomason" "packer.nvim")
-
-  (local packer (require "packer"))
-
+(fn plugin-specs []
   (fn use [name opts]
     (let [opts (or opts {})]
       (tset opts 1 name)
-      (packer.use opts)))
+      opts))
 
-  (packer.startup
-    (fn []
-      ; Basic Packer/Fennel/Lua setup
+  [
+    ; Basic Packer/Fennel/Lua setup
 
-      (use "wbthomason/packer.nvim")
-      (use "nvim-lua/plenary.nvim")
-      (use "Olical/nfnl")
-      (use "Olical/conjure")
+    (use "wbthomason/packer.nvim")
+    (use "nvim-lua/plenary.nvim")
+    (use "Olical/nfnl")
+    (use "Olical/conjure")
 
-      ; Ergonomics
+    ; Ergonomics
 
-      (use "godlygeek/tabular")
-      (use "justinmk/vim-sneak")
-      (use "tpope/vim-endwise")
-      (use "tpope/vim-repeat")
-      (use "tpope/vim-speeddating")
-      (use "tpope/vim-surround")
-      (use "tpope/vim-unimpaired")
+    (use "godlygeek/tabular")
+    (use "justinmk/vim-sneak")
+    (use "tpope/vim-endwise")
+    (use "tpope/vim-repeat")
+    (use "tpope/vim-speeddating")
+    (use "tpope/vim-surround")
+    (use "tpope/vim-unimpaired")
 
-      (use "kana/vim-textobj-user")
-      (use "glts/vim-textobj-comment")
+    (use "kana/vim-textobj-user")
+    (use "glts/vim-textobj-comment"
+         {:dependencies ["kana/vim-textobj-user"]})
 
-      (use "preservim/nerdcommenter")
+    (use "preservim/nerdcommenter")
 
-      (use "tpope/vim-fugitive")
-      (use "tpope/vim-rhubarb")
+    (use "tpope/vim-fugitive")
+    (use "tpope/vim-rhubarb")
 
-      (use "airblade/vim-gitgutter")
+    (use "airblade/vim-gitgutter")
 
-      (use "rf-/vim-bclose")
+    (use "rf-/vim-bclose")
 
-      (use "AndrewRadev/splitjoin.vim")
+    (use "AndrewRadev/splitjoin.vim")
 
-      (use "simnalamburt/vim-mundo")
+    (use "simnalamburt/vim-mundo")
 
-      ; Snippets
+    ; Snippets
 
-      (use "hrsh7th/vim-vsnip")
+    (use "hrsh7th/vim-vsnip")
 
-      (use "github/copilot.vim")
-      (use "CopilotC-Nvim/CopilotChat.nvim")
+    (use "github/copilot.vim")
+    (use "CopilotC-Nvim/CopilotChat.nvim" {:branch "main"})
 
-      ; Language support
+    ; Language support
 
-      (set g.polyglot_disabled ["typescript"])
-      (use "sheerun/vim-polyglot")
+    (use "sheerun/vim-polyglot"
+        {:init #(set g.polyglot_disabled ["typescript"])})
 
-      (use "rf-/yats.vim")
-      (use "nvim-treesitter/nvim-treesitter")
+    (use "rf-/yats.vim")
+    (use "nvim-treesitter/nvim-treesitter")
 
-      (use "neovim/nvim-lspconfig")
-      (use "nvimtools/none-ls.nvim")
-      (use "nvimdev/lspsaga.nvim")
+    (use "neovim/nvim-lspconfig")
+    (use "nvimtools/none-ls.nvim")
+    (use "nvimdev/lspsaga.nvim")
 
-      (use "antosha417/nvim-lsp-file-operations"
-           {:requires ["nvim-neo-tree/neo-tree.nvim"]})
+    (use "antosha417/nvim-lsp-file-operations"
+         {:dependencies ["nvim-neo-tree/neo-tree.nvim"]})
 
-      (use "folke/trouble.nvim" {:tag "v2.10.0"})
-      (use "seblj/nvim-echo-diagnostics")
+    (use "folke/trouble.nvim" {:version "v2.10.0"})
+    (use "seblj/nvim-echo-diagnostics")
 
-      (use "hrsh7th/cmp-nvim-lsp")
-      (use "hrsh7th/cmp-buffer")
-      (use "hrsh7th/cmp-path")
-      (use "hrsh7th/cmp-cmdline")
-      (use "hrsh7th/cmp-vsnip")
-      (use "hrsh7th/nvim-cmp")
+    (use "hrsh7th/cmp-nvim-lsp")
+    (use "hrsh7th/cmp-buffer")
+    (use "hrsh7th/cmp-path")
+    (use "hrsh7th/cmp-cmdline")
+    (use "hrsh7th/cmp-vsnip")
+    (use "hrsh7th/nvim-cmp")
 
-      (use "vale1410/vim-minizinc")
-      (use "nelstrom/vim-textobj-rubyblock")
+    (use "vale1410/vim-minizinc")
+    (use "nelstrom/vim-textobj-rubyblock"
+         {:dependencies ["kana/vim-textobj-user"]})
 
-      (use "iamcco/markdown-preview.nvim" {:run "cd app && yarn install"})
+    (use "iamcco/markdown-preview.nvim"
+         {:build "cd app && env COREPACK_ENABLE_AUTO_PIN=0 yarn install"})
 
-      ; Navigation
+    ; Navigation
 
-      (use "nvim-telescope/telescope.nvim")
-      (use "nvim-telescope/telescope-fzy-native.nvim")
-      (use "nvim-telescope/telescope-ui-select.nvim")
+    (use "nvim-telescope/telescope.nvim")
+    (use "nvim-telescope/telescope-fzy-native.nvim")
+    (use "nvim-telescope/telescope-ui-select.nvim")
 
-      (use "nvim-neo-tree/neo-tree.nvim"
-           {:branch "v3.x" :requires ["MunifTanjim/nui.nvim"]})
+    (use "nvim-neo-tree/neo-tree.nvim"
+         {:branch "v3.x" :dependencies ["MunifTanjim/nui.nvim"]})
 
-      (use "aaronik/treewalker.nvim")
+    (use "aaronik/treewalker.nvim")
 
-      ; Color
+    ; Color
 
-      (use "rf-/edge")))
+    (use "rf-/edge")
+  ])
 
-  ; Fix Packer or whatever breaking load path
-  (set package.path (.. (fs.normalize "~") "/.config/nvim/lua/?.lua," package.path))
-
-  (when (not env.PACKER_SYNC)
-    (require "local.core")
-    (require "local.plugins")
-    (require "local.commands")))
+(fn init []
+  (local lazy (bootstrap-lazy))
+  (require :local.core)
+  (lazy.setup {:spec (plugin-specs) :checker {:enabled true}})
+  ;; Fix some plugin breaking load path
+  (set package.path (.. (fs.normalize "~") "/.config/nvim/lua/?.lua,"
+                        package.path))
+  (require :local.plugins)
+  (require :local.commands))
 
 (if (not g.vscode) (init))
