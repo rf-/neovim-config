@@ -34,9 +34,8 @@
       opts))
 
   [
-    ; Basic Packer/Fennel/Lua setup
+    ; Basic Fennel/Lua setup
 
-    (use "wbthomason/packer.nvim")
     (use "nvim-lua/plenary.nvim")
     (use "Olical/nfnl")
     (use "Olical/conjure"
