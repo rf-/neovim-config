@@ -39,7 +39,8 @@
     (use "wbthomason/packer.nvim")
     (use "nvim-lua/plenary.nvim")
     (use "Olical/nfnl")
-    (use "Olical/conjure")
+    (use "Olical/conjure"
+         {:init #(require :local.plugins.conjure)})
 
     ; Ergonomics
 
@@ -55,52 +56,76 @@
     (use "glts/vim-textobj-comment"
          {:dependencies ["kana/vim-textobj-user"]})
 
-    (use "preservim/nerdcommenter")
+    (use "preservim/nerdcommenter"
+         {:init #(require :local.plugins.nerdcommenter)})
 
-    (use "tpope/vim-fugitive")
+    (use "tpope/vim-fugitive"
+         {:config #(require :local.plugins.fugitive)})
     (use "tpope/vim-rhubarb")
 
-    (use "airblade/vim-gitgutter")
+    (use "airblade/vim-gitgutter"
+         {:config #(require :local.plugins.gitgutter)})
 
-    (use "rf-/vim-bclose")
+    (use "rf-/vim-bclose"
+         {:config #(require :local.plugins.bclose)})
 
-    (use "AndrewRadev/splitjoin.vim")
+    (use "AndrewRadev/splitjoin.vim"
+         {:config #(require :local.plugins.splitjoin)})
 
-    (use "simnalamburt/vim-mundo")
+    (use "simnalamburt/vim-mundo"
+         {:init #(require :local.plugins.mundo)})
 
     ; Snippets
 
-    (use "hrsh7th/vim-vsnip")
+    (use "hrsh7th/vim-vsnip"
+         {:init #(require :local.plugins.vsnip)})
 
     (use "github/copilot.vim")
-    (use "CopilotC-Nvim/CopilotChat.nvim" {:branch "main"})
+    (use "CopilotC-Nvim/CopilotChat.nvim"
+         {:branch "main"
+          :config #(require :local.plugins.copilot-chat)})
 
     ; Language support
 
     (use "sheerun/vim-polyglot"
-        {:init #(set g.polyglot_disabled ["typescript"])})
+        {:init #(require :local.plugins.polyglot)})
 
     (use "rf-/yats.vim")
-    (use "nvim-treesitter/nvim-treesitter")
 
-    (use "neovim/nvim-lspconfig")
+    (use "nvim-treesitter/nvim-treesitter"
+         {:config #(require :local.plugins.treesitter)})
+
+    (use "neovim/nvim-lspconfig"
+         {:config #(require :local.plugins.lspconfig)
+          :dependencies ["hrsh7th/cmp-nvim-lsp"]})
+
     (use "nvimtools/none-ls.nvim")
-    (use "nvimdev/lspsaga.nvim")
+
+    (use "nvimdev/lspsaga.nvim"
+         {:config #(require :local.plugins.lspsaga)})
 
     (use "antosha417/nvim-lsp-file-operations"
-         {:dependencies ["nvim-neo-tree/neo-tree.nvim"]})
+         {:config #(require :local.plugins.lsp-file-operations)
+          :dependencies ["nvim-lua/plenary.nvim"
+                         "nvim-neo-tree/neo-tree.nvim"]})
 
-    (use "folke/trouble.nvim" {:version "v2.10.0"})
-    (use "seblj/nvim-echo-diagnostics")
+    (use "folke/trouble.nvim"
+         {:config #(require :local.plugins.trouble)
+          :version "v2.10.0"})
 
-    (use "hrsh7th/cmp-nvim-lsp")
-    (use "hrsh7th/cmp-buffer")
-    (use "hrsh7th/cmp-path")
-    (use "hrsh7th/cmp-cmdline")
-    (use "hrsh7th/cmp-vsnip")
-    (use "hrsh7th/nvim-cmp")
+    (use "seblj/nvim-echo-diagnostics"
+         {:config #(require :local.plugins.echo-diagnostics)})
+
+    (use "hrsh7th/nvim-cmp"
+         {:config #(require :local.plugins.cmp)
+          :dependencies ["hrsh7th/cmp-nvim-lsp"
+                         "hrsh7th/cmp-buffer"
+                         "hrsh7th/cmp-path"
+                         "hrsh7th/cmp-cmdline"
+                         "hrsh7th/cmp-vsnip"]})
 
     (use "vale1410/vim-minizinc")
+
     (use "nelstrom/vim-textobj-rubyblock"
          {:dependencies ["kana/vim-textobj-user"]})
 
@@ -109,28 +134,31 @@
 
     ; Navigation
 
-    (use "nvim-telescope/telescope.nvim")
-    (use "nvim-telescope/telescope-fzy-native.nvim")
-    (use "nvim-telescope/telescope-ui-select.nvim")
+    (use "nvim-telescope/telescope.nvim"
+         {:config #(require :local.plugins.telescope)
+          :dependencies ["nvim-telescope/telescope-fzy-native.nvim"
+                         "nvim-telescope/telescope-ui-select.nvim"]})
 
     (use "nvim-neo-tree/neo-tree.nvim"
-         {:branch "v3.x" :dependencies ["MunifTanjim/nui.nvim"]})
+         {:branch "v3.x"
+          :config #(require :local.plugins.neo-tree)
+          :dependencies ["MunifTanjim/nui.nvim"]})
 
-    (use "aaronik/treewalker.nvim")
+    (use "aaronik/treewalker.nvim"
+         {:config #(require :local.plugins.treewalker)})
 
     ; Color
 
-    (use "rf-/edge")
+    (use "rf-/edge"
+         {:config #(require :local.plugins.edge)})
   ])
 
 (fn init []
+  (set package.path (.. (fs.normalize "~") "/.config/nvim/lua/?.lua,"
+                        package.path))
   (local lazy (bootstrap-lazy))
   (require :local.core)
   (lazy.setup {:spec (plugin-specs) :checker {:enabled true}})
-  ;; Fix some plugin breaking load path
-  (set package.path (.. (fs.normalize "~") "/.config/nvim/lua/?.lua,"
-                        package.path))
-  (require :local.plugins)
   (require :local.commands))
 
 (if (not g.vscode) (init))
