@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import pynvim, os, re, sys, time
+import pynvim, os, re, sys, time, resource
 
 # Get a list of buffers that haven't been deleted. `nvim.buffers` includes
 # buffers that have had `:bdelete` called on them and aren't in the buffer
@@ -21,6 +21,9 @@ try:
     nvim_socket = os.environ["NVIM"]
 except KeyError:
     # If we aren't running inside a `:terminal`, just exec nvim.
+    # Raise open file limit to avoid issues with `lazy.nvim`.
+    (_soft, hard) = resource.getrlimit(resource.RLIMIT_NOFILE)
+    resource.setrlimit(resource.RLIMIT_NOFILE, (8192, hard))
     os.execvp('nvim', sys.argv)
 
 nvim = pynvim.attach('socket', path=nvim_socket)
