@@ -157,7 +157,7 @@
                         package.path))
   (local lazy (bootstrap-lazy))
   (require :local.core)
-  (lazy.setup {:spec (plugin-specs) :checker {:enabled true}})
+  (lazy.setup {:spec (plugin-specs) :checker {:enabled false}})
   (require :local.commands))
 
 (if (not g.vscode) (init))

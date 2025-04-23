@@ -99,7 +99,7 @@ local function init()
   package.path = (fs.normalize("~") .. "/.config/nvim/lua/?.lua," .. package.path)
   local lazy = bootstrap_lazy()
   require("local.core")
-  lazy.setup({spec = plugin_specs(), checker = {enabled = true}})
+  lazy.setup({spec = plugin_specs(), checker = {enabled = false}})
   return require("local.commands")
 end
 if not g.vscode then
