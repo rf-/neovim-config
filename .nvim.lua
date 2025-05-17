@@ -1,4 +1,4 @@
--- [nfnl] Compiled from .nvim.fnl by https://github.com/Olical/nfnl, do not edit.
+-- [nfnl] .nvim.fnl
 if not vim.env.PACKER_SYNC then
   local null_ls = require("null-ls")
   local lsp = require("local.lsp")
