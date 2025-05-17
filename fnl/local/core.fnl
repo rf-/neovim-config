@@ -182,6 +182,9 @@
 ; Map <C-\><C-t> to open a new terminal split
 (map! [:t :n :v :i] "<C-\\><C-t>" "<C-\\><C-n>:split<CR><C-\\><C-n>:term<CR>")
 
+; Map <C-\><C-v> to open a new terminal in a vertical split
+(map! [:t :n :v :i] "<C-\\><C-v>" "<C-\\><C-n>:vsplit<CR><C-\\><C-n>:term<CR>")
+
 ; Map <C-\><C-p> to paste in terminal mode
 (map! [:t] "<C-\\><C-p>" "<C-\\><C-n>p")
 
