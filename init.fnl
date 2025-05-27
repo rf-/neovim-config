@@ -37,7 +37,8 @@
     ; Basic Fennel/Lua setup
 
     (use "nvim-lua/plenary.nvim")
-    (use "Olical/nfnl")
+    (use "Olical/nfnl"
+         {:init #(require :local.plugins.nfnl)})
     (use "Olical/conjure"
          {:init #(require :local.plugins.conjure)})
 
@@ -92,7 +93,9 @@
     (use "rf-/yats.vim")
 
     (use "nvim-treesitter/nvim-treesitter"
-         {:config #(require :local.plugins.treesitter)})
+         {:branch "main"
+          :build #(: (require :local.plugins.treesitter) :build)
+          :config #(: (require :local.plugins.treesitter) :config)})
 
     (use "neovim/nvim-lspconfig"
          {:config #(require :local.plugins.lspconfig)
