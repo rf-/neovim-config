@@ -10,14 +10,6 @@
 
 ; Set LSP shortcuts when client attaches
 (fn on-attach [client buf-nr]
-  (when client.server_capabilities.signatureHelpProvider
-    (autocmd! {:event :CursorHoldI
-               :buffer buf-nr
-               :group :lsp-config-signature-help})
-    (autocmd :CursorHoldI
-             {:buffer buf-nr
-              :callback (fn [] (vim.lsp.buf.signature_help) nil)
-              :group :lsp-config-signature-help}))
   (buf-set-keymap 0 :n :<Leader>gs
                   ":Telescope lsp_dynamic_workspace_symbols<CR>" {:silent true})
   (each [lhs func-name (pairs {"<C-]>" :definition

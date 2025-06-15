@@ -8,15 +8,6 @@ local autocmd_21 = vim.api["nvim_clear_autocmds"]
 local buf_set_keymap = vim.api["nvim_buf_set_keymap"]
 augroup("lsp-config-signature-help", {clear = true})
 local function on_attach(client, buf_nr)
-  if client.server_capabilities.signatureHelpProvider then
-    autocmd_21({event = "CursorHoldI", buffer = buf_nr, group = "lsp-config-signature-help"})
-    local function _1_()
-      vim.lsp.buf.signature_help()
-      return nil
-    end
-    autocmd("CursorHoldI", {buffer = buf_nr, callback = _1_, group = "lsp-config-signature-help"})
-  else
-  end
   buf_set_keymap(0, "n", "<Leader>gs", ":Telescope lsp_dynamic_workspace_symbols<CR>", {silent = true})
   for lhs, func_name in pairs({["<C-]>"] = "definition", ["<C-p>"] = "hover", ["<C-S-]>"] = "type_definition", ["<Leader>gr"] = "references", ["<Leader>cr"] = "rename"}) do
     buf_set_keymap(0, "n", lhs, (":lua vim.lsp.buf." .. func_name .. "()<CR>"), {silent = true})
