@@ -192,6 +192,8 @@ local function _14_()
   return nil
 end
 autocmd({"FileType"}, {pattern = "dict", callback = _14_})
+autocmd({"QuickFixCmdPost"}, {pattern = "[^l]*", command = "cwindow", nested = true})
+autocmd({"QuickFixCmdPost"}, {pattern = "l*", command = "lwindow", nested = true})
 vim.diagnostic.config({underline = true, signs = true, update_in_insert = true, severity_sort = true, virtual_text = false})
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {silent = true, focusable = false})
 local function _16_()

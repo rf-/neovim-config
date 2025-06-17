@@ -296,6 +296,10 @@
                                           #(.. "0f;lciw" score "<Esc>:noh<CR>")))
                                   nil)})
 
+; Automatically open quickfix or location list after commands like `make`
+(autocmd [:QuickFixCmdPost] {:pattern "[^l]*" :command "cwindow" :nested true})
+(autocmd [:QuickFixCmdPost] {:pattern "l*" :command "lwindow" :nested true})
+
 ; Customize display of LSP diagnostics
 (vim.diagnostic.config {:underline true
                         :virtual_text false
