@@ -29,7 +29,6 @@ local function on_attach_eslint(client, buf_nr)
   client.server_capabilities.documentFormattingProvider = true
   return on_attach(client, buf_nr)
 end
-setup("solargraph")
 setup("rust_analyzer", {settings = {["rust-analyzer"] = {workspace = {symbol = {search = {kind = "all_symbols"}}}}}})
 setup("clangd", {capabilities = {offsetEncoding = {"utf-16"}}})
 setup("ts_ls", {on_attach = on_attach_ts_ls, init_options = {hostInfo = "neovim", maxTsServerMemory = 8192}})

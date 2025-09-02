@@ -37,8 +37,6 @@
   (set client.server_capabilities.documentFormattingProvider true)
   (on-attach client buf-nr))
 
-(setup :solargraph)
-
 (setup :rust_analyzer
        {:settings {"rust-analyzer" {:workspace {:symbol {:search {:kind :all_symbols}}}}}})
 
