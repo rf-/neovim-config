@@ -287,6 +287,10 @@
          {:pattern "{Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}"
           :command "set filetype=ruby"})
 
+; Support Node Typescript extensions
+(autocmd [:BufRead :BufNewFile]
+         {:pattern "*.{mts,cts}" :command "set filetype=typescript"})
+
 ; Add shortcuts for scoring word lists
 (autocmd [:BufRead :BufNewFile] {:pattern :*.dict :command "set filetype=dict"})
 (autocmd [:FileType] {:pattern :dict

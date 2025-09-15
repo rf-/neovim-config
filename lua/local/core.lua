@@ -181,6 +181,7 @@ autocmd({"FileType"}, {pattern = "fennel", command = "setlocal iskeyword-=."})
 autocmd({"FileType"}, {pattern = "ruby", command = "setlocal iskeyword+=!,?"})
 autocmd({"BufRead", "BufNewFile"}, {pattern = "*.txt", command = "setlocal wrap wrapmargin=2 textwidth=72"})
 autocmd({"BufRead", "BufNewFile"}, {pattern = "{Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}", command = "set filetype=ruby"})
+autocmd({"BufRead", "BufNewFile"}, {pattern = "*.{mts,cts}", command = "set filetype=typescript"})
 autocmd({"BufRead", "BufNewFile"}, {pattern = "*.dict", command = "set filetype=dict"})
 local function _14_()
   for idx, score in ipairs({0, 10, 21, 51, 61}) do
