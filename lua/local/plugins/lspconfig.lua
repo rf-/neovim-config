@@ -16,9 +16,9 @@ local function on_attach(client, buf_nr)
 end
 local cmp_capabilities = cmp_lsp.default_capabilities()
 local function setup(server_name, extra_config)
-  local setup_fn = lspconfig[server_name].setup
   local config = tbl.merge({on_attach = on_attach, capabilities = cmp_capabilities}, (extra_config or {}))
-  return setup_fn(config)
+  vim.lsp.config(server_name, config)
+  return vim.lsp.enable(server_name)
 end
 local function on_attach_ts_ls(client, buf_nr)
   vim.o.formatexpr = ""

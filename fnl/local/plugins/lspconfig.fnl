@@ -23,10 +23,10 @@
 (local cmp-capabilities (cmp-lsp.default_capabilities))
 
 (fn setup [server-name extra-config]
-  (let [setup-fn (. (. lspconfig server-name) :setup)
-        config (tbl.merge {:on_attach on-attach :capabilities cmp-capabilities}
+  (let [config (tbl.merge {:on_attach on-attach :capabilities cmp-capabilities}
                           (or extra-config {}))]
-    (setup-fn config)))
+    (vim.lsp.config server-name config)
+    (vim.lsp.enable server-name)))
 
 (fn on-attach-ts_ls [client buf-nr]
   (set vim.o.formatexpr "")
