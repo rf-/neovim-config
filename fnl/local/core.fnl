@@ -172,6 +172,10 @@
 ; Map <Leader>gd to show diagnostics
 (map! [:n] :<Leader>gd #(vim.diagnostic.open_float) {:silent true})
 
+; Map <Leader>/ to toggle comments with built-in Neovim maps
+(map! [:n] :<Leader>/ :gcc {:remap true})
+(map! [:v] :<Leader>/ :gc {:remap true})
+
 ; Map F10 to show syntax groups under cursor
 (map! [:n :v] :<F10> #(print (u.inspect-syntax-group)) {:silent true})
 

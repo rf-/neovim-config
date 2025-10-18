@@ -56,9 +56,6 @@
     (use "glts/vim-textobj-comment"
          {:dependencies ["kana/vim-textobj-user"]})
 
-    (use "preservim/nerdcommenter"
-         {:init #(require :local.plugins.nerdcommenter)})
-
     (use "tpope/vim-fugitive"
          {:config #(require :local.plugins.fugitive)})
     (use "tpope/vim-rhubarb")
