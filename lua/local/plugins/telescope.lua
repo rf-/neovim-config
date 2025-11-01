@@ -5,6 +5,7 @@ local bind = _local_1_.bind
 local foldl = _local_1_.foldl
 local _local_2_ = require("std.table")
 local merge = _local_2_.merge
+local sort = _local_2_.sort
 local telescope = require("telescope")
 local telescope_action_state = require("telescope.actions.state")
 local telescope_actions = require("telescope.actions")
@@ -83,4 +84,76 @@ map_21({"n", "v"}, "<Leader>a", telescope_builtin.grep_string, {silent = true})
 map_21({"n"}, "<Leader>f", telescope_builtin.live_grep, {silent = true})
 map_21({"n"}, "<Leader>k", vim.lsp.buf.code_action, {silent = true})
 map_21({"n"}, "<Leader>t", telescope_builtin.buffers, {silent = true})
-return map_21({"n"}, "<Leader>T", telescope_builtin.find_files, {silent = true})
+map_21({"n"}, "<Leader>T", telescope_builtin.find_files, {silent = true})
+local priorities_by_name = {ts_ls = 1, ["null-ls"] = 2}
+local function get_priorities_by_client_id()
+  local clients = vim.lsp.get_clients()
+  local tbl_21_ = {}
+  for _, client in ipairs(clients) do
+    local k_22_, v_23_ = client.id, priorities_by_name[client.name]
+    if ((k_22_ ~= nil) and (v_23_ ~= nil)) then
+      tbl_21_[k_22_] = v_23_
+    else
+    end
+  end
+  return tbl_21_
+end
+local function stable_sort(tbl, f)
+  local with_indices
+  do
+    local tbl_26_ = {}
+    local i_27_ = 0
+    for i, v in ipairs(tbl) do
+      local val_28_ = {i, v}
+      if (nil ~= val_28_) then
+        i_27_ = (i_27_ + 1)
+        tbl_26_[i_27_] = val_28_
+      else
+      end
+    end
+    with_indices = tbl_26_
+  end
+  local sorted_with_indices
+  local function _15_(_13_, _14_)
+    local i1 = _13_[1]
+    local v1 = _13_[2]
+    local i2 = _14_[1]
+    local v2 = _14_[2]
+    local result = f(v1, v2)
+    if (result == nil) then
+      return (i1 < i2)
+    else
+      return result
+    end
+  end
+  sorted_with_indices = sort(with_indices, _15_)
+  local function _18_(_, _17_)
+    local i = _17_[1]
+    local v = _17_[2]
+    return v
+  end
+  return map(_18_, sorted_with_indices)
+end
+local function sort_codeactions(items)
+  local priorities = get_priorities_by_client_id()
+  local function _19_(a1, a2)
+    local p1 = (priorities[a1.ctx.client_id] or (1/0))
+    local p2 = (priorities[a2.ctx.client_id] or (1/0))
+    if (p1 ~= p2) then
+      return (p1 < p2)
+    else
+      return nil
+    end
+  end
+  return stable_sort(items, _19_)
+end
+local select = vim.ui.select
+local function _21_(items, opts, on_choice)
+  if (opts.kind == "codeaction") then
+    return select(sort_codeactions(items), opts, on_choice)
+  else
+    return select(items, opts, on_choice)
+  end
+end
+vim.ui.select = _21_
+return nil

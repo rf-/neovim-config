@@ -1,5 +1,5 @@
 (local {: map : bind : foldl} (require :std.functional))
-(local {: merge} (require :std.table))
+(local {: merge : sort} (require :std.table))
 (local telescope (require :telescope))
 (local telescope-action-state (require :telescope.actions.state))
 (local telescope-actions (require :telescope.actions))
@@ -89,3 +89,37 @@
 (map! [:n] :<Leader>k vim.lsp.buf.code_action {:silent true})
 (map! [:n] :<Leader>t telescope-builtin.buffers {:silent true})
 (map! [:n] :<Leader>T telescope-builtin.find_files {:silent true})
+
+;; Prioritize code actions by server. This has to go here to make sure we're
+;; wrapping the Telescope `vim.ui.select` and not the native one.
+
+(local priorities-by-name {:ts_ls 1 :null-ls 2})
+
+(fn get-priorities-by-client-id []
+  (let [clients (vim.lsp.get_clients)]
+    (collect [_ client (ipairs clients)]
+      (values client.id (. priorities-by-name client.name)))))
+
+(fn stable-sort [tbl f]
+  (let [with-indices (icollect [i v (ipairs tbl)] [i v])
+        sorted-with-indices (sort with-indices
+                                  (fn [[i1 v1] [i2 v2]]
+                                    (let [result (f v1 v2)]
+                                      (if (= result nil)
+                                          (< i1 i2)
+                                          result))))]
+    (map (fn [_ [i v]] v) sorted-with-indices)))
+
+(fn sort-codeactions [items]
+  (let [priorities (get-priorities-by-client-id)]
+    (stable-sort items (fn [a1 a2]
+                         (let [p1 (or (. priorities a1.ctx.client_id) .inf)
+                               p2 (or (. priorities a2.ctx.client_id) .inf)]
+                           (when (not= p1 p2)
+                             (< p1 p2)))))))
+
+(let [select vim.ui.select]
+  (set vim.ui.select (fn [items opts on-choice]
+                       (if (= opts.kind :codeaction)
+                           (select (sort-codeactions items) opts on-choice)
+                           (select items opts on-choice)))))
