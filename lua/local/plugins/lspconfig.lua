@@ -2,10 +2,10 @@
 local lspconfig = require("lspconfig")
 local cmp_lsp = require("cmp_nvim_lsp")
 local tbl = require("std.table")
-local augroup = vim.api["nvim_create_augroup"]
-local autocmd = vim.api["nvim_create_autocmd"]
-local autocmd_21 = vim.api["nvim_clear_autocmds"]
-local buf_set_keymap = vim.api["nvim_buf_set_keymap"]
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+local autocmd_21 = vim.api.nvim_clear_autocmds
+local buf_set_keymap = vim.api.nvim_buf_set_keymap
 augroup("lsp-config-signature-help", {clear = true})
 local function on_attach(client, buf_nr)
   buf_set_keymap(0, "n", "<Leader>gs", ":Telescope lsp_dynamic_workspace_symbols<CR>", {silent = true})

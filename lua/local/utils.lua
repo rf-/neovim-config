@@ -1,10 +1,10 @@
 -- [nfnl] fnl/local/utils.fnl
-local get_line_number = vim.fn["line"]
-local get_col_number = vim.fn["col"]
-local syn_id = vim.fn["synID"]
-local syn_id_attr = vim.fn["synIDattr"]
-local syn_id_trans = vim.fn["synIDtrans"]
-local popen = io["popen"]
+local get_line_number = vim.fn.line
+local get_col_number = vim.fn.col
+local syn_id = vim.fn.synID
+local syn_id_attr = vim.fn.synIDattr
+local syn_id_trans = vim.fn.synIDtrans
+local popen = io.popen
 local function system(cmd)
   local handle = popen((cmd .. " 2>&1"))
   local result = handle:read("*all")

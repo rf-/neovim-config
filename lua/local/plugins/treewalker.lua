@@ -3,7 +3,7 @@ local treewalker = require("treewalker")
 local nodes = require("treewalker.nodes")
 local targets = require("treewalker.targets")
 local operations = require("treewalker.operations")
-local map_21 = vim.keymap["set"]
+local map_21 = vim.keymap.set
 treewalker.setup({highlight = false})
 local function default_down()
   local target, row = targets.down()

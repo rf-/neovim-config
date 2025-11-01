@@ -1,8 +1,8 @@
 -- [nfnl] fnl/local/plugins/neo-tree.fnl
-local g = vim["g"]
-local keymap = vim["keymap"]
-local wait = vim["wait"]
-local map_21 = keymap["set"]
+local g = vim.g
+local keymap = vim.keymap
+local wait = vim.wait
+local map_21 = keymap.set
 local neo_tree = require("neo-tree")
 local neo_tree_fs = require("neo-tree.sources.filesystem")
 local neo_tree_renderer = require("neo-tree.ui.renderer")

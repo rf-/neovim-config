@@ -1,8 +1,8 @@
 -- [nfnl] fnl/local/plugins/treesitter.fnl
-local command = vim.api["nvim_command"]
-local autocmd = vim.api["nvim_create_autocmd"]
+local command = vim.api.nvim_command
+local autocmd = vim.api.nvim_create_autocmd
 local _local_1_ = require("std.table")
-local keys = _local_1_["keys"]
+local keys = _local_1_.keys
 local ts = require("nvim-treesitter")
 local all_parsers = keys(require("nvim-treesitter.parsers"))
 local function build()

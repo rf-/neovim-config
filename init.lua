@@ -1,13 +1,13 @@
 -- [nfnl] init.fnl
 vim.loader.enable()
-local g = vim["g"]
-local env = vim["env"]
-local fs = vim["fs"]
-local command = vim.api["nvim_command"]
-local stdpath = vim.fn["stdpath"]
-local empty = vim.fn["empty"]
-local glob = vim.fn["glob"]
-local format = string["format"]
+local g = vim.g
+local env = vim.env
+local fs = vim.fs
+local command = vim.api.nvim_command
+local stdpath = vim.fn.stdpath
+local empty = vim.fn.empty
+local glob = vim.fn.glob
+local format = string.format
 local function bootstrap_lazy()
   local lazypath = (vim.fn.stdpath("data") .. "/lazy/lazy.nvim")
   if not vim.uv.fs_stat(lazypath) then

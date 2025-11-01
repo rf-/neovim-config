@@ -1,10 +1,10 @@
 -- [nfnl] fnl/local/commands.fnl
-local g = vim["g"]
-local command = vim.api["nvim_command"]
-local create_command = vim.api["nvim_create_user_command"]
-local list_wins = vim.api["nvim_list_wins"]
-local win_get_config = vim.api["nvim_win_get_config"]
-local win_close = vim.api["nvim_win_close"]
+local g = vim.g
+local command = vim.api.nvim_command
+local create_command = vim.api.nvim_create_user_command
+local list_wins = vim.api.nvim_list_wins
+local win_get_config = vim.api.nvim_win_get_config
+local win_close = vim.api.nvim_win_close
 local u = require("local.utils")
 local function rg(opts)
   local results = u.system(("rg --no-heading --line-number " .. opts.args))

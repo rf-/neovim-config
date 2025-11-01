@@ -1,12 +1,12 @@
 -- [nfnl] fnl/local/lsp.fnl
 local _local_1_ = require("std.functional")
-local map = _local_1_["map"]
+local map = _local_1_.map
 local tbl = require("std.table")
 local local_plugins_lspconfig = require("local.plugins.lspconfig")
-local create_augroup = vim.api["nvim_create_augroup"]
-local create_autocmd = vim.api["nvim_create_autocmd"]
-local clear_autocmds = vim.api["nvim_clear_autocmds"]
-local get_current_buf = vim.api["nvim_get_current_buf"]
+local create_augroup = vim.api.nvim_create_augroup
+local create_autocmd = vim.api.nvim_create_autocmd
+local clear_autocmds = vim.api.nvim_clear_autocmds
+local get_current_buf = vim.api.nvim_get_current_buf
 create_augroup("local-lsp-auto-format", {clear = true})
 local function is_array(tbl0)
   return not not tbl0[1]

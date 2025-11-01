@@ -1,19 +1,19 @@
 -- [nfnl] fnl/local/plugins/telescope.fnl
 local _local_1_ = require("std.functional")
-local map = _local_1_["map"]
-local bind = _local_1_["bind"]
-local foldl = _local_1_["foldl"]
+local map = _local_1_.map
+local bind = _local_1_.bind
+local foldl = _local_1_.foldl
 local _local_2_ = require("std.table")
-local merge = _local_2_["merge"]
+local merge = _local_2_.merge
 local telescope = require("telescope")
 local telescope_action_state = require("telescope.actions.state")
 local telescope_actions = require("telescope.actions")
 local telescope_builtin = require("telescope.builtin")
 local telescope_from_entry = require("telescope.from_entry")
 local telescope_themes = require("telescope.themes")
-local keymap = vim["keymap"]
-local map_21 = keymap["set"]
-local command = vim.api["nvim_command"]
+local keymap = vim.keymap
+local map_21 = keymap.set
+local command = vim.api.nvim_command
 local function entry_to_qf(entry)
   local or_3_ = entry.text
   if not or_3_ then
