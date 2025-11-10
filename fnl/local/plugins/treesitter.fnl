@@ -9,6 +9,7 @@
   (: (ts.update all-parsers) :wait 300000))
 
 ; To force rebuild:
+; rm -rf ~/.local/share/nvim/site
 ; (ts.install all-parsers {:force true})
 
 ;; Adapted from https://github.com/nvim-treesitter/nvim-treesitter/discussions/7894
