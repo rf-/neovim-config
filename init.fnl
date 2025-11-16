@@ -146,6 +146,9 @@
     (use "aaronik/treewalker.nvim"
          {:config #(require :local.plugins.treewalker)})
 
+    (use "nvim-treesitter/nvim-treesitter-context"
+         {:config #(require :local.plugins.treesitter-context)})
+
     ; Color
 
     (use "rf-/edge"
