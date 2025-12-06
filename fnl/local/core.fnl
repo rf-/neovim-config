@@ -64,7 +64,7 @@
 (set o.splitright true)
 
 ; Keep some padding between the cursor and the edge of the screen
-(set o.scrolloff 1)
+(set o.scrolloff 5)
 (set o.sidescrolloff 5)
 
 ; History and persistent undo
