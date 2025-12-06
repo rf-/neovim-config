@@ -172,6 +172,9 @@
 ; Map <Leader>gd to show diagnostics
 (map! [:n] :<Leader>gd #(vim.diagnostic.open_float) {:silent true})
 
+; Map <Leader>v to search within the last visual selection
+(map! [:n] :<Leader>v "/\\%V")
+
 ; Map <Leader>/ to toggle comments with built-in Neovim maps
 (map! [:n] :<Leader>/ :gcc {:remap true})
 (map! [:v] :<Leader>/ :gc {:remap true})

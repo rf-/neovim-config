@@ -117,6 +117,7 @@ local function _6_()
   return vim.diagnostic.open_float()
 end
 map_21({"n"}, "<Leader>gd", _6_, {silent = true})
+map_21({"n"}, "<Leader>v", "/\\%V")
 map_21({"n"}, "<Leader>/", "gcc", {remap = true})
 map_21({"v"}, "<Leader>/", "gc", {remap = true})
 local function _7_()
