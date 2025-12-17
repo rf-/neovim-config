@@ -28,7 +28,7 @@
     (vim.lsp.config server-name config)
     (vim.lsp.enable server-name)))
 
-(fn on-attach-ts_ls [client buf-nr]
+(fn on-attach-tsgo [client buf-nr]
   (set vim.o.formatexpr "")
   (set client.server_capabilities.documentFormattingProvider false)
   (on-attach client buf-nr))
@@ -42,9 +42,9 @@
 
 (setup :clangd {:capabilities {:offsetEncoding ["utf-16"]}})
 
-(setup :ts_ls
-       {:on_attach on-attach-ts_ls
-        :init_options {:hostInfo "neovim" :maxTsServerMemory 8192}})
+(setup :tsgo
+       {:on_attach on-attach-tsgo
+        :capabilities {:general {:positionEncodings [:utf-16]}}})
 
 (setup :eslint {:cmd_env {:NODE_OPTIONS "--max-old-space-size=8192"}
                 :on_attach on-attach-eslint})
