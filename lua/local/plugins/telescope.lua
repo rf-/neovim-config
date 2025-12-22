@@ -85,7 +85,7 @@ map_21({"n"}, "<Leader>f", telescope_builtin.live_grep, {silent = true})
 map_21({"n"}, "<Leader>k", vim.lsp.buf.code_action, {silent = true})
 map_21({"n"}, "<Leader>t", telescope_builtin.buffers, {silent = true})
 map_21({"n"}, "<Leader>T", telescope_builtin.find_files, {silent = true})
-local priorities_by_name = {tsgo = 1, ["null-ls"] = 2}
+local priorities_by_name = {ts_ls = 1, ["null-ls"] = 2}
 local function get_priorities_by_client_id()
   local clients = vim.lsp.get_clients()
   local tbl_21_ = {}
