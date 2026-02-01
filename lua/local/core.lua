@@ -9,6 +9,7 @@ local keymap = vim.keymap
 local map_21 = keymap.set
 local command = vim.api.nvim_command
 local autocmd = vim.api.nvim_create_autocmd
+local tbl = require("std.table")
 local str = require("std.string")
 local u = require("local.utils")
 g.mapleader = " "
@@ -200,11 +201,23 @@ autocmd({"QuickFixCmdPost"}, {pattern = "[^l]*", command = "cwindow", nested = t
 autocmd({"QuickFixCmdPost"}, {pattern = "l*", command = "lwindow", nested = true})
 vim.diagnostic.config({underline = true, signs = true, update_in_insert = true, severity_sort = true, virtual_text = false})
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {silent = true, focusable = false})
-local function _16_()
-  return vim.diagnostic.goto_prev({float = false})
+local function prioritized_jump(count)
+  local _let_16_ = tbl.sort(tbl.keys(vim.diagnostic.count(0)))
+  local min_severity = _let_16_[1]
+  local _ = (function (t, k) return ((getmetatable(t) or {}).__fennelrest or function (t, k) return {(table.unpack or unpack)(t, k)} end)(t, k) end)(_let_16_, 2)
+  local severity
+  if (min_severity == vim.diagnostic.severity.ERROR) then
+    severity = min_severity
+  else
+    severity = nil
+  end
+  return vim.diagnostic.jump({count = count, severity = severity})
 end
-map_21({"n"}, "[d", _16_, {silent = true})
-local function _17_()
-  return vim.diagnostic.goto_next({float = false})
+local function _18_()
+  return prioritized_jump(-1)
 end
-return map_21({"n"}, "]d", _17_, {silent = true})
+map_21({"n"}, "[d", _18_, {silent = true})
+local function _19_()
+  return prioritized_jump(1)
+end
+return map_21({"n"}, "]d", _19_, {silent = true})

@@ -1,6 +1,7 @@
 (local {: g : o : bo : wo : env : opt : keymap} vim)
 (local {:set map!} keymap)
 (local {:nvim_command command :nvim_create_autocmd autocmd} vim.api)
+(local tbl (require :std.table))
 (local str (require :std.string))
 (local u (require :local.utils))
 
@@ -322,6 +323,13 @@
      (vim.lsp.with vim.lsp.handlers.signature_help
        {:silent true :focusable false}))
 
+; Jump between only errors if present, all diagnostics otherwise
+(fn prioritized-jump [count]
+  (let [[min-severity & _] (tbl.sort (tbl.keys (vim.diagnostic.count 0)))
+        severity (when (= min-severity vim.diagnostic.severity.ERROR)
+                   min-severity)]
+    (vim.diagnostic.jump {:count count :severity severity})))
+
 ; Add shortcuts for jumping between diagnostics
-(map! [:n] "[d" #(vim.diagnostic.goto_prev {:float false}) {:silent true})
-(map! [:n] "]d" #(vim.diagnostic.goto_next {:float false}) {:silent true})
+(map! [:n] "[d" #(prioritized-jump -1) {:silent true})
+(map! [:n] "]d" #(prioritized-jump 1) {:silent true})
