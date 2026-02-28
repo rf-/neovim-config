@@ -1,5 +1,4 @@
 (local lspconfig (require :lspconfig))
-(local cmp-lsp (require :cmp_nvim_lsp))
 (local tbl (require :std.table))
 (local {:nvim_create_augroup augroup
         :nvim_create_autocmd autocmd
@@ -27,13 +26,10 @@
         (buf-set-keymap 0 :n lhs (.. ":lua vim.lsp.buf." func-name "()<CR>")
                         {:silent true})))))
 
-(local cmp-capabilities (cmp-lsp.default_capabilities))
-
 (fn setup [server-name extra-config]
   (let [extra-config (or extra-config {})
         on_attach (wrap-on-attach server-name extra-config.on_attach)
-        capabilities (tbl.merge (tbl.clone cmp-capabilities)
-                                (or extra-config.capabilities {}))
+        capabilities (or extra-config.capabilities {})
         config (tbl.merge (tbl.clone extra-config)
                           {:on_attach on_attach :capabilities capabilities})]
     (vim.lsp.config server-name config)

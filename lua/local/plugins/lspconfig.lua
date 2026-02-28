@@ -1,6 +1,5 @@
 -- [nfnl] fnl/local/plugins/lspconfig.fnl
 local lspconfig = require("lspconfig")
-local cmp_lsp = require("cmp_nvim_lsp")
 local tbl = require("std.table")
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
@@ -26,11 +25,10 @@ local function wrap_on_attach(name, callback)
   end
   return _1_
 end
-local cmp_capabilities = cmp_lsp.default_capabilities()
 local function setup(server_name, extra_config)
   local extra_config0 = (extra_config or {})
   local on_attach = wrap_on_attach(server_name, extra_config0.on_attach)
-  local capabilities = tbl.merge(tbl.clone(cmp_capabilities), (extra_config0.capabilities or {}))
+  local capabilities = (extra_config0.capabilities or {})
   local config = tbl.merge(tbl.clone(extra_config0), {on_attach = on_attach, capabilities = capabilities})
   vim.lsp.config(server_name, config)
   return vim.lsp.enable(server_name)

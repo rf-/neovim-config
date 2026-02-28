@@ -72,11 +72,6 @@
     (use "simnalamburt/vim-mundo"
          {:init #(require :local.plugins.mundo)})
 
-    ; Snippets
-
-    (use "hrsh7th/vim-vsnip"
-         {:init #(require :local.plugins.vsnip)})
-
     (use "github/copilot.vim")
     (use "CopilotC-Nvim/CopilotChat.nvim"
          {:branch "main"
@@ -95,8 +90,7 @@
           :config #(: (require :local.plugins.treesitter) :config)})
 
     (use "neovim/nvim-lspconfig"
-         {:config #(require :local.plugins.lspconfig)
-          :dependencies ["hrsh7th/cmp-nvim-lsp"]})
+         {:config #(require :local.plugins.lspconfig)})
 
     (use "nvimtools/none-ls.nvim")
 
@@ -114,14 +108,6 @@
 
     (use "seblj/nvim-echo-diagnostics"
          {:config #(require :local.plugins.echo-diagnostics)})
-
-    (use "hrsh7th/nvim-cmp"
-         {:config #(require :local.plugins.cmp)
-          :dependencies ["hrsh7th/cmp-nvim-lsp"
-                         "hrsh7th/cmp-buffer"
-                         "hrsh7th/cmp-path"
-                         "hrsh7th/cmp-cmdline"
-                         "hrsh7th/cmp-vsnip"]})
 
     (use "vale1410/vim-minizinc")
 

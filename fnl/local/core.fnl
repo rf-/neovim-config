@@ -105,7 +105,7 @@
 ; Complete longest common string first, then open menu
 (set o.wildmode "longest:full")
 
-; Set up completion according to `nvim-cmp` recommendation
+; Always show a completion menu and never insert before choosing an option
 (set o.completeopt "menu,menuone,noselect")
 
 ; See instant feedback when entering commands
