@@ -25,15 +25,19 @@ local function wrap_on_attach(name, callback)
   end
   return _1_
 end
-local function setup(server_name, extra_config)
+local function setup(server_name, extra_config, opts)
   local extra_config0 = (extra_config or {})
   local on_attach = wrap_on_attach(server_name, extra_config0.on_attach)
   local capabilities = (extra_config0.capabilities or {})
   local config = tbl.merge(tbl.clone(extra_config0), {on_attach = on_attach, capabilities = capabilities})
   vim.lsp.config(server_name, config)
-  return vim.lsp.enable(server_name)
+  if not (opts and opts["skip-enable"]) then
+    return vim.lsp.enable(server_name)
+  else
+    return nil
+  end
 end
-local function on_attach_ts_ls(client, buf_nr)
+local function on_attach_ts(client, buf_nr)
   vim.o.formatexpr = ""
   client.server_capabilities.documentFormattingProvider = false
   return nil
@@ -44,7 +48,8 @@ local function on_attach_eslint(client, buf_nr)
 end
 setup("rust_analyzer", {settings = {["rust-analyzer"] = {workspace = {symbol = {search = {kind = "all_symbols"}}}}}})
 setup("clangd", {capabilities = {offsetEncoding = {"utf-16"}}})
-setup("ts_ls", {on_attach = on_attach_ts_ls, init_options = {hostInfo = "neovim", maxTsServerMemory = 8192}})
+setup("ts_ls", {on_attach = on_attach_ts, init_options = {hostInfo = "neovim", maxTsServerMemory = 8192}})
+setup("tsgo", {on_attach = on_attach_ts, capabilities = {general = {positionEncodings = {"utf-16"}}}}, {["skip-enable"] = true})
 setup("eslint", {on_attach = on_attach_eslint, cmd_env = {NODE_OPTIONS = "--max-old-space-size=8192"}})
 setup("gopls", {settings = {gopls = {buildFlags = {"-mod=readonly"}}}})
 return {setup = setup}

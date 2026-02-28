@@ -26,16 +26,17 @@
         (buf-set-keymap 0 :n lhs (.. ":lua vim.lsp.buf." func-name "()<CR>")
                         {:silent true})))))
 
-(fn setup [server-name extra-config]
+(fn setup [server-name extra-config opts]
   (let [extra-config (or extra-config {})
         on_attach (wrap-on-attach server-name extra-config.on_attach)
         capabilities (or extra-config.capabilities {})
         config (tbl.merge (tbl.clone extra-config)
                           {:on_attach on_attach :capabilities capabilities})]
     (vim.lsp.config server-name config)
-    (vim.lsp.enable server-name)))
+    (if (not (and opts opts.skip-enable))
+        (vim.lsp.enable server-name))))
 
-(fn on-attach-ts_ls [client buf-nr]
+(fn on-attach-ts [client buf-nr]
   (set vim.o.formatexpr "")
   (set client.server_capabilities.documentFormattingProvider false))
 
@@ -48,8 +49,13 @@
 (setup :clangd {:capabilities {:offsetEncoding ["utf-16"]}})
 
 (setup :ts_ls
-       {:on_attach on-attach-ts_ls
+       {:on_attach on-attach-ts
         :init_options {:hostInfo "neovim" :maxTsServerMemory 8192}})
+
+(setup :tsgo
+       {:on_attach on-attach-ts
+        :capabilities {:general {:positionEncodings ["utf-16"]}}}
+       {:skip-enable true})
 
 (setup :eslint
        {:on_attach on-attach-eslint
