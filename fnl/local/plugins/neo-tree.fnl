@@ -6,7 +6,7 @@
 
 (map! [:n :v] :<Leader>n ":Neotree toggle<CR>")
 (map! [:n :v] :<Leader>N ":Neotree<CR>")
-(map! [:n :v] "-" ":Neotree reveal<CR>")
+(map! [:n :v] :<Leader>- ":Neotree reveal<CR>")
 
 (fn open-dir [state dir-node]
   (neo-tree-fs.toggle_directory state dir-node nil true false)

@@ -27,7 +27,7 @@
   "telescope-fzy-native.nvim": { "branch": "master", "commit": "282f069504515eec762ab6d6c89903377252bf5b" },
   "telescope-ui-select.nvim": { "branch": "master", "commit": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2" },
   "telescope.nvim": { "branch": "master", "commit": "3a12a853ebf21ec1cce9a92290e3013f8ae75f02" },
-  "treewalker.nvim": { "branch": "main", "commit": "6b436021ccea7c3fde67cb42febfd4335ce3c73c" },
+  "treewalker.nvim": { "branch": "main", "commit": "3d5148e160ed9728b3275d37d06ea028cef5f43b" },
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "vim-bclose": { "branch": "master", "commit": "be7b3f39619669dfdc910ff242f29e602a7fab42" },
   "vim-endwise": { "branch": "master", "commit": "4994afb0cdf956d9a665a14b9c834869e602c396" },
@@ -44,7 +44,7 @@
   "vim-textobj-comment": { "branch": "master", "commit": "58ae4571b76a5bf74850698f23d235eef991dd4b" },
   "vim-textobj-rubyblock": { "branch": "master", "commit": "2b882e2cc2599078f75e6e88cd268192bf7b27bf" },
   "vim-textobj-user": { "branch": "master", "commit": "41a675ddbeefd6a93664a4dc52f302fe3086a933" },
-  "vim-unimpaired": { "branch": "master", "commit": "db65482581a28e4ccf355be297f1864a4e66985c" },
+  "vim-unimpaired": { "branch": "master", "commit": "18a5af780e0a85ce493d52230686375c0a6ce220" },
   "vim-vsnip": { "branch": "master", "commit": "9bcfabea653abdcdac584283b5097c3f8760abaa" },
   "yats.vim": { "branch": "master", "commit": "6ebbb5384c998fe4d20807f7d49ec0463ad10019" }
 }

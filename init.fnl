@@ -50,7 +50,7 @@
     (use "tpope/vim-repeat")
     (use "tpope/vim-speeddating")
     (use "tpope/vim-surround")
-    (use "tpope/vim-unimpaired")
+    (use "rf-/vim-unimpaired")
 
     (use "kana/vim-textobj-user")
     (use "glts/vim-textobj-comment"
