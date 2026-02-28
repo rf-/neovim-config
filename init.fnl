@@ -109,6 +109,11 @@
     (use "seblj/nvim-echo-diagnostics"
          {:config #(require :local.plugins.echo-diagnostics)})
 
+    (use "saghen/blink.cmp"
+         {:version "1.*"
+          :build "cargo build --release"
+          :config #(require :local.plugins.blink-cmp)})
+
     (use "vale1410/vim-minizinc")
 
     (use "nelstrom/vim-textobj-rubyblock"
