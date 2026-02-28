@@ -9,33 +9,42 @@
 (augroup :lsp-config-signature-help {:clear true})
 
 ; Set LSP shortcuts when client attaches
-(fn on-attach [client buf-nr]
-  (buf-set-keymap 0 :n :<Leader>gs
-                  ":Telescope lsp_dynamic_workspace_symbols<CR>" {:silent true})
-  (each [lhs func-name (pairs {"<C-]>" :definition
-                               :<C-p> :hover
-                               "<C-S-]>" :type_definition
-                               :<Leader>gr :references
-                               :<Leader>cr :rename})]
-    (buf-set-keymap 0 :n lhs (.. ":lua vim.lsp.buf." func-name "()<CR>")
-                    {:silent true})))
+(fn wrap-on-attach [name callback]
+  (let [base-on-attach (. vim.lsp.config name :on_attach)]
+    (fn [client buf-nr]
+      (when base-on-attach
+        (base-on-attach client buf-nr))
+      (when callback
+        (callback client buf-nr))
+      (buf-set-keymap 0 :n :<Leader>gs
+                      ":Telescope lsp_dynamic_workspace_symbols<CR>"
+                      {:silent true})
+      (each [lhs func-name (pairs {"<C-]>" :definition
+                                   :<C-p> :hover
+                                   "<C-S-]>" :type_definition
+                                   :<Leader>gr :references
+                                   :<Leader>cr :rename})]
+        (buf-set-keymap 0 :n lhs (.. ":lua vim.lsp.buf." func-name "()<CR>")
+                        {:silent true})))))
 
 (local cmp-capabilities (cmp-lsp.default_capabilities))
 
 (fn setup [server-name extra-config]
-  (let [config (tbl.merge {:on_attach on-attach :capabilities cmp-capabilities}
-                          (or extra-config {}))]
+  (let [extra-config (or extra-config {})
+        on_attach (wrap-on-attach server-name extra-config.on_attach)
+        capabilities (tbl.merge (tbl.clone cmp-capabilities)
+                                (or extra-config.capabilities {}))
+        config (tbl.merge (tbl.clone extra-config)
+                          {:on_attach on_attach :capabilities capabilities})]
     (vim.lsp.config server-name config)
     (vim.lsp.enable server-name)))
 
 (fn on-attach-ts_ls [client buf-nr]
   (set vim.o.formatexpr "")
-  (set client.server_capabilities.documentFormattingProvider false)
-  (on-attach client buf-nr))
+  (set client.server_capabilities.documentFormattingProvider false))
 
 (fn on-attach-eslint [client buf-nr]
-  (set client.server_capabilities.documentFormattingProvider true)
-  (on-attach client buf-nr))
+  (set client.server_capabilities.documentFormattingProvider true))
 
 (setup :rust_analyzer
        {:settings {"rust-analyzer" {:workspace {:symbol {:search {:kind :all_symbols}}}}}})
@@ -46,7 +55,8 @@
        {:on_attach on-attach-ts_ls
         :init_options {:hostInfo "neovim" :maxTsServerMemory 8192}})
 
-(setup :eslint {:cmd_env {:NODE_OPTIONS "--max-old-space-size=8192"}
-                :on_attach on-attach-eslint})
+(setup :eslint
+       {:on_attach on-attach-eslint
+        :cmd_env {:NODE_OPTIONS "--max-old-space-size=8192"}})
 
 {: setup}
