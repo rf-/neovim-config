@@ -55,4 +55,6 @@
        {:on_attach on-attach-eslint
         :cmd_env {:NODE_OPTIONS "--max-old-space-size=8192"}})
 
+(setup :gopls {:settings {:gopls {:buildFlags ["-mod=readonly"]}}})
+
 {: setup}

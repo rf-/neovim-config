@@ -46,4 +46,5 @@ setup("rust_analyzer", {settings = {["rust-analyzer"] = {workspace = {symbol = {
 setup("clangd", {capabilities = {offsetEncoding = {"utf-16"}}})
 setup("ts_ls", {on_attach = on_attach_ts_ls, init_options = {hostInfo = "neovim", maxTsServerMemory = 8192}})
 setup("eslint", {on_attach = on_attach_eslint, cmd_env = {NODE_OPTIONS = "--max-old-space-size=8192"}})
+setup("gopls", {settings = {gopls = {buildFlags = {"-mod=readonly"}}}})
 return {setup = setup}
