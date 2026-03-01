@@ -78,17 +78,17 @@
 (map! [:n] "<C-=>" #(move down-or-jump-target) {:silent true})
 
 ; Adding Shift moves to parent or child nodes
-(map! [:n] "<S-->" ":Treewalker Left<CR>" {:silent true})
-(map! [:n] "<S-=>" ":Treewalker Right<CR>" {:silent true})
+(map! [:n] "_" ":Treewalker Left<CR>" {:silent true})
+(map! [:n] "+" ":Treewalker Right<CR>" {:silent true})
 
 ; Adding Ctrl-Shift jumps to the parent level at scope boundaries
-(map! [:n] "<C-S-->" #(move up-or-out-target) {:silent true})
-(map! [:n] "<C-S-=>" #(move down-or-out-target) {:silent true})
+(map! [:n] "<C-_>" #(move up-or-out-target) {:silent true})
+(map! [:n] "<C-+>" #(move down-or-out-target) {:silent true})
 
 ; Adding Alt swaps expressions
 (map! [:n] "<A-->" ":Treewalker SwapLeft<CR>" {:silent true})
 (map! [:n] "<A-=>" ":Treewalker SwapRight<CR>" {:silent true})
 
 ; Adding Alt-Shift swaps declarations
-(map! [:n] "<A-S-->" ":Treewalker SwapUp<CR>" {:silent true})
-(map! [:n] "<A-S-=>" ":Treewalker SwapDown<CR>" {:silent true})
+(map! [:n] "<A-_>" ":Treewalker SwapUp<CR>" {:silent true})
+(map! [:n] "<A-+>" ":Treewalker SwapDown<CR>" {:silent true})
