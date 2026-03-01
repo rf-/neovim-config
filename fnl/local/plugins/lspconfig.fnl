@@ -44,7 +44,8 @@
   (set client.server_capabilities.documentFormattingProvider true))
 
 (setup :rust_analyzer
-       {:settings {"rust-analyzer" {:workspace {:symbol {:search {:kind :all_symbols}}}}}})
+       {:settings {"rust-analyzer" {:workspace {:symbol {:search {:kind :all_symbols}}}
+                                    :cargo {:allFeatures true}}}})
 
 (setup :clangd {:capabilities {:offsetEncoding ["utf-16"]}})
 

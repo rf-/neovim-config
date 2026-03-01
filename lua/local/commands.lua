@@ -30,4 +30,12 @@ local function close_floating_windows()
   end
   return nil
 end
-return create_command("CloseFloatingWindows", close_floating_windows, {})
+create_command("CloseFloatingWindows", close_floating_windows, {})
+local function bootstrap_config()
+  u.system("cp -n ~/.config/nvim/nfnl.sample.fnl .nfnl.fnl")
+  u.system("cp -n ~/.config/nvim/nvim.sample.fnl .nvim.fnl")
+  require("nfnl.api")["compile-file"]({path = ".nvim.fnl"})
+  dofile("./.nvim.lua")
+  return vim.cmd.edit(".nvim.fnl")
+end
+return create_command("BootstrapConfig", bootstrap_config, {})

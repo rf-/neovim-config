@@ -30,3 +30,12 @@
           (win-close win false)))))
 
 (create-command :CloseFloatingWindows close-floating-windows {})
+
+(fn bootstrap-config []
+  (u.system "cp -n ~/.config/nvim/nfnl.sample.fnl .nfnl.fnl")
+  (u.system "cp -n ~/.config/nvim/nvim.sample.fnl .nvim.fnl")
+  ((. (require :nfnl.api) "compile-file") {:path ".nvim.fnl"})
+  (dofile "./.nvim.lua")
+  (vim.cmd.edit ".nvim.fnl"))
+
+(create-command :BootstrapConfig bootstrap-config {})

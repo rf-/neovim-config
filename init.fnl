@@ -37,8 +37,7 @@
     ; Basic Fennel/Lua setup
 
     (use "nvim-lua/plenary.nvim")
-    (use "Olical/nfnl"
-         {:init #(require :local.plugins.nfnl)})
+    (use "Olical/nfnl")
     (use "Olical/conjure"
          {:init #(require :local.plugins.conjure)})
 

@@ -46,7 +46,7 @@ local function on_attach_eslint(client, buf_nr)
   client.server_capabilities.documentFormattingProvider = true
   return nil
 end
-setup("rust_analyzer", {settings = {["rust-analyzer"] = {workspace = {symbol = {search = {kind = "all_symbols"}}}}}})
+setup("rust_analyzer", {settings = {["rust-analyzer"] = {workspace = {symbol = {search = {kind = "all_symbols"}}}, cargo = {allFeatures = true}}}})
 setup("clangd", {capabilities = {offsetEncoding = {"utf-16"}}})
 setup("ts_ls", {on_attach = on_attach_ts, init_options = {hostInfo = "neovim", maxTsServerMemory = 8192}})
 setup("tsgo", {on_attach = on_attach_ts, capabilities = {general = {positionEncodings = {"utf-16"}}}}, {["skip-enable"] = true})
