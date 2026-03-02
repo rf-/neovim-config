@@ -79,6 +79,8 @@ o.matchtime = 1
 o.pumblend = 20
 o.winblend = 10
 o.wildoptions = "pum"
+command("aunmenu PopUp")
+command("autocmd! nvim.popupmenu")
 o.wildmode = "longest:full"
 o.completeopt = "menu,menuone,noselect"
 o.inccommand = "nosplit"

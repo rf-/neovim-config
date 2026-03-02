@@ -102,6 +102,10 @@
 ; Use popup menu for command-line completion
 (set o.wildoptions :pum)
 
+; Disable right-click menu
+(command "aunmenu PopUp")
+(command "autocmd! nvim.popupmenu")
+
 ; Complete longest common string first, then open menu
 (set o.wildmode "longest:full")
 
