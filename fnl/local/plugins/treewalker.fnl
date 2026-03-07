@@ -4,6 +4,8 @@
 (local operations (require "treewalker.operations"))
 
 (local {:set map!} vim.keymap)
+(local {:nvim_create_autocmd create-autocmd} vim.api)
+(local {:get_parser get-parser} vim.treesitter)
 
 (treewalker.setup {:highlight false :scope_confined true})
 
@@ -69,26 +71,28 @@
         (operations.jump target row)
         (when (not is-neighbor) (update-jump-list))))))
 
-; By default, - and = move up and down within just the current scope
-(map! [:n] "-" #(move up-target) {:silent true})
-(map! [:n] "=" #(move down-target) {:silent true})
+(fn create-treewalker-bindings [event]
+  (let [{: buf} event
+        map!! #(map! [:n] $1 $2 {:silent true :buffer buf})
+        parser (get-parser buf nil {:error false})]
+    (when parser
+      ;; By default, - and = move up and down within just the current scope
+      (map!! "-" #(move up-target))
+      (map!! "=" #(move down-target))
+      ;; Adding Ctrl jumps to lines at the same level across scope boundaries
+      (map!! "<C-->" #(move up-or-jump-target))
+      (map!! "<C-=>" #(move down-or-jump-target))
+      ;; Adding Shift moves to parent or child nodes
+      (map!! "_" ":Treewalker Left<CR>")
+      (map!! "+" ":Treewalker Right<CR>")
+      ;; Adding Ctrl-Shift jumps to the parent level at scope boundaries
+      (map!! "<C-_>" #(move up-or-out-target))
+      (map!! "<C-+>" #(move down-or-out-target))
+      ;; Adding Alt swaps expressions
+      (map!! "<A-->" ":Treewalker SwapLeft<CR>")
+      (map!! "<A-=>" ":Treewalker SwapRight<CR>")
+      ;; Adding Alt-Shift swaps declarations
+      (map!! "<A-_>" ":Treewalker SwapUp<CR>")
+      (map!! "<A-+>" ":Treewalker SwapDown<CR>"))))
 
-; Adding Ctrl jumps to lines at the same level across scope boundaries
-(map! [:n] "<C-->" #(move up-or-jump-target) {:silent true})
-(map! [:n] "<C-=>" #(move down-or-jump-target) {:silent true})
-
-; Adding Shift moves to parent or child nodes
-(map! [:n] "_" ":Treewalker Left<CR>" {:silent true})
-(map! [:n] "+" ":Treewalker Right<CR>" {:silent true})
-
-; Adding Ctrl-Shift jumps to the parent level at scope boundaries
-(map! [:n] "<C-_>" #(move up-or-out-target) {:silent true})
-(map! [:n] "<C-+>" #(move down-or-out-target) {:silent true})
-
-; Adding Alt swaps expressions
-(map! [:n] "<A-->" ":Treewalker SwapLeft<CR>" {:silent true})
-(map! [:n] "<A-=>" ":Treewalker SwapRight<CR>" {:silent true})
-
-; Adding Alt-Shift swaps declarations
-(map! [:n] "<A-_>" ":Treewalker SwapUp<CR>" {:silent true})
-(map! [:n] "<A-+>" ":Treewalker SwapDown<CR>" {:silent true})
+(create-autocmd :FileType {:callback create-treewalker-bindings})

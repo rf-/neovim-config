@@ -4,6 +4,8 @@ local nodes = require("treewalker.nodes")
 local targets = require("treewalker.targets")
 local operations = require("treewalker.operations")
 local map_21 = vim.keymap.set
+local create_autocmd = vim.api.nvim_create_autocmd
+local get_parser = vim.treesitter.get_parser
 treewalker.setup({scope_confined = true, highlight = false})
 local function should_confine_vertical_move(current_node, candidate)
   local current_parent = nodes.scope_parent(current_node)
@@ -106,33 +108,47 @@ local function move(get_target)
     return nil
   end
 end
-local function _15_()
-  return move(up_target)
+local function create_treewalker_bindings(event)
+  local buf = event.buf
+  local map_21_21
+  local function _15_(_241, _242)
+    return map_21({"n"}, _241, _242, {silent = true, buffer = buf})
+  end
+  map_21_21 = _15_
+  local parser = get_parser(buf, nil, {error = false})
+  if parser then
+    local function _16_()
+      return move(up_target)
+    end
+    map_21_21("-", _16_)
+    local function _17_()
+      return move(down_target)
+    end
+    map_21_21("=", _17_)
+    local function _18_()
+      return move(up_or_jump_target)
+    end
+    map_21_21("<C-->", _18_)
+    local function _19_()
+      return move(down_or_jump_target)
+    end
+    map_21_21("<C-=>", _19_)
+    map_21_21("_", ":Treewalker Left<CR>")
+    map_21_21("+", ":Treewalker Right<CR>")
+    local function _20_()
+      return move(up_or_out_target)
+    end
+    map_21_21("<C-_>", _20_)
+    local function _21_()
+      return move(down_or_out_target)
+    end
+    map_21_21("<C-+>", _21_)
+    map_21_21("<A-->", ":Treewalker SwapLeft<CR>")
+    map_21_21("<A-=>", ":Treewalker SwapRight<CR>")
+    map_21_21("<A-_>", ":Treewalker SwapUp<CR>")
+    return map_21_21("<A-+>", ":Treewalker SwapDown<CR>")
+  else
+    return nil
+  end
 end
-map_21({"n"}, "-", _15_, {silent = true})
-local function _16_()
-  return move(down_target)
-end
-map_21({"n"}, "=", _16_, {silent = true})
-local function _17_()
-  return move(up_or_jump_target)
-end
-map_21({"n"}, "<C-->", _17_, {silent = true})
-local function _18_()
-  return move(down_or_jump_target)
-end
-map_21({"n"}, "<C-=>", _18_, {silent = true})
-map_21({"n"}, "_", ":Treewalker Left<CR>", {silent = true})
-map_21({"n"}, "+", ":Treewalker Right<CR>", {silent = true})
-local function _19_()
-  return move(up_or_out_target)
-end
-map_21({"n"}, "<C-_>", _19_, {silent = true})
-local function _20_()
-  return move(down_or_out_target)
-end
-map_21({"n"}, "<C-+>", _20_, {silent = true})
-map_21({"n"}, "<A-->", ":Treewalker SwapLeft<CR>", {silent = true})
-map_21({"n"}, "<A-=>", ":Treewalker SwapRight<CR>", {silent = true})
-map_21({"n"}, "<A-_>", ":Treewalker SwapUp<CR>", {silent = true})
-return map_21({"n"}, "<A-+>", ":Treewalker SwapDown<CR>", {silent = true})
+return create_autocmd("FileType", {callback = create_treewalker_bindings})
