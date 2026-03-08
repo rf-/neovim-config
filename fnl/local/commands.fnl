@@ -7,6 +7,14 @@
 
 (local u (require :local.utils))
 
+(fn ag [opts]
+  (let [results (u.system (.. "ag --nogroup " opts.args))]
+    (set g.__ag_results results)
+    (command "cexpr g:__ag_results")
+    (command "copen")))
+
+(create-command :Ag ag {:nargs "*" :complete "dir"})
+
 (fn rg [opts]
   (let [results (u.system (.. "rg --no-heading --line-number " opts.args))]
     (set g.__rg_results results)

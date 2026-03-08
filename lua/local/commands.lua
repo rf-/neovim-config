@@ -6,6 +6,13 @@ local list_wins = vim.api.nvim_list_wins
 local win_get_config = vim.api.nvim_win_get_config
 local win_close = vim.api.nvim_win_close
 local u = require("local.utils")
+local function ag(opts)
+  local results = u.system(("ag --nogroup " .. opts.args))
+  g.__ag_results = results
+  command("cexpr g:__ag_results")
+  return command("copen")
+end
+create_command("Ag", ag, {nargs = "*", complete = "dir"})
 local function rg(opts)
   local results = u.system(("rg --no-heading --line-number " .. opts.args))
   g.__rg_results = results
