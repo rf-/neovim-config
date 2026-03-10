@@ -39,6 +39,7 @@ o.smarttab = true
 o.softtabstop = 2
 o.tabstop = 8
 o.termguicolors = true
+o.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-TermCursor"
 o.wrap = true
 o.breakindent = true
 o.linebreak = true

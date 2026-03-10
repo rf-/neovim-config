@@ -30,6 +30,7 @@
 (set o.softtabstop 2)
 (set o.tabstop 8)
 (set o.termguicolors true)
+(set o.guicursor "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-TermCursor")
 
 ; Line wrapping: wrap at word boundaries, indent and mark next line
 (set o.wrap true)
