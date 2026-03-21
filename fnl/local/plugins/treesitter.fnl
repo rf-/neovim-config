@@ -1,16 +1,23 @@
-(local {:nvim_command command :nvim_create_autocmd autocmd} vim.api)
+(local {:nvim_command command
+        :nvim_create_autocmd autocmd
+        :nvim_create_user_command create-command} vim.api)
+
 (local {: keys} (require :std.table))
 
 (local ts (require :nvim-treesitter))
 (local all-parsers (keys (require :nvim-treesitter.parsers)))
 
+(local u (require :local.utils))
+
 (fn build []
   (: (ts.install all-parsers) :wait 300000)
   (: (ts.update all-parsers) :wait 300000))
 
-; To force rebuild:
-; rm -rf ~/.local/share/nvim/site
-; (ts.install all-parsers {:force true})
+(fn rebuild-all []
+  (u.system "rm -rf ~/.local/share/nvim/site")
+  (ts.install all-parsers {:force true}))
+
+(create-command :TSRebuildAll rebuild-all {})
 
 ;; Adapted from https://github.com/nvim-treesitter/nvim-treesitter/discussions/7894
 (fn config []
