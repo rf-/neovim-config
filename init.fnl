@@ -75,6 +75,8 @@
     (use "CopilotC-Nvim/CopilotChat.nvim"
          {:branch "main"
           :config #(require :local.plugins.copilot-chat)})
+    (use "folke/sidekick.nvim"
+         {:config #(require :local.plugins.sidekick)})
 
     ; Language support
 

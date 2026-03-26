@@ -52,48 +52,51 @@ local function plugin_specs()
     return require("local.plugins.copilot-chat")
   end
   local function _10_()
-    return require("local.plugins.polyglot")
+    return require("local.plugins.sidekick")
   end
   local function _11_()
-    return require("local.plugins.treesitter"):build()
+    return require("local.plugins.polyglot")
   end
   local function _12_()
-    return require("local.plugins.treesitter"):config()
+    return require("local.plugins.treesitter"):build()
   end
   local function _13_()
-    return require("local.plugins.lspconfig")
+    return require("local.plugins.treesitter"):config()
   end
   local function _14_()
-    return require("local.plugins.lspsaga")
+    return require("local.plugins.lspconfig")
   end
   local function _15_()
-    return require("local.plugins.lsp-file-operations")
+    return require("local.plugins.lspsaga")
   end
   local function _16_()
-    return require("local.plugins.trouble")
+    return require("local.plugins.lsp-file-operations")
   end
   local function _17_()
-    return require("local.plugins.echo-diagnostics")
+    return require("local.plugins.trouble")
   end
   local function _18_()
-    return require("local.plugins.blink-cmp")
+    return require("local.plugins.echo-diagnostics")
   end
   local function _19_()
-    return require("local.plugins.telescope")
+    return require("local.plugins.blink-cmp")
   end
   local function _20_()
-    return require("local.plugins.neo-tree")
+    return require("local.plugins.telescope")
   end
   local function _21_()
-    return require("local.plugins.treewalker")
+    return require("local.plugins.neo-tree")
   end
   local function _22_()
-    return require("local.plugins.treesitter-context")
+    return require("local.plugins.treewalker")
   end
   local function _23_()
+    return require("local.plugins.treesitter-context")
+  end
+  local function _24_()
     return require("local.plugins.edge")
   end
-  return {use("nvim-lua/plenary.nvim"), use("Olical/nfnl"), use("Olical/conjure", {init = _3_}), use("godlygeek/tabular"), use("justinmk/vim-sneak"), use("tpope/vim-endwise"), use("tpope/vim-repeat"), use("tpope/vim-speeddating"), use("tpope/vim-surround"), use("rf-/vim-unimpaired"), use("kana/vim-textobj-user"), use("glts/vim-textobj-comment", {dependencies = {"kana/vim-textobj-user"}}), use("tpope/vim-fugitive", {config = _4_}), use("tpope/vim-rhubarb"), use("airblade/vim-gitgutter", {config = _5_}), use("rf-/vim-bclose", {config = _6_}), use("AndrewRadev/splitjoin.vim", {config = _7_}), use("simnalamburt/vim-mundo", {init = _8_}), use("github/copilot.vim"), use("CopilotC-Nvim/CopilotChat.nvim", {branch = "main", config = _9_}), use("sheerun/vim-polyglot", {init = _10_}), use("rf-/yats.vim"), use("nvim-treesitter/nvim-treesitter", {branch = "main", build = _11_, config = _12_}), use("neovim/nvim-lspconfig", {config = _13_}), use("nvimtools/none-ls.nvim"), use("nvimdev/lspsaga.nvim", {config = _14_}), use("antosha417/nvim-lsp-file-operations", {config = _15_, dependencies = {"nvim-lua/plenary.nvim", "nvim-neo-tree/neo-tree.nvim"}}), use("folke/trouble.nvim", {config = _16_, version = "v2.10.0"}), use("seblj/nvim-echo-diagnostics", {config = _17_}), use("saghen/blink.cmp", {version = "1.*", build = "cargo build --release", config = _18_}), use("vale1410/vim-minizinc"), use("nelstrom/vim-textobj-rubyblock", {dependencies = {"kana/vim-textobj-user"}}), use("iamcco/markdown-preview.nvim", {build = "cd app && env COREPACK_ENABLE_AUTO_PIN=0 yarn install"}), use("nvim-telescope/telescope.nvim", {config = _19_, dependencies = {"nvim-telescope/telescope-fzy-native.nvim", "nvim-telescope/telescope-ui-select.nvim"}}), use("nvim-neo-tree/neo-tree.nvim", {branch = "v3.x", config = _20_, dependencies = {"MunifTanjim/nui.nvim"}}), use("aaronik/treewalker.nvim", {config = _21_}), use("nvim-treesitter/nvim-treesitter-context", {config = _22_}), use("rf-/edge", {config = _23_})}
+  return {use("nvim-lua/plenary.nvim"), use("Olical/nfnl"), use("Olical/conjure", {init = _3_}), use("godlygeek/tabular"), use("justinmk/vim-sneak"), use("tpope/vim-endwise"), use("tpope/vim-repeat"), use("tpope/vim-speeddating"), use("tpope/vim-surround"), use("rf-/vim-unimpaired"), use("kana/vim-textobj-user"), use("glts/vim-textobj-comment", {dependencies = {"kana/vim-textobj-user"}}), use("tpope/vim-fugitive", {config = _4_}), use("tpope/vim-rhubarb"), use("airblade/vim-gitgutter", {config = _5_}), use("rf-/vim-bclose", {config = _6_}), use("AndrewRadev/splitjoin.vim", {config = _7_}), use("simnalamburt/vim-mundo", {init = _8_}), use("github/copilot.vim"), use("CopilotC-Nvim/CopilotChat.nvim", {branch = "main", config = _9_}), use("folke/sidekick.nvim", {config = _10_}), use("sheerun/vim-polyglot", {init = _11_}), use("rf-/yats.vim"), use("nvim-treesitter/nvim-treesitter", {branch = "main", build = _12_, config = _13_}), use("neovim/nvim-lspconfig", {config = _14_}), use("nvimtools/none-ls.nvim"), use("nvimdev/lspsaga.nvim", {config = _15_}), use("antosha417/nvim-lsp-file-operations", {config = _16_, dependencies = {"nvim-lua/plenary.nvim", "nvim-neo-tree/neo-tree.nvim"}}), use("folke/trouble.nvim", {config = _17_, version = "v2.10.0"}), use("seblj/nvim-echo-diagnostics", {config = _18_}), use("saghen/blink.cmp", {version = "1.*", build = "cargo build --release", config = _19_}), use("vale1410/vim-minizinc"), use("nelstrom/vim-textobj-rubyblock", {dependencies = {"kana/vim-textobj-user"}}), use("iamcco/markdown-preview.nvim", {build = "cd app && env COREPACK_ENABLE_AUTO_PIN=0 yarn install"}), use("nvim-telescope/telescope.nvim", {config = _20_, dependencies = {"nvim-telescope/telescope-fzy-native.nvim", "nvim-telescope/telescope-ui-select.nvim"}}), use("nvim-neo-tree/neo-tree.nvim", {branch = "v3.x", config = _21_, dependencies = {"MunifTanjim/nui.nvim"}}), use("aaronik/treewalker.nvim", {config = _22_}), use("nvim-treesitter/nvim-treesitter-context", {config = _23_}), use("rf-/edge", {config = _24_})}
 end
 local function init()
   package.path = (fs.normalize("~") .. "/.config/nvim/lua/?.lua," .. package.path)
