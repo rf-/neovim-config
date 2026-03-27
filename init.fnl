@@ -136,7 +136,8 @@
           :dependencies ["MunifTanjim/nui.nvim"]})
 
     (use "aaronik/treewalker.nvim"
-         {:config #(require :local.plugins.treewalker)})
+         {:commit "3d5148e160ed9728b3275d37d06ea028cef5f43b"
+          :config #(require :local.plugins.treewalker)})
 
     (use "nvim-treesitter/nvim-treesitter-context"
          {:config #(require :local.plugins.treesitter-context)})
