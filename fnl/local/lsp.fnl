@@ -1,6 +1,7 @@
 (local {: map} (require :std.functional))
 (local tbl (require :std.table))
 (local local-plugins-lspconfig (require :local.plugins.lspconfig))
+(local {:setup sidekick-setup} (require :local.plugins.sidekick))
 (local {:nvim_create_augroup create-augroup
         :nvim_create_autocmd create-autocmd
         :nvim_clear_autocmds clear-autocmds
@@ -41,4 +42,7 @@
 (fn setup [server-name config]
   (local-plugins-lspconfig.setup server-name config))
 
-{: auto-format-on-save : setup}
+(fn enable-sidekick []
+  (sidekick-setup))
+
+{: auto-format-on-save : setup : enable-sidekick}

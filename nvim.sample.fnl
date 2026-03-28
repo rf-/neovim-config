@@ -58,3 +58,5 @@
 ;; (local-lsp.auto-format-on-save [:cpp :objcpp] {:name "clangd"})
 
 ;; (local-lsp.auto-format-on-save [:go :gomod :gowork :gotmpl] {:name "gopls"})
+
+;; (local-lsp.enable-sidekick)
