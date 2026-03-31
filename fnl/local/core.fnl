@@ -324,10 +324,6 @@
                         :update_in_insert true
                         :severity_sort true})
 
-(set vim.lsp.handlers.textDocument/signatureHelp
-     (vim.lsp.with vim.lsp.handlers.signature_help
-       {:silent true :focusable false}))
-
 ; Jump between only errors if present, all diagnostics otherwise
 (fn prioritized-jump [count]
   (let [[min-severity & _] (tbl.sort (tbl.keys (vim.diagnostic.count 0)))

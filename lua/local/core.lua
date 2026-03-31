@@ -203,7 +203,6 @@ autocmd({"FileType"}, {pattern = "dict", callback = _14_})
 autocmd({"QuickFixCmdPost"}, {pattern = "[^l]*", command = "cwindow", nested = true})
 autocmd({"QuickFixCmdPost"}, {pattern = "l*", command = "lwindow", nested = true})
 vim.diagnostic.config({underline = true, signs = true, update_in_insert = true, severity_sort = true, virtual_text = false})
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {silent = true, focusable = false})
 local function prioritized_jump(count)
   local _let_16_ = tbl.sort(tbl.keys(vim.diagnostic.count(0)))
   local min_severity = _let_16_[1]
