@@ -222,4 +222,11 @@ map_21({"n"}, "[d", _18_, {silent = true})
 local function _19_()
   return prioritized_jump(1)
 end
-return map_21({"n"}, "]d", _19_, {silent = true})
+map_21({"n"}, "]d", _19_, {silent = true})
+local function trust_nvim_lua()
+  return vim.secure.trust({action = "allow", path = ".nvim.lua"})
+end
+local function _20_()
+  return vim.defer_fn(trust_nvim_lua, 1)
+end
+return autocmd("BufWritePost", {pattern = ".nvim.fnl", callback = _20_})

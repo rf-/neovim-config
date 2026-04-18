@@ -334,3 +334,11 @@
 ; Add shortcuts for jumping between diagnostics
 (map! [:n] "[d" #(prioritized-jump -1) {:silent true})
 (map! [:n] "]d" #(prioritized-jump 1) {:silent true})
+
+; Automatically trust `.nvim.lua` after saving `.nvim.fnl`. Defer to the next
+; tick to give `nfnl` a chance to update the file.
+(fn trust-nvim-lua []
+  (vim.secure.trust {:action :allow :path ".nvim.lua"}))
+
+(autocmd :BufWritePost
+         {:pattern ".nvim.fnl" :callback #(vim.defer_fn trust-nvim-lua 1)})
