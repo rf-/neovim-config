@@ -88,6 +88,7 @@
 
 ; Copy and paste to/from system clipboard
 (set o.clipboard :unnamedplus)
+(set g.clipboard :osc52)
 
 ; Don't show completion messages in status line
 (opt.shortmess:append :c)
