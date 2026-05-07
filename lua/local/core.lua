@@ -74,7 +74,10 @@ o.smartcase = true
 o.backupdir = vim.fn.expand("~/.config/nvim/backup//")
 o.directory = vim.fn.expand("~/.config/nvim/swap//")
 o.clipboard = "unnamedplus"
-g.clipboard = "osc52"
+if (env.TERM == "xterm-ghostty") then
+  g.clipboard = "osc52"
+else
+end
 opt.shortmess:append("c")
 o.showmatch = true
 o.matchtime = 1

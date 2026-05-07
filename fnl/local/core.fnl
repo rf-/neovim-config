@@ -88,7 +88,10 @@
 
 ; Copy and paste to/from system clipboard
 (set o.clipboard :unnamedplus)
-(set g.clipboard :osc52)
+
+; Use OSC 52 clipboard when using ghostty
+(if (= env.TERM "xterm-ghostty")
+    (set g.clipboard :osc52))
 
 ; Don't show completion messages in status line
 (opt.shortmess:append :c)
