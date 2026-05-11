@@ -142,6 +142,9 @@
     (use "nvim-treesitter/nvim-treesitter-context"
          {:config #(require :local.plugins.treesitter-context)})
 
+    (use "chentoast/marks.nvim"
+         {:config #(require :local.plugins.marks)})
+
     ; Color
 
     (use "rf-/edge"
