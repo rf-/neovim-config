@@ -101,10 +101,10 @@ map_21({"n", "v"}, "<Up>", "gk")
 map_21({"i"}, "<Down>", "<C-o>gj")
 map_21({"i"}, "<Up>", "<C-o>gk")
 for c_u_or_d, j_or_k in pairs({["<C-d>"] = "j", ["<C-u>"] = "k"}) do
-  local function _4_()
+  local function _5_()
     return command(("normal! " .. vim.wo.scroll .. j_or_k))
   end
-  map_21({"n"}, c_u_or_d, _4_, {silent = true})
+  map_21({"n"}, c_u_or_d, _5_, {silent = true})
 end
 for _, key in pairs({"h", "j", "k", "l"}) do
   map_21({"t", "n", "v", "i"}, ("<C-" .. key .. ">"), ("<C-\\><C-n><C-w>" .. key))
@@ -114,24 +114,24 @@ map_21({"n", "v"}, "<Leader>#", ":e#<CR>")
 map_21({"n", "v"}, "<Leader>3", ":e#<CR>")
 map_21({"n", "v"}, "<Leader>e", ":bel 10split term://pry<CR>")
 map_21({"n", "v"}, "<Leader>h", ":nohlsearch<CR>")
-local function _5_()
+local function _6_()
   wo.relativenumber = not wo.relativenumber
   return nil
 end
-map_21({"n", "v"}, "<Leader>r", _5_, {silent = true})
+map_21({"n", "v"}, "<Leader>r", _6_, {silent = true})
 map_21({"n"}, "<Leader>w", ":w<CR>")
 map_21({"n", "v"}, "<Leader>q", ":q<CR>")
-local function _6_()
+local function _7_()
   return vim.diagnostic.open_float()
 end
-map_21({"n"}, "<Leader>gd", _6_, {silent = true})
+map_21({"n"}, "<Leader>gd", _7_, {silent = true})
 map_21({"n"}, "<Leader>v", "/\\%V")
 map_21({"n"}, "<Leader>/", "gcc", {remap = true})
 map_21({"v"}, "<Leader>/", "gc", {remap = true})
-local function _7_()
+local function _8_()
   return print(u["inspect-syntax-group"]())
 end
-map_21({"n", "v"}, "<F10>", _7_, {silent = true})
+map_21({"n", "v"}, "<F10>", _8_, {silent = true})
 map_21({"t", "n", "v", "i"}, "<C-\\><C-[>", "<C-\\><C-n>gT")
 map_21({"t", "n", "v", "i"}, "<C-\\><C-]>", "<C-\\><C-n>gt")
 map_21({"t", "n", "v", "i"}, "<C-\\><C-t>", "<C-\\><C-n>:split<CR><C-\\><C-n>:term<CR>")
@@ -140,7 +140,7 @@ map_21({"t"}, "<C-\\><C-p>", "<C-\\><C-n>p")
 map_21({"t"}, "<C-\\><C-\\>", "<C-\\><C-n>")
 map_21({"t"}, "<M-k>", "<C-k>")
 command("nmap <expr> <CR> &buftype == 'terminal' ? \"i\\<CR>\" : \"\\<CR>\"")
-local function _8_()
+local function _9_()
   do
     local saved_line_nr = vim.fn.line("'\"")
     local last_line_nr = vim.fn.line("$")
@@ -151,13 +151,13 @@ local function _8_()
   end
   return nil
 end
-autocmd("BufReadPost", {pattern = "*", callback = _8_})
-local function _10_()
+autocmd("BufReadPost", {pattern = "*", callback = _9_})
+local function _11_()
   wo.scroll = math.floor((vim.fn.winheight(0) / 4))
   return nil
 end
-autocmd({"BufReadPost", "WinEnter"}, {pattern = "*", callback = _10_})
-local function _11_()
+autocmd({"BufReadPost", "WinEnter"}, {pattern = "*", callback = _11_})
+local function _12_()
   do
     local last_line_on_screen_nr = vim.fn.line("w$")
     local last_line_nr = vim.fn.line("$")
@@ -168,7 +168,7 @@ local function _11_()
   end
   return nil
 end
-autocmd({"TermOpen", "BufWinEnter", "WinEnter"}, {pattern = "term://*", callback = _11_})
+autocmd({"TermOpen", "BufWinEnter", "WinEnter"}, {pattern = "term://*", callback = _12_})
 autocmd({"TermOpen", "BufWinEnter"}, {pattern = "term://*", command = "setlocal nonumber"})
 autocmd({"BufWinLeave"}, {pattern = "term://*", command = "setlocal number"})
 g.omni_sql_no_default_maps = true
@@ -179,13 +179,13 @@ autocmd({"BufReadPost", "BufNewFile"}, {pattern = "*.mm", command = "set filetyp
 do
   local filetype_settings = {coffee = {shiftwidth = 2, softtabstop = 2}, css = {shiftwidth = 2, softtabstop = 2}, go = {tabstop = 4, shiftwidth = 4, expandtab = false}, haxe = {tabstop = 4, shiftwidth = 4, softtabstop = 4}, javascript = {shiftwidth = 2, softtabstop = 2}, make = {expandtab = false}, python = {shiftwidth = 4, softtabstop = 4, textwidth = 79}, scala = {textwidth = 99}, scss = {shiftwidth = 2, softtabstop = 2}, typescript = {shiftwidth = 2, softtabstop = 2}, typescriptreact = {shiftwidth = 2, softtabstop = 2}}
   for filetype, settings in pairs(filetype_settings) do
-    local function _13_()
+    local function _14_()
       for setting, value in pairs(settings) do
         bo[setting] = value
       end
       return nil
     end
-    autocmd({"FileType"}, {pattern = filetype, callback = _13_})
+    autocmd({"FileType"}, {pattern = filetype, callback = _14_})
   end
 end
 autocmd({"FileType"}, {pattern = "fennel", command = "setlocal iskeyword-=."})
@@ -193,24 +193,25 @@ autocmd({"FileType"}, {pattern = "ruby", command = "setlocal iskeyword+=!,?"})
 autocmd({"BufRead", "BufNewFile"}, {pattern = "*.txt", command = "setlocal wrap wrapmargin=2 textwidth=72"})
 autocmd({"BufRead", "BufNewFile"}, {pattern = "{Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}", command = "set filetype=ruby"})
 autocmd({"BufRead", "BufNewFile"}, {pattern = "*.{mts,cts}", command = "set filetype=typescript"})
+autocmd({"BufRead"}, {pattern = "*.jjdescription", command = "set filetype=gitcommit"})
 autocmd({"BufRead", "BufNewFile"}, {pattern = "*.dict", command = "set filetype=dict"})
-local function _14_()
+local function _15_()
   for idx, score in ipairs({0, 10, 21, 51, 61}) do
-    local function _15_()
+    local function _16_()
       return ("0f;lciw" .. score .. "<Esc>:noh<CR>")
     end
-    map_21({"n"}, tostring(idx), _15_)
+    map_21({"n"}, tostring(idx), _16_)
   end
   return nil
 end
-autocmd({"FileType"}, {pattern = "dict", callback = _14_})
+autocmd({"FileType"}, {pattern = "dict", callback = _15_})
 autocmd({"QuickFixCmdPost"}, {pattern = "[^l]*", command = "cwindow", nested = true})
 autocmd({"QuickFixCmdPost"}, {pattern = "l*", command = "lwindow", nested = true})
 vim.diagnostic.config({underline = true, signs = true, update_in_insert = true, severity_sort = true, virtual_text = false})
 local function prioritized_jump(count)
-  local _let_16_ = tbl.sort(tbl.keys(vim.diagnostic.count(0)))
-  local min_severity = _let_16_[1]
-  local _ = (function (t, k) return ((getmetatable(t) or {}).__fennelrest or function (t, k) return {(table.unpack or unpack)(t, k)} end)(t, k) end)(_let_16_, 2)
+  local _let_17_ = tbl.sort(tbl.keys(vim.diagnostic.count(0)))
+  local min_severity = _let_17_[1]
+  local _ = (function (t, k) return ((getmetatable(t) or {}).__fennelrest or function (t, k) return {(table.unpack or unpack)(t, k)} end)(t, k) end)(_let_17_, 2)
   local severity
   if (min_severity == vim.diagnostic.severity.ERROR) then
     severity = min_severity
@@ -219,18 +220,18 @@ local function prioritized_jump(count)
   end
   return vim.diagnostic.jump({count = count, severity = severity})
 end
-local function _18_()
+local function _19_()
   return prioritized_jump(-1)
 end
-map_21({"n"}, "[d", _18_, {silent = true})
-local function _19_()
+map_21({"n"}, "[d", _19_, {silent = true})
+local function _20_()
   return prioritized_jump(1)
 end
-map_21({"n"}, "]d", _19_, {silent = true})
+map_21({"n"}, "]d", _20_, {silent = true})
 local function trust_nvim_lua()
   return vim.secure.trust({action = "allow", path = ".nvim.lua"})
 end
-local function _20_()
+local function _21_()
   return vim.defer_fn(trust_nvim_lua, 1)
 end
-return autocmd("BufWritePost", {pattern = ".nvim.fnl", callback = _20_})
+return autocmd("BufWritePost", {pattern = ".nvim.fnl", callback = _21_})

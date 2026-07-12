@@ -308,6 +308,10 @@
 (autocmd [:BufRead :BufNewFile]
          {:pattern "*.{mts,cts}" :command "set filetype=typescript"})
 
+; Support Jujutsu commit editor
+(autocmd [:BufRead]
+         {:pattern "*.jjdescription" :command "set filetype=gitcommit"})
+
 ; Add shortcuts for scoring word lists
 (autocmd [:BufRead :BufNewFile] {:pattern :*.dict :command "set filetype=dict"})
 (autocmd [:FileType] {:pattern :dict
