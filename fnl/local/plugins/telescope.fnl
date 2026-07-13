@@ -92,7 +92,7 @@
 ;; Prioritize code actions by server. This has to go here to make sure we're
 ;; wrapping the Telescope `vim.ui.select` and not the native one.
 
-(local priorities-by-name {:tsgo 1 :ts_ls 2 :null-ls 3})
+(local priorities-by-name {:tsgo 1 :ts_ls 2 :vtsls 3 :null-ls 4})
 
 (fn get-priorities-by-client-id []
   (let [clients (vim.lsp.get_clients)]

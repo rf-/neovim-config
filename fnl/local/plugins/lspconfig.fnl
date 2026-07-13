@@ -51,7 +51,12 @@
 
 (setup :ts_ls
        {:on_attach on-attach-ts
-        :init_options {:hostInfo "neovim" :maxTsServerMemory 8192}})
+        :init_options {:hostInfo "neovim" :maxTsServerMemory 12288}}
+       {:skip-enable true})
+
+(setup :vtsls
+       {:on_attach on-attach-ts
+        :settings {:typescript {:tsserver {:maxTsServerMemory 12288}}}})
 
 (setup :tsgo
        {:on_attach on-attach-ts
