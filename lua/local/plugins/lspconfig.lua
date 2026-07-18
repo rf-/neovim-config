@@ -52,5 +52,6 @@ setup("ts_ls", {on_attach = on_attach_ts, init_options = {hostInfo = "neovim", m
 setup("vtsls", {on_attach = on_attach_ts, settings = {typescript = {tsserver = {maxTsServerMemory = 12288}}}})
 setup("tsgo", {on_attach = on_attach_ts, capabilities = {general = {positionEncodings = {"utf-16"}}}}, {["skip-enable"] = true})
 setup("eslint", {on_attach = on_attach_eslint, cmd_env = {NODE_OPTIONS = "--max-old-space-size=8192"}})
+setup("oxlint", {settings = {fixKind = "all"}})
 setup("gopls", {settings = {gopls = {buildFlags = {"-mod=readonly"}}}})
 return {setup = setup}

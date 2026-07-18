@@ -16,24 +16,31 @@
 
 ;; (set o.path (.. o.path ",./client/src"))
 
-;; (vim.lsp.set_log_level "debug")
+;; (vim.lsp.log.set_level "debug")
 
 ;; (vim.lsp.enable :ts_ls false)
 ;; (vim.lsp.enable :tsgo)
 
+;; (vim.lsp.enable :eslint false)
+
 ;; (local-lsp.setup :tailwindcss)
 
 ;; (local prettier-source
-;;        (null_ls.builtins.formatting.prettier.with {:filetypes [:css
+;;        (null-ls.builtins.formatting.prettier.with {:filetypes [:css
 ;;                                                                :json
 ;;                                                                :typescript
 ;;                                                                :typescriptreact
 ;;                                                                :javascript
 ;;                                                                :javascriptreact]}))
 
-(null-ls.setup {:sources [null_ls.builtins.formatting.fnlfmt
-                          ;; null_ls.builtins.diagnostics.rubocop
+;; (local oxfmt (require :none-ls.formatting.oxfmt))
+
+(null-ls.setup {:sources [null-ls.builtins.formatting.fnlfmt
+                          ;; null-ls.builtins.diagnostics.rubocop
                           ;; prettier-source
+                          ;; (oxfmt.with {:command "node_modules/.bin/oxfmt"
+                          ;;              :filetypes [:json
+                          ;;                          (unpack oxfmt.filetypes)]})
                           ]})
 
 (local-lsp.auto-format-on-save [:fennel

@@ -93,7 +93,8 @@
     (use "neovim/nvim-lspconfig"
          {:config #(require :local.plugins.lspconfig)})
 
-    (use "nvimtools/none-ls.nvim")
+    (use "nvimtools/none-ls.nvim"
+         {:dependencies ["nvimtools/none-ls-extras.nvim"]})
 
     (use "nvimdev/lspsaga.nvim"
          {:config #(require :local.plugins.lspsaga)})
