@@ -232,6 +232,6 @@ local function trust_nvim_lua()
   return vim.secure.trust({action = "allow", path = ".nvim.lua"})
 end
 local function _21_()
-  return vim.defer_fn(trust_nvim_lua, 1)
+  return vim.defer_fn(trust_nvim_lua, 100)
 end
 return autocmd("BufWritePost", {pattern = ".nvim.fnl", callback = _21_})

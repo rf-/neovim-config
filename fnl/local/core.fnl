@@ -309,8 +309,8 @@
          {:pattern "*.{mts,cts}" :command "set filetype=typescript"})
 
 ; Support Jujutsu commit editor
-(autocmd [:BufRead]
-         {:pattern "*.jjdescription" :command "set filetype=gitcommit"})
+(autocmd [:BufRead] {:pattern "*.jjdescription"
+                     :command "set filetype=gitcommit"})
 
 ; Add shortcuts for scoring word lists
 (autocmd [:BufRead :BufNewFile] {:pattern :*.dict :command "set filetype=dict"})
@@ -349,4 +349,4 @@
   (vim.secure.trust {:action :allow :path ".nvim.lua"}))
 
 (autocmd :BufWritePost
-         {:pattern ".nvim.fnl" :callback #(vim.defer_fn trust-nvim-lua 1)})
+         {:pattern ".nvim.fnl" :callback #(vim.defer_fn trust-nvim-lua 100)})
