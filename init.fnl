@@ -95,7 +95,8 @@
           :config #(require :local.plugins.lspconfig)})
 
     (use "nvimtools/none-ls.nvim"
-         {:dependencies ["nvimtools/none-ls-extras.nvim"]})
+         {:config #(require :local.plugins.none-ls)
+          :dependencies ["nvimtools/none-ls-extras.nvim"]})
 
     (use "nvimdev/lspsaga.nvim"
          {:config #(require :local.plugins.lspsaga)})

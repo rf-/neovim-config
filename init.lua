@@ -67,39 +67,42 @@ local function plugin_specs()
     return require("local.plugins.lspconfig")
   end
   local function _15_()
-    return require("local.plugins.lspsaga")
+    return require("local.plugins.none-ls")
   end
   local function _16_()
-    return require("local.plugins.lsp-file-operations")
+    return require("local.plugins.lspsaga")
   end
   local function _17_()
-    return require("local.plugins.trouble")
+    return require("local.plugins.lsp-file-operations")
   end
   local function _18_()
-    return require("local.plugins.echo-diagnostics")
+    return require("local.plugins.trouble")
   end
   local function _19_()
-    return require("local.plugins.blink-cmp")
+    return require("local.plugins.echo-diagnostics")
   end
   local function _20_()
-    return require("local.plugins.telescope")
+    return require("local.plugins.blink-cmp")
   end
   local function _21_()
-    return require("local.plugins.neo-tree")
+    return require("local.plugins.telescope")
   end
   local function _22_()
-    return require("local.plugins.treewalker")
+    return require("local.plugins.neo-tree")
   end
   local function _23_()
-    return require("local.plugins.treesitter-context")
+    return require("local.plugins.treewalker")
   end
   local function _24_()
-    return require("local.plugins.marks")
+    return require("local.plugins.treesitter-context")
   end
   local function _25_()
+    return require("local.plugins.marks")
+  end
+  local function _26_()
     return require("local.plugins.edge")
   end
-  return {use("nvim-lua/plenary.nvim"), use("Olical/nfnl"), use("Olical/conjure", {init = _3_}), use("godlygeek/tabular"), use("justinmk/vim-sneak"), use("tpope/vim-endwise"), use("tpope/vim-repeat"), use("tpope/vim-speeddating"), use("tpope/vim-surround"), use("rf-/vim-unimpaired"), use("kana/vim-textobj-user"), use("glts/vim-textobj-comment", {dependencies = {"kana/vim-textobj-user"}}), use("tpope/vim-fugitive", {config = _4_}), use("tpope/vim-rhubarb"), use("airblade/vim-gitgutter", {config = _5_}), use("rf-/vim-bclose", {config = _6_}), use("AndrewRadev/splitjoin.vim", {config = _7_}), use("simnalamburt/vim-mundo", {init = _8_}), use("github/copilot.vim"), use("CopilotC-Nvim/CopilotChat.nvim", {branch = "main", config = _9_}), use("folke/sidekick.nvim", {config = _10_}), use("sheerun/vim-polyglot", {init = _11_}), use("rf-/yats.vim"), use("nvim-treesitter/nvim-treesitter", {branch = "main", build = _12_, config = _13_}), use("neovim/nvim-lspconfig", {commit = "47657ffa9121d62bb3dd9a36530a11caaa10eab9", config = _14_}), use("nvimtools/none-ls.nvim", {dependencies = {"nvimtools/none-ls-extras.nvim"}}), use("nvimdev/lspsaga.nvim", {config = _15_}), use("antosha417/nvim-lsp-file-operations", {config = _16_, dependencies = {"nvim-lua/plenary.nvim", "nvim-neo-tree/neo-tree.nvim"}}), use("folke/trouble.nvim", {config = _17_, version = "v2.10.0"}), use("seblj/nvim-echo-diagnostics", {config = _18_}), use("saghen/blink.cmp", {version = "1.*", build = "cargo build --release", config = _19_}), use("vale1410/vim-minizinc"), use("nelstrom/vim-textobj-rubyblock", {dependencies = {"kana/vim-textobj-user"}}), use("iamcco/markdown-preview.nvim", {build = "cd app && env COREPACK_ENABLE_AUTO_PIN=0 yarn install"}), use("nvim-telescope/telescope.nvim", {config = _20_, dependencies = {"nvim-telescope/telescope-fzy-native.nvim", "nvim-telescope/telescope-ui-select.nvim"}}), use("nvim-neo-tree/neo-tree.nvim", {branch = "v3.x", config = _21_, dependencies = {"MunifTanjim/nui.nvim"}}), use("aaronik/treewalker.nvim", {commit = "3d5148e160ed9728b3275d37d06ea028cef5f43b", config = _22_}), use("nvim-treesitter/nvim-treesitter-context", {config = _23_}), use("chentoast/marks.nvim", {config = _24_}), use("rf-/edge", {config = _25_})}
+  return {use("nvim-lua/plenary.nvim"), use("Olical/nfnl"), use("Olical/conjure", {init = _3_}), use("godlygeek/tabular"), use("justinmk/vim-sneak"), use("tpope/vim-endwise"), use("tpope/vim-repeat"), use("tpope/vim-speeddating"), use("tpope/vim-surround"), use("rf-/vim-unimpaired"), use("kana/vim-textobj-user"), use("glts/vim-textobj-comment", {dependencies = {"kana/vim-textobj-user"}}), use("tpope/vim-fugitive", {config = _4_}), use("tpope/vim-rhubarb"), use("airblade/vim-gitgutter", {config = _5_}), use("rf-/vim-bclose", {config = _6_}), use("AndrewRadev/splitjoin.vim", {config = _7_}), use("simnalamburt/vim-mundo", {init = _8_}), use("github/copilot.vim"), use("CopilotC-Nvim/CopilotChat.nvim", {branch = "main", config = _9_}), use("folke/sidekick.nvim", {config = _10_}), use("sheerun/vim-polyglot", {init = _11_}), use("rf-/yats.vim"), use("nvim-treesitter/nvim-treesitter", {branch = "main", build = _12_, config = _13_}), use("neovim/nvim-lspconfig", {commit = "47657ffa9121d62bb3dd9a36530a11caaa10eab9", config = _14_}), use("nvimtools/none-ls.nvim", {config = _15_, dependencies = {"nvimtools/none-ls-extras.nvim"}}), use("nvimdev/lspsaga.nvim", {config = _16_}), use("antosha417/nvim-lsp-file-operations", {config = _17_, dependencies = {"nvim-lua/plenary.nvim", "nvim-neo-tree/neo-tree.nvim"}}), use("folke/trouble.nvim", {config = _18_, version = "v2.10.0"}), use("seblj/nvim-echo-diagnostics", {config = _19_}), use("saghen/blink.cmp", {version = "1.*", build = "cargo build --release", config = _20_}), use("vale1410/vim-minizinc"), use("nelstrom/vim-textobj-rubyblock", {dependencies = {"kana/vim-textobj-user"}}), use("iamcco/markdown-preview.nvim", {build = "cd app && env COREPACK_ENABLE_AUTO_PIN=0 yarn install"}), use("nvim-telescope/telescope.nvim", {config = _21_, dependencies = {"nvim-telescope/telescope-fzy-native.nvim", "nvim-telescope/telescope-ui-select.nvim"}}), use("nvim-neo-tree/neo-tree.nvim", {branch = "v3.x", config = _22_, dependencies = {"MunifTanjim/nui.nvim"}}), use("aaronik/treewalker.nvim", {commit = "3d5148e160ed9728b3275d37d06ea028cef5f43b", config = _23_}), use("nvim-treesitter/nvim-treesitter-context", {config = _24_}), use("chentoast/marks.nvim", {config = _25_}), use("rf-/edge", {config = _26_})}
 end
 local function init()
   package.path = (fs.normalize("~") .. "/.config/nvim/lua/?.lua," .. package.path)
