@@ -9,13 +9,34 @@
 
 (local u (require :local.utils))
 
+(fn task? [x]
+  (and (= (type x) :table) (= (type x.await) :function)))
+
+(fn without-message-prompts [f]
+  (let [saved-more vim.o.more
+        saved-messagesopt vim.o.messagesopt]
+    (set vim.o.more false)
+    (set vim.o.messagesopt "wait:0,history:500,progress:c")
+    (let [restore (fn []
+                    (set vim.o.more saved-more)
+                    (set vim.o.messagesopt saved-messagesopt))
+          (ok? result) (pcall f)]
+      (when (not ok?)
+        (restore)
+        (error result))
+      (if (task? result)
+          (result:await #(vim.schedule restore))
+          (restore))
+      result)))
+
 (fn build []
-  (: (ts.install all-parsers) :wait 300000)
-  (: (ts.update all-parsers) :wait 300000))
+  (without-message-prompts (fn []
+                             (: (ts.install all-parsers) :wait 300000)
+                             (: (ts.update all-parsers) :wait 300000))))
 
 (fn rebuild-all []
   (u.system "rm -rf ~/.local/share/nvim/site")
-  (ts.install all-parsers {:force true}))
+  (without-message-prompts #(ts.install all-parsers {:force true})))
 
 (create-command :TSRebuildAll rebuild-all {})
 
