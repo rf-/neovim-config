@@ -91,7 +91,8 @@
           :config #(: (require :local.plugins.treesitter) :config)})
 
     (use "neovim/nvim-lspconfig"
-         {:config #(require :local.plugins.lspconfig)})
+         {:commit "47657ffa9121d62bb3dd9a36530a11caaa10eab9" ; before TSC migration
+          :config #(require :local.plugins.lspconfig)})
 
     (use "nvimtools/none-ls.nvim"
          {:dependencies ["nvimtools/none-ls-extras.nvim"]})
