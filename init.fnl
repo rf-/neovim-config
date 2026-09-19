@@ -151,6 +151,13 @@
 
     (use "rf-/edge"
          {:config #(require :local.plugins.edge)})
+
+    ; Misc
+
+    (use "3rd/image.nvim"
+          {:build false
+           :enabled (= vim.env.TERM "xterm-ghostty")
+           :opts {:processor "magick_cli"}})
   ])
 
 (fn init []
