@@ -13,7 +13,6 @@
     (local out (vim.fn.system ["git"
                                "clone"
                                "--filter=blob:none"
-                               "--branch=stable"
                                lazyrepo
                                lazypath]))
     (when (not= vim.v.shell_error 0)
